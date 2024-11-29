@@ -1,0 +1,14 @@
+{
+    "default_symbol": "EURUSD",
+    "default_volume": 0.01,
+    "default_sl_pips": 50,
+    "default_tp_pips": 100,
+    "risk_percent": 1.0,
+    "favorite_symbols": [
+        "EURUSD",
+        "GBPUSD",
+        "USDJPY"
+    ],
+    "last_modified": "2024-11-29 07:22:26",
+    "test_setting": "test_value"
+}
