@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List, Optional
 from datetime import datetime
-import logging
+from logger_config import setup_logger
 
 @dataclass
 class ModuleStatus:
@@ -33,7 +33,7 @@ class BotStatusManager:
         self._setup_logging()
         self.bot_status = BotStatus(
             is_active=False,
-            mode='AUTOMATED',  # Change default mode to AUTOMATED
+            mode='AUTOMATED',
             started_at=datetime.now()
         )
         self.module_statuses: Dict[str, ModuleStatus] = {}
@@ -41,28 +41,25 @@ class BotStatusManager:
         
     def _setup_logging(self):
         """Setup logging for status manager"""
-        self.logger = logging.getLogger('BotStatusManager')
-        if not self.logger.handlers:
-            handler = logging.StreamHandler()
-            formatter = logging.Formatter(
-                '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-            )
-            handler.setFormatter(formatter)
-            self.logger.addHandler(handler)
-            self.logger.setLevel(logging.INFO)
+        from logger_config import setup_logger, get_implementation_logger
+        self.logger = setup_logger('BotStatusManager')
+        impl_logger = get_implementation_logger()
+        impl_logger.info("BotStatusManager initialized with centralized logging")
 
     def start_bot(self):
         """Mark bot as active"""
         self.bot_status.is_active = True
         self.bot_status.started_at = datetime.now()
         self._log_activity("Bot started")
-        self.logger.info("Bot started")
+        self.logger.error("Bot Started") # Show on dashboard
+        self.logger.info("Bot startup sequence completed") # Log file only
 
     def stop_bot(self):
         """Mark bot as inactive"""
         self.bot_status.is_active = False
         self._log_activity("Bot stopped")
-        self.logger.info("Bot stopped")
+        self.logger.error("Bot Stopped") # Show on dashboard
+        self.logger.info("Bot shutdown sequence completed") # Log file only
 
     def set_mode(self, mode: str):
         """Set bot operation mode"""
@@ -70,7 +67,8 @@ class BotStatusManager:
             raise ValueError("Invalid mode. Must be 'AUTOMATED' or 'MANUAL'")
         self.bot_status.mode = mode
         self._log_activity(f"Mode changed to {mode}")
-        self.logger.info(f"Bot mode changed to {mode}")
+        self.logger.error(f"Bot Mode: {mode}") # Show on dashboard
+        self.logger.info(f"Operation mode updated to {mode}") # Log file onl
 
     def update_module_status(self, module_name: str, status: str, message: str = None, details: Dict = None):
         """Update status for a specific module"""
@@ -84,10 +82,12 @@ class BotStatusManager:
         
         if status == 'ERROR':
             self.bot_status.error_count += 1
+            self.logger.error(f"Module {module_name} Error: {message}")  # Show on dashboard
         elif status == 'WARNING':
             self.bot_status.warnings_count += 1
-            
-        self.logger.info(f"Module {module_name} status updated: {status}")
+            self.logger.warning(f"Module {module_name}: {message}")  # Log file only
+        else:
+            self.logger.debug(f"Module {module_name} status updated: {status}")  # Log file only
 
     def log_action(self, action: str, operation: str = None):
         """Log bot action"""
@@ -96,7 +96,8 @@ class BotStatusManager:
         if operation:
             self.bot_status.current_operation = operation
         self._log_activity(action)
-        self.logger.info(f"Action logged: {action}")
+        self.logger.info(f"Action: {action}")  # Log file only
+
 
     def _log_activity(self, activity: str):
         """Add activity to log with timestamp"""
@@ -107,6 +108,8 @@ class BotStatusManager:
         # Keep only last 1000 entries
         if len(self.activity_log) > 1000:
             self.activity_log = self.activity_log[-1000:]
+        
+        self.logger.debug(f"Activity logged: {activity}")  # Log file only
 
     def get_bot_status(self) -> Dict:
         """Get comprehensive bot status report"""

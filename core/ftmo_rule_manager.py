@@ -18,15 +18,11 @@ class FTMORuleManager:
         self.last_reset = datetime.now()
 
     def _setup_logging(self):
-        self.logger = logging.getLogger('FTMORuleManager')
-        if not self.logger.handlers:
-            handler = logging.StreamHandler()
-            formatter = logging.Formatter(
-                '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-            )
-            handler.setFormatter(formatter)
-            self.logger.addHandler(handler)
-            self.logger.setLevel(logging.INFO)
+        """Setup centralized logging for FTMO rule manager"""
+        from logger_config import setup_logger, get_implementation_logger
+        self.logger = setup_logger('FTMORuleManager')
+        impl_logger = get_implementation_logger()
+        impl_logger.info("FTMORuleManager logging configured with centralized system")
 
     def _load_rules(self) -> Dict:
         try:

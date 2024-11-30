@@ -31,17 +31,12 @@ class TradingLogic:
         self.required_signal_strength = 0.7
 
     def _setup_logging(self):
-        """Setup logging for trading logic"""
-        self.logger = logging.getLogger('TradingLogic')
-        if not self.logger.handlers:
-            handler = logging.StreamHandler()
-            formatter = logging.Formatter(
-                '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-            )
-            handler.setFormatter(formatter)
-            self.logger.addHandler(handler)
-            self.logger.setLevel(logging.INFO)
-
+        """Setup centralized logging for trading logic"""
+        from logger_config import setup_logger, get_implementation_logger
+        self.logger = setup_logger('TradingLogic')
+        impl_logger = get_implementation_logger()
+        impl_logger.info("TradingLogic logging configured with centralized system")
+        
     def check_position_duration(self, position: Dict) -> Dict:
         """
         Check if position has exceeded maximum duration
