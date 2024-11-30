@@ -35,14 +35,27 @@ class MarketSessionManager:
         return False
 
     def is_session_open(self, session: str) -> bool:
-        """Check if a trading session is currently open"""
+        """Check if a trading session is currently open with enhanced logging"""
+        from src.utils.logger import setup_logger
+        logger = setup_logger('MarketSessionManager')
+        
+        logger.info(f"Checking if session {session} is open...")
+        
         if session not in self.sessions:
+            logger.warning(f"Session {session} not found in configuration")
             return False
 
         now = datetime.now(ZoneInfo("UTC"))
+        logger.info(f"Current UTC time: {now}")
         
+        # Check for weekend
+        if now.weekday() >= 5:  # 5 is Saturday, 6 is Sunday
+            logger.warning(f"Market should be closed - Current day is {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][now.weekday()]}")
+            return False
+            
         # Check for holidays
         if self.is_holiday(session):
+            logger.warning(f"Market should be closed - Holiday detected for session {session}")
             return False
 
         session_times = self.sessions[session]
@@ -50,11 +63,17 @@ class MarketSessionManager:
         close_time = datetime.strptime(session_times["close"], "%H:%M").time()
         current_time = now.time()
 
+        logger.info(f"Session times - Open: {open_time}, Close: {close_time}, Current: {current_time}")
+
         # Handle sessions that cross midnight
+        is_open = False
         if open_time > close_time:
-            return current_time >= open_time or current_time <= close_time
+            is_open = current_time >= open_time or current_time <= close_time
         else:
-            return open_time <= current_time <= close_time
+            is_open = open_time <= current_time <= close_time
+
+        logger.info(f"Session {session} status: {'Open' if is_open else 'Closed'}")
+        return is_open
 
     def get_current_session_info(self) -> Dict:
         """Get comprehensive session information"""

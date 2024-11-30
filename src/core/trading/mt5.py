@@ -262,12 +262,14 @@ class MT5Trader:
 
     @property
     def market_is_open(self) -> bool:
-        """Check if market is open with enhanced connection handling"""
+        """Check if market is open with enhanced connection handling and logging"""
         if not self.connected:
             self.logger.warning("Market check failed: MT5 not connected")
             return False
-                    
+                        
         try:
+            self.logger.info("Starting market status check...")
+            
             # Enhanced connection verification
             if not mt5.initialize():
                 self.logger.error("MT5 initialization required")
@@ -279,37 +281,50 @@ class MT5Trader:
             if terminal_info is None:
                 self.logger.error("Cannot get terminal info")
                 return False
-                    
+                        
             terminal_dict = terminal_info._asdict()
+            self.logger.info(f"Terminal connection state: {terminal_dict.get('connected', False)}")
+            
             if not terminal_dict.get('connected', False):
                 self.logger.error("Terminal not connected")
                 return False
-                    
-            # Get current server time
+                        
+            # Get current server time and log details
             tick = mt5.symbol_info_tick("EURUSD")
             if tick is None:
                 self.logger.error("Cannot get current server time")
                 return False
-                
+                    
             server_time = datetime.fromtimestamp(tick.time)
             self.logger.info(f"Current server time: {server_time}")
             self.logger.info(f"Current session: {self._get_current_session()}")
             
             # Check if market is actually receiving price updates
+            self.logger.info("Checking price feed updates...")
             initial_tick = mt5.symbol_info_tick("EURUSD")
             time.sleep(1)  # Wait a second
             second_tick = mt5.symbol_info_tick("EURUSD")
             
             if initial_tick and second_tick:
-                self.logger.info(f"Price update check: Initial={initial_tick.bid}, Second={second_tick.bid}")
+                self.logger.info(f"Initial tick: Bid={initial_tick.bid}, Ask={initial_tick.ask}, Time={datetime.fromtimestamp(initial_tick.time)}")
+                self.logger.info(f"Second tick: Bid={second_tick.bid}, Ask={second_tick.ask}, Time={datetime.fromtimestamp(second_tick.time)}")
+                
+                # Check if times are different
+                if initial_tick.time == second_tick.time:
+                    self.logger.warning("Price feed might be stale - timestamps are identical")
+                if initial_tick.bid == second_tick.bid and initial_tick.ask == second_tick.ask:
+                    self.logger.warning("Price feed might be stale - prices haven't changed")
             else:
                 self.logger.error("Failed to get price updates")
                 return False
 
-            return True
+            # Log final market state
+            market_state = bool(mt5.symbol_info_tick("EURUSD"))
+            self.logger.info(f"Final market state determination: {'Open' if market_state else 'Closed'}")
+            return market_state
 
         except Exception as e:
-            self.logger.error(f"Error checking market status: {str(e)}")
+            self.logger.error(f"Error checking market status: {str(e)}", exc_info=True)
             return False
     
     def _get_current_session(self) -> str:
