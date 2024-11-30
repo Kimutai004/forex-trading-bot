@@ -19,7 +19,7 @@ class FTMORuleManager:
 
     def _setup_logging(self):
         """Setup centralized logging for FTMO rule manager"""
-        from logger_config import setup_logger, get_implementation_logger
+        from src.utils.logger import setup_logger, get_implementation_logger
         self.logger = setup_logger('FTMORuleManager')
         impl_logger = get_implementation_logger()
         impl_logger.info("FTMORuleManager logging configured with centralized system")

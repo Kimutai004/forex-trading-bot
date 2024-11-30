@@ -26,7 +26,7 @@ class SystemAuditor:
         self.results: List[AuditResult] = []
         
         # Initialize status manager
-        from core.bot_status_manager import BotStatusManager
+        from src.core.system.monitor import BotStatusManager
         self.status_manager = BotStatusManager(config_manager)
         
     def _setup_logging(self):
@@ -44,7 +44,7 @@ class SystemAuditor:
     def audit_mt5_connection(self) -> AuditResult:
         """Audit MT5 connection status"""
         try:
-            from core.mt5_trader import MT5Trader
+            from src.core.trading.mt5 import MT5Trader
             trader = MT5Trader(status_manager=self.status_manager)
             
             # First check basic connection
@@ -139,7 +139,7 @@ class SystemAuditor:
     def _check_mt5_expert_status(self) -> AuditResult:
         """Check MT5 expert status directly"""
         try:
-            from core.mt5_trader import MT5Trader
+            from src.core.trading.mt5 import MT5Trader
             trader = MT5Trader(status_manager=self.status_manager)
             
             if not trader.connected:
@@ -180,8 +180,8 @@ class SystemAuditor:
     def audit_market_watcher(self) -> AuditResult:
         """Audit Market Watcher functionality"""
         try:
-            from market_watcher import MarketWatcher
-            from core.mt5_trader import MT5Trader
+            from src.core.market.watcher import MarketWatcher
+            from src.core.trading.mt5 import MT5Trader
             
             trader = MT5Trader(status_manager=self.status_manager)
             watcher = MarketWatcher(trader)
@@ -247,8 +247,8 @@ class SystemAuditor:
     def audit_position_manager(self) -> AuditResult:
         """Audit Position Manager functionality"""
         try:
-            from core.position_manager import PositionManager
-            from core.mt5_trader import MT5Trader
+            from src.core.trading.positions import PositionManager
+            from src.core.trading.mt5 import MT5Trader
             
             trader = MT5Trader(status_manager=self.status_manager)
             manager = PositionManager(trader)
@@ -296,7 +296,7 @@ class SystemAuditor:
     def audit_mt5_connection(self) -> AuditResult:
         """Audit MT5 connection status"""
         try:
-            from core.mt5_trader import MT5Trader
+            from src.core.trading.mt5 import MT5Trader
             trader = MT5Trader(status_manager=self.status_manager)
             
             # First check basic connection
@@ -400,8 +400,8 @@ class SystemAuditor:
     def audit_signal_manager(self) -> AuditResult:
         """Audit Signal Manager functionality"""
         try:
-            from signals.signal_manager import SignalManager
-            from core.mt5_trader import MT5Trader
+            from src.signals.providers.manager import SignalManager
+            from src.core.trading.mt5 import MT5Trader
             
             trader = MT5Trader(status_manager=self.status_manager)
             manager = SignalManager(trader, self.config_manager)
@@ -440,7 +440,7 @@ class SystemAuditor:
         """Audit Configuration Manager"""
         try:
             if not self.config_manager:
-                from core.config_manager import ConfigManager
+                from src.core.config_manager import ConfigManager
                 self.config_manager = ConfigManager()
             
             # Test settings access
@@ -485,7 +485,7 @@ class SystemAuditor:
     def audit_menu_manager(self) -> AuditResult:
         """Audit Menu Manager"""
         try:
-            from core.menu_manager import MenuManager
+            from src.core.system.menu import MenuManager
             menu = MenuManager()
             
             # Test menu creation

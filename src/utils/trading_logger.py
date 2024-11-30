@@ -3,11 +3,11 @@ import os
 import json
 from typing import Dict, List, Optional
 import logging
-from signals.signal_provider import SignalType, Signal
-from core.mt5_trader import MT5Trader
-from core.position_manager import PositionManager
-from signals.signal_manager import SignalManager
-from core.config_manager import ConfigManager
+from src.signals.providers.base import SignalType, Signal
+from src.core.trading.mt5 import MT5Trader
+from src.core.trading.positions import PositionManager
+from src.signals.providers.manager import SignalManager
+from src.core.config_manager import ConfigManager
 import MetaTrader5 as mt5
 
 class TradingLogger:
@@ -43,7 +43,7 @@ class TradingLogger:
 
     def _setup_logging(self):
         """Setup logging configuration"""
-        from logger_config import setup_logger
+        from src.utils.logger import setup_logger
         self.logger = setup_logger('TradingLogger')
         self.logger.info("TradingLogger initialized")
         self.logger.info(f"Trading activity will be logged to: {self.current_log_file}")

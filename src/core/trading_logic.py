@@ -3,7 +3,7 @@
 from typing import Dict, Optional
 from datetime import datetime
 import logging
-from signals.signal_provider import Signal, SignalType
+from src.signals.providers.base import Signal, SignalType
 
 class TradingLogic:
     """Handles automated trading decisions and execution"""
@@ -32,7 +32,7 @@ class TradingLogic:
 
     def _setup_logging(self):
         """Setup centralized logging for trading logic"""
-        from logger_config import setup_logger, get_implementation_logger
+        from src.utils.logger import setup_logger, get_implementation_logger
         self.logger = setup_logger('TradingLogic')
         impl_logger = get_implementation_logger()
         impl_logger.info("TradingLogic logging configured with centralized system")

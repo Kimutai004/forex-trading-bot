@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List, Optional
 from datetime import datetime
-from logger_config import setup_logger
+from src.utils.logger import setup_logger
 
 @dataclass
 class ModuleStatus:
@@ -41,7 +41,7 @@ class BotStatusManager:
         
     def _setup_logging(self):
         """Setup logging for status manager"""
-        from logger_config import setup_logger, get_implementation_logger
+        from src.utils.logger import setup_logger, get_implementation_logger
         self.logger = setup_logger('BotStatusManager')
         impl_logger = get_implementation_logger()
         impl_logger.info("BotStatusManager initialized with centralized logging")

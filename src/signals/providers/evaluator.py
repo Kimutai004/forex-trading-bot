@@ -1,6 +1,6 @@
 import logging
 from typing import List, Dict
-from .signal_provider import SignalProvider, Signal, SignalType
+from .base import SignalProvider, Signal, SignalType
 from datetime import datetime
 
 

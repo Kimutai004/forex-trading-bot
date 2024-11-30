@@ -5,19 +5,19 @@ from datetime import datetime, timedelta
 import msvcrt  # for Windows
 import select
 import sys
-from core.mt5_trader import MT5Trader
-from core.position_manager import PositionManager
-from core.config_manager import ConfigManager
-from core.menu_manager import MenuManager
-from core.trading_logic import TradingLogic
-from signals.signal_manager import SignalManager
-from signals.signal_provider import SignalType
-from core.system_auditor import SystemAuditor
-from core.bot_status_manager import BotStatusManager
-from core.ftmo_rule_manager import FTMORuleManager
-from trading_logger import TradingLogger 
-from core.market_session_manager import MarketSessionManager
-from signals.signal_evaluator import SignalEvaluator
+from src.core.trading.mt5 import MT5Trader
+from src.core.trading.positions import PositionManager
+from src.core.config_manager import ConfigManager
+from src.core.system.menu import MenuManager
+from src.core.trading_logic import TradingLogic
+from src.signals.providers.manager import SignalManager
+from src.signals.providers.base import SignalType
+from src.core.system.auditor import SystemAuditor
+from src.core.system.monitor import BotStatusManager
+from src.core.ftmo_rule_manager import FTMORuleManager
+from src.utils.trading_logger import TradingLogger 
+from src.core.market.sessions import MarketSessionManager
+from src.signals.providers.evaluator import SignalEvaluator
 import time
 import keyboard
 import os
@@ -91,7 +91,7 @@ class ForexBot:
             raise RuntimeError(f"Bot initialization failed: {str(e)}")
 
     def _setup_logging(self):
-        from logger_config import setup_logger
+        from src.utils.logger import setup_logger
         self.logger = setup_logger('ForexBot')
         self.logger.info("ForexBot logging system initialized")
 

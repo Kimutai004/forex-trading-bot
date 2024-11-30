@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List, Dict
-from .signal_provider import SignalProvider, Signal, SignalType
+from .base import SignalProvider, Signal, SignalType
 
 class MovingAverageProvider(SignalProvider):
     """Simple Moving Average crossover signal provider"""

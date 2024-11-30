@@ -1,6 +1,6 @@
 import json
 import os
-from market_watcher import MarketWatcher
+from src.core.market.watcher import MarketWatcher
 import MetaTrader5 as mt5
 from typing import Dict, Optional, Tuple
 import time
@@ -121,7 +121,7 @@ class MT5Trader:
             }
 
     def _setup_logging(self):
-        from logger_config import setup_logger
+        from src.utils.logger import setup_logger
         self.logger = setup_logger('MT5Trader')
         self.logger.info("MT5Trader logging system initialized")
 

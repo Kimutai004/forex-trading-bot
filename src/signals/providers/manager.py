@@ -1,8 +1,8 @@
 from typing import Dict, List, Optional, Set
 from datetime import datetime
 import logging
-from .signal_provider import SignalProvider, Signal, SignalType
-from .signal_evaluator import SignalEvaluator
+from .base import SignalProvider, Signal, SignalType
+from .evaluator import SignalEvaluator
 
 
 class SignalManager:
