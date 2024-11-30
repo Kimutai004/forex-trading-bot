@@ -27,6 +27,9 @@ class PositionManager:
             profit = position.profit
             pips = self._calculate_pips(position.symbol, position.price_open, current_price)
 
+            # Store the raw timestamp value for duration calculations
+            open_timestamp = position.time
+
             formatted_positions.append({
                 'ticket': position.ticket,
                 'symbol': position.symbol,
@@ -39,7 +42,7 @@ class PositionManager:
                 'profit': profit,
                 'pips': pips,
                 'comment': position.comment,
-                'time': datetime.fromtimestamp(position.time).strftime('%Y-%m-%d %H:%M:%S')
+                'time': open_timestamp  # Pass the raw timestamp
             })
 
         return formatted_positions

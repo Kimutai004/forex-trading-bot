@@ -13,7 +13,7 @@ import MetaTrader5 as mt5
 class TradingLogger:
     """Handles generation and management of trading logs"""
     
-    def __init__(self, mt5_trader, position_manager, signal_manager, config_manager):
+    def __init__(self, mt5_trader, position_manager, signal_manager, config_manager, ftmo_manager):
         """
         Initialize Trading Logger
         
@@ -22,11 +22,13 @@ class TradingLogger:
             position_manager: PositionManager instance
             signal_manager: SignalManager instance
             config_manager: ConfigManager instance
+            ftmo_manager: FTMORuleManager instance
         """
         self.mt5_trader = mt5_trader
         self.position_manager = position_manager
         self.signal_manager = signal_manager
         self.config_manager = config_manager
+        self.ftmo_manager = ftmo_manager
         
         # Create logs directory if it doesn't exist
         self.logs_dir = "trading_logs"
@@ -69,7 +71,7 @@ class TradingLogger:
                         'time': datetime.fromtimestamp(tick.time).strftime('%H:%M:%S')
                     }
 
-            # Get open positions
+            # Get open positions with duration checks
             positions = self.position_manager.get_open_positions()
             
             # Write detailed log entry
@@ -97,10 +99,12 @@ class TradingLogger:
                 f.write(f"Profit: ${account_info['profit']:.2f}\n")
                 f.write(f"Margin Level: {account_info.get('margin_level', 0)}%\n")
                 
-                # Position Information
+                # Position Information with Duration Checks
                 f.write("\nOPEN POSITIONS:\n")
                 if positions:
                     for pos in positions:
+                        # Get duration check for each position
+                        duration_check = self.ftmo_manager.check_position_duration(pos)
                         f.write(f"Symbol: {pos['symbol']}\n")
                         f.write(f"  Type: {pos['type']}\n")
                         f.write(f"  Volume: {pos['volume']}\n")
@@ -108,23 +112,12 @@ class TradingLogger:
                         f.write(f"  Current Price: {pos['current_price']}\n")
                         f.write(f"  Profit: ${pos['profit']:.2f}\n")
                         f.write(f"  Pips: {pos['pips']:.1f}\n")
+                        f.write(f"  Duration: {duration_check['duration']}\n")
+                        f.write(f"  Time Limit Status: {'WARNING' if duration_check['warning'] else 'OK'}\n")
+                        if duration_check['needs_closure']:
+                            f.write(f"  *** EXCEEDED TIME LIMIT ***\n")
                 else:
                     f.write("No open positions\n")
-                
-                # Signal Information
-                f.write("\nSIGNAL STATUS:\n")
-                for symbol in self.config_manager.get_setting('favorite_symbols', []):
-                    signals = self.signal_manager.get_signals(symbol)
-                    f.write(f"{symbol}:\n")
-                    if signals:
-                        for signal in signals:
-                            f.write(f"  Type: {signal.type.value}\n")
-                            f.write(f"  Entry: {signal.entry_price}\n")
-                            f.write(f"  SL: {signal.stop_loss}\n")
-                            f.write(f"  TP: {signal.take_profit}\n")
-                            f.write(f"  Time: {signal.timestamp}\n")
-                    else:
-                        f.write("  No active signals\n")
                 
                 f.write(f"\n{'='*50}\n")
                 

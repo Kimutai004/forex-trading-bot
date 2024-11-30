@@ -72,7 +72,7 @@ class ForexBot:
             self.system_auditor = self._initialize_system_auditor()
             if not self.system_auditor:
                 raise RuntimeError("Failed to initialize system auditor")
-            self.trading_logger = TradingLogger(self.mt5_trader, self.position_manager, self.signal_manager, self.config)
+            self.trading_logger = TradingLogger(self.mt5_trader, self.position_manager, self.signal_manager, self.config, self.ftmo_manager)
             
             self.running = True
             self.logger.info("ForexBot initialization completed successfully")
