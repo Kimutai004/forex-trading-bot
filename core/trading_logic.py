@@ -8,7 +8,7 @@ from signals.signal_provider import Signal, SignalType
 class TradingLogic:
     """Handles automated trading decisions and execution"""
     
-    def __init__(self, mt5_trader, signal_manager, position_manager):
+    def __init__(self, mt5_trader, signal_manager, position_manager, ftmo_manager=None):
         """
         Initialize Trading Logic
         
@@ -16,17 +16,19 @@ class TradingLogic:
             mt5_trader: MT5Trader instance for trade execution
             signal_manager: SignalManager for getting trading signals
             position_manager: PositionManager for position handling
+            ftmo_manager: FTMORuleManager instance for trade rules
         """
         self.mt5_trader = mt5_trader
         self.signal_manager = signal_manager
         self.position_manager = position_manager
+        self.ftmo_manager = ftmo_manager
         self._setup_logging()
         
         # Trading parameters
-        self.min_risk_reward = 2.0  # Minimum risk/reward ratio
-        self.max_positions_per_symbol = 1  # Maximum positions per symbol
-        self.max_total_positions = 3  # Maximum total positions
-        self.required_signal_strength = 0.7  # Required signal strength (70%)
+        self.min_risk_reward = 2.0
+        self.max_positions_per_symbol = 1
+        self.max_total_positions = 3
+        self.required_signal_strength = 0.7
 
     def _setup_logging(self):
         """Setup logging for trading logic"""
@@ -111,6 +113,69 @@ class TradingLogic:
                 return False
         
         return True
+    
+    def monitor_positions(self):
+        """Monitor and enforce position duration limits"""
+        try:
+            if not self.ftmo_manager:
+                self.logger.error("FTMO manager not initialized")
+                return
+                
+            if not self.mt5_trader.market_is_open:
+                self.logger.warning("Market is closed - will attempt position closure when market opens")
+                return
+
+            positions = self.position_manager.get_open_positions()
+            self.logger.info(f"[Duration Monitor] Checking {len(positions)} positions for time limits")
+            
+            for position in positions:
+                try:
+                    duration_check = self.ftmo_manager.check_position_duration(position)
+                    
+                    self.logger.info(
+                        f"[Duration Check] Position {position['ticket']} ({position['symbol']}) "
+                        f"Duration: {duration_check['duration']} | "
+                        f"Max allowed: {duration_check['max_duration']}min | "
+                        f"Needs closure: {duration_check['needs_closure']}"
+                    )
+                    
+                    if duration_check['warning']:
+                        self.logger.warning(
+                            f"[Duration Warning] Position {position['ticket']} ({position['symbol']}) "
+                            f"approaching time limit - Current duration: {duration_check['duration']}"
+                        )
+                    
+                    if duration_check['needs_closure']:
+                        self.logger.warning(
+                            f"[Duration Exceeded] Position {position['ticket']} ({position['symbol']}) "
+                            f"exceeded maximum duration. Current: {duration_check['duration']}"
+                        )
+                        
+                        # Try to close position
+                        success, message = self.position_manager.close_position(position['ticket'])
+                        
+                        if success:
+                            self.logger.info(
+                                f"[Closure Success] Position {position['ticket']} closed successfully"
+                            )
+                        else:
+                            if "10018" in message:  # Market closed error
+                                self.logger.warning(
+                                    f"[Closure Delayed] Market closed for {position['symbol']}. "
+                                    f"Will attempt closure when market opens"
+                                )
+                            else:
+                                self.logger.error(
+                                    f"[Closure Failed] Failed to close position {position['ticket']}. "
+                                    f"Error: {message}"
+                                )
+                            
+                except Exception as e:
+                    self.logger.error(f"[Monitor Error] Error monitoring position {position.get('ticket', 'unknown')}: {str(e)}")
+                    continue
+                    
+        except Exception as e:
+            self.logger.error(f"[Monitor Error] Error in position monitoring: {str(e)}")
 
     def process_symbol(self, symbol: str) -> Optional[Dict]:
         """Process trading logic for a symbol"""

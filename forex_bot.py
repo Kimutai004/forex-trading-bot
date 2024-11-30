@@ -60,12 +60,21 @@ class ForexBot:
             self.logger.info("Signal manager initialized")
 
             # Initialize trading logic
-            self.trading_logic = TradingLogic(self.mt5_trader, self.signal_manager, self.position_manager)
+            self.trading_logic = TradingLogic(
+                self.mt5_trader, 
+                self.signal_manager, 
+                self.position_manager,
+                self.ftmo_manager  # Pass the FTMO manager here
+            )
             self.logger.info("Trading logic initialized")
 
             # Update signal manager with trading logic and initialize evaluator
             self.signal_manager.trading_logic = self.trading_logic
-            self.signal_manager.signal_evaluator = SignalEvaluator(self.signal_manager, self.trading_logic)
+            self.signal_manager.signal_evaluator = SignalEvaluator(
+                signal_manager=self.signal_manager,
+                trading_logic=self.trading_logic,
+                ftmo_manager=self.ftmo_manager
+            )
 
             # Initialize menu and other components
             self.menu = self._initialize_menu_manager()
@@ -220,6 +229,11 @@ class ForexBot:
         try:
             if not self.mt5_trader.market_is_open:
                 return
+                
+            # Run position monitoring first - Added explicit logging
+            self.logger.info("[Trading Loop] Starting position duration monitoring cycle")
+            self.trading_logic.monitor_positions()
+            self.logger.info("[Trading Loop] Completed position duration monitoring cycle")
                 
             symbols = self.config.get_setting('favorite_symbols', [])
             

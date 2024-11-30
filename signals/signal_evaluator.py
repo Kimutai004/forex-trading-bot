@@ -7,9 +7,17 @@ from datetime import datetime
 class SignalEvaluator:
     """Enhanced signal evaluation system incorporating all trading criteria"""
     
-    def __init__(self, signal_manager, trading_logic):
+    def __init__(self, signal_manager, trading_logic, ftmo_manager=None):
+        """Initialize SignalEvaluator
+        
+        Args:
+            signal_manager: SignalManager instance
+            trading_logic: TradingLogic instance
+            ftmo_manager: Optional FTMORuleManager instance
+        """
         self.signal_manager = signal_manager
         self.trading_logic = trading_logic
+        self.ftmo_manager = ftmo_manager
         self.position_manager = trading_logic.position_manager
         self._setup_logging()
         self.logger.info("SignalEvaluator initialized with signal manager and trading logic")

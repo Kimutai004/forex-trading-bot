@@ -68,7 +68,13 @@ class PositionManager:
 
     def close_position(self, ticket: int) -> Tuple[bool, str]:
         """Close specific position by ticket"""
-        return self.mt5_instance.close_trade(ticket)
+        try:
+            if not self.mt5_instance.market_is_open:
+                return False, "Market is closed"
+                
+            return self.mt5_instance.close_trade(ticket)
+        except Exception as e:
+            return False, f"Error closing position: {str(e)}"
 
     def close_all_positions(self) -> List[Tuple[int, bool, str]]:
         """Close all open positions"""
