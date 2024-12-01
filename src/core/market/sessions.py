@@ -12,6 +12,13 @@ class MarketSessionManager:
         self.calendar_data = self._load_calendar()
         self.sessions = self.calendar_data.get("sessions", {})
         self.holidays = self.calendar_data.get("holidays", {})
+        self._setup_logging()
+    
+    def _setup_logging(self):
+        """Setup logging for market session manager"""
+        from src.utils.logger import setup_logger
+        self.logger = setup_logger('MarketSessionManager')
+        self.logger.info("MarketSessionManager initialized with logging")
 
     def _load_calendar(self) -> Dict:
         """Load market calendar from JSON file"""
@@ -119,11 +126,76 @@ class MarketSessionManager:
         return hours * 60 + minutes
 
     def _calculate_minutes_until(self, current: time, target: time) -> int:
-        """Calculate minutes until target time"""
-        current_minutes = current.hour * 60 + current.minute
-        target_minutes = target.hour * 60 + target.minute
+        """
+        Calculate minutes until target time, accounting for weekends and market hours
         
-        if target_minutes <= current_minutes:
-            target_minutes += 24 * 60
+        Args:
+            current: Current time
+            target: Target session opening time
             
-        return target_minutes - current_minutes
+        Returns:
+            int: Minutes until next session
+        """
+        try:
+            now = datetime.now(ZoneInfo("UTC"))
+            current_minutes = current.hour * 60 + current.minute
+            target_minutes = target.hour * 60 + target.minute
+            
+            self.logger.info(f"""
+            Calculating next session time:
+            Current UTC: {now}
+            Current Day: {now.strftime('%A')}
+            Target Time: {target.strftime('%H:%M')}
+            Current Minutes: {current_minutes}
+            Target Minutes: {target_minutes}
+            """)
+
+            if now.weekday() == 5:  # Saturday
+                # Calculate minutes until Sunday 21:00 UTC (Sydney open)
+                hours_until_sydney = 24 + 21  # 24 hours until Sunday + 21 hours until Sydney open
+                minutes_until_sydney = (hours_until_sydney * 60) - (current.hour * 60 + current.minute)
+                
+                self.logger.info(f"Saturday: Minutes until Sydney open: {minutes_until_sydney}")
+
+                if target.hour == 21:  # Sydney
+                    return minutes_until_sydney
+                elif target.hour == 0:  # Tokyo (next day)
+                    return minutes_until_sydney + 180  # Sydney + 3 hours
+                elif target.hour == 8:  # London
+                    return minutes_until_sydney + 660  # Sydney + 11 hours
+                elif target.hour == 13:  # New York
+                    return minutes_until_sydney + 960  # Sydney + 16 hours
+                    
+            elif now.weekday() == 6:  # Sunday
+                if now.hour < 21:  # Before Sydney open
+                    # Minutes until Sydney open
+                    minutes_until_sydney = (21 - now.hour) * 60 - now.minute
+                    
+                    self.logger.info(f"Sunday before Sydney: Minutes until Sydney open: {minutes_until_sydney}")
+
+                    if target.hour == 21:  # Sydney
+                        return minutes_until_sydney
+                    elif target.hour == 0:  # Tokyo (next day)
+                        return minutes_until_sydney + 180  # Sydney + 3 hours
+                    elif target.hour == 8:  # London
+                        return minutes_until_sydney + 660  # Sydney + 11 hours
+                    elif target.hour == 13:  # New York
+                        return minutes_until_sydney + 960  # Sydney + 16 hours
+                else:
+                    # After Sydney open, normal calculation
+                    if target_minutes <= current_minutes:
+                        target_minutes += 24 * 60
+                    minutes_until = target_minutes - current_minutes
+                    self.logger.info(f"Sunday after Sydney: Normal calculation: {minutes_until}")
+                    return minutes_until
+            else:
+                # Normal weekday calculation
+                if target_minutes <= current_minutes:
+                    target_minutes += 24 * 60
+                minutes_until = target_minutes - current_minutes
+                self.logger.info(f"Weekday: Normal calculation: {minutes_until}")
+                return minutes_until
+                
+        except Exception as e:
+            self.logger.error(f"Error calculating session time: {str(e)}")
+            return 0
