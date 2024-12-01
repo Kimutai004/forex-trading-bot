@@ -142,6 +142,44 @@ class TradingLogger:
             
         except Exception as e:
             self.logger.error(f"Error logging trade: {str(e)}")
+    
+    def log_ftmo_status(self, compliance_check: Dict):
+        """Log FTMO compliance status"""
+        try:
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
+            with open(self.current_log_file, 'a', encoding='utf-8') as f:
+                f.write(f"\n{'='*30} FTMO STATUS CHECK {'='*30}\n")
+                f.write(f"Time: {timestamp}\n")
+                f.write(f"Compliant: {compliance_check['compliant']}\n")
+                
+                if compliance_check['violations']:
+                    f.write("\nViolations:\n")
+                    for violation in compliance_check['violations']:
+                        f.write(f"- {violation}\n")
+                        
+                if compliance_check['warnings']:
+                    f.write("\nWarnings:\n")
+                    for warning in compliance_check['warnings']:
+                        f.write(f"- {warning}\n")
+                        
+                f.write("\nDaily Loss Status:\n")
+                f.write(f"Current: ${abs(compliance_check['daily_loss_status']['current'])}\n")
+                f.write(f"Limit: ${abs(compliance_check['daily_loss_status']['limit'])}\n")
+                f.write(f"Remaining: ${compliance_check['daily_loss_status']['remaining']}\n")
+                
+                f.write("\nTotal Loss Status:\n")
+                f.write(f"Current: ${abs(compliance_check['total_loss_status']['current'])}\n")
+                f.write(f"Limit: ${abs(compliance_check['total_loss_status']['limit'])}\n")
+                f.write(f"Remaining: ${compliance_check['total_loss_status']['remaining']}\n")
+                
+                f.write(f"\nTrading Days: {compliance_check['trading_days']}\n")
+                f.write(f"{'='*78}\n")
+                
+            self.logger.info("FTMO status logged successfully")
+            
+        except Exception as e:
+            self.logger.error(f"Error logging FTMO status: {str(e)}")
 
     def log_error(self, error_message: str, error_details: Optional[Dict] = None):
         """Log error information"""

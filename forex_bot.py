@@ -50,6 +50,7 @@ class ForexBot:
             if not self.mt5_trader.connected:
                 raise RuntimeError("Failed to connect to MT5")
             self.logger.info("MT5 trader initialized and connected")
+            self.ftmo_manager.set_mt5_trader(self.mt5_trader)
 
             # Initialize position manager
             self.position_manager = PositionManager(self.mt5_trader)
@@ -227,53 +228,93 @@ class ForexBot:
     def run_trading_loop(self):
         """Main trading loop logic"""
         try:
-            if not self.mt5_trader.market_is_open:
+            # Check market status first
+            market_open = False
+            try:
+                # Get current session info
+                session_info = self.session_manager.get_current_session_info()
+                market_open = len(session_info['active_sessions']) > 0
+                
+                # Check all positions regardless of market status
+                positions = self.position_manager.get_open_positions()
+                self.logger.info(f"Checking {len(positions)} positions for FTMO compliance")
+                
+                for position in positions:
+                    duration_check = self.ftmo_manager.check_position_duration(position)
+                    if duration_check.get('needs_closure', False):
+                        if not market_open:
+                            self.logger.warning(f"""
+                            Position Duration Check:
+                            Ticket: {position['ticket']}
+                            Symbol: {position['symbol']}
+                            Duration: {duration_check['duration']}
+                            Status: MARKET CLOSED - Cannot close position
+                            Action: Will attempt closure when market opens
+                            """)
+                        else:
+                            self.logger.warning(f"""
+                            Position Duration Check:
+                            Ticket: {position['ticket']}
+                            Symbol: {position['symbol']}
+                            Duration: {duration_check['duration']}
+                            Status: Attempting closure
+                            """)
+                            # Attempt closure if market is open
+                            success, message = self.mt5_trader.close_trade(position['ticket'])
+                            self.logger.info(f"Position closure attempt: {success}, Message: {message}")
+
+                if not market_open:
+                    self.logger.info("Market CLOSED - Skipping trading operations")
+                    return
+
+                # Run position monitoring
+                self.logger.info("[Trading Loop] Starting position duration monitoring cycle")
+                self.trading_logic.monitor_positions()
+                self.logger.info("[Trading Loop] Completed position duration monitoring cycle")
+                    
+                symbols = self.config.get_setting('favorite_symbols', [])
+                
+                for symbol in symbols:
+                    try:
+                        positions = self.position_manager.get_open_positions()
+                        if len(positions) >= self.trading_logic.max_total_positions:
+                            continue
+                            
+                        signals = self.signal_manager.get_signals(symbol)
+                        if not signals:
+                            continue
+                            
+                        consensus = self.signal_manager.get_consensus_signal(symbol)
+                        if not consensus:
+                            continue
+                            
+                        decision = {
+                            'symbol': symbol,
+                            'signal': consensus,
+                            'open_positions': len([p for p in positions if p['symbol'] == symbol])
+                        }
+                        
+                        if self.execute_trade(decision):
+                            self.logger.info(f"Trade executed for {symbol}")
+                            self.trading_logger.log_trade({
+                                'symbol': symbol,
+                                'type': consensus.type.value,
+                                'entry_price': consensus.entry_price,
+                                'stop_loss': consensus.stop_loss,
+                                'take_profit': consensus.take_profit,
+                                'volume': consensus.volume
+                            })
+                            
+                    except Exception as e:
+                        self.logger.error(f"Error processing symbol {symbol}: {str(e)}")
+                        continue
+                        
+                self.trading_logger.log_system_state()
+                
+            except Exception as e:
+                self.logger.error(f"Error checking market status: {str(e)}")
                 return
                 
-            # Run position monitoring first - Added explicit logging
-            self.logger.info("[Trading Loop] Starting position duration monitoring cycle")
-            self.trading_logic.monitor_positions()
-            self.logger.info("[Trading Loop] Completed position duration monitoring cycle")
-                
-            symbols = self.config.get_setting('favorite_symbols', [])
-            
-            for symbol in symbols:
-                try:
-                    positions = self.position_manager.get_open_positions()
-                    if len(positions) >= self.trading_logic.max_total_positions:
-                        continue
-                        
-                    signals = self.signal_manager.get_signals(symbol)
-                    if not signals:
-                        continue
-                        
-                    consensus = self.signal_manager.get_consensus_signal(symbol)
-                    if not consensus:
-                        continue
-                        
-                    decision = {
-                        'symbol': symbol,
-                        'signal': consensus,
-                        'open_positions': len([p for p in positions if p['symbol'] == symbol])
-                    }
-                    
-                    if self.execute_trade(decision):
-                        self.logger.info(f"Trade executed for {symbol}")
-                        self.trading_logger.log_trade({
-                            'symbol': symbol,
-                            'type': consensus.type.value,
-                            'entry_price': consensus.entry_price,
-                            'stop_loss': consensus.stop_loss,
-                            'take_profit': consensus.take_profit,
-                            'volume': consensus.volume
-                        })
-                        
-                except Exception as e:
-                    self.logger.error(f"Error processing symbol {symbol}: {str(e)}")
-                    continue
-                    
-            self.trading_logger.log_system_state()
-            
         except Exception as e:
             self.logger.error(f"Error in trading loop: {str(e)}")
 

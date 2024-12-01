@@ -27,7 +27,7 @@ class MT5Trader:
 
     def _check_expert_status(self) -> Dict:
         """
-        Enhanced check for Expert Advisor status
+        Enhanced check for Expert Advisor status with actual trading capability verification
         Returns Dict with status details and diagnostic info
         """
         try:
@@ -41,22 +41,28 @@ class MT5Trader:
 
             terminal_dict = terminal_info._asdict()
             
-            # Direct expert check
-            trade_expert = terminal_dict.get('trade_expert')
-            
-            # Alternative checks
-            expert_enabled = True
+            # Test actual trading capability instead of just checking trade_expert
             diagnostics = {
-                'trade_expert_raw': trade_expert,
-                'trade_allowed': terminal_dict.get('trade_allowed'),
-                'connected': terminal_dict.get('connected'),
-                'dlls_allowed': terminal_dict.get('dlls_allowed'),
+                'trade_expert_raw': terminal_dict.get('trade_expert'),
+                'trade_allowed': terminal_dict.get('trade_allowed', False),
+                'connected': terminal_dict.get('connected', False),
+                'dlls_allowed': terminal_dict.get('dlls_allowed', False),
                 'trade_context': mt5.symbol_info_tick("EURUSD") is not None,
-                'can_trade': True
+                'can_trade': False,  # Will be updated based on actual check
+                'positions_accessible': False  # Will be updated based on check
             }
-            
-            # Test ability to place a trade
+
+            # Verify ability to access positions
             try:
+                positions = mt5.positions_total()
+                diagnostics['positions_accessible'] = positions is not None
+            except Exception as e:
+                self.logger.error(f"Position access check failed: {str(e)}")
+                diagnostics['positions_accessible'] = False
+
+            # Test actual trading capability
+            try:
+                # Just check if order validation would pass
                 request = {
                     "action": mt5.TRADE_ACTION_DEAL,
                     "symbol": "EURUSD",
@@ -69,41 +75,33 @@ class MT5Trader:
                     "type_time": mt5.ORDER_TIME_GTC,
                     "type_filling": mt5.ORDER_FILLING_IOC,
                 }
-                # Just check if order check passes, don't actually place the trade
                 result = mt5.order_check(request)
-                if result is None:
-                    diagnostics['can_trade'] = False
-                    expert_enabled = False
-                else:
+                diagnostics['can_trade'] = result is not None
+                if result is not None:
                     diagnostics['order_check_retcode'] = result.retcode
-                    # If order check passes, experts are likely enabled
-                    expert_enabled = result.retcode in [0, 10018]  # 10018 is "Market closed"
-                    
+                    # Consider it valid if order check passes or gets "market closed"
+                    diagnostics['can_trade'] = result.retcode in [0, 10018]
             except Exception as e:
-                diagnostics['order_check_error'] = str(e)
+                self.logger.error(f"Trade capability check failed: {str(e)}")
                 diagnostics['can_trade'] = False
-                expert_enabled = False
 
-            # Additional context check
-            try:
-                positions = mt5.positions_total()
-                diagnostics['positions_accessible'] = positions is not None
-                expert_enabled = expert_enabled and diagnostics['positions_accessible']
-            except Exception as e:
-                diagnostics['positions_error'] = str(e)
-                diagnostics['positions_accessible'] = False
+            # Determine actual trading capability
+            expert_enabled = (
+                diagnostics['trade_allowed'] and
+                diagnostics['connected'] and
+                diagnostics['positions_accessible'] and
+                diagnostics['can_trade']
+            )
 
-            # Log all diagnostic information
             self.logger.info(f"""
             Expert Status Check Results:
-            Trade Expert Raw Value: {trade_expert}
-            Can Trade: {diagnostics['can_trade']}
+            Trade Expert Raw Value: {diagnostics['trade_expert_raw']}
+            Can Actually Trade: {diagnostics['can_trade']}
             Trade Allowed: {diagnostics['trade_allowed']}
             Connected: {diagnostics['connected']}
-            DLLs Allowed: {diagnostics['dlls_allowed']}
-            Trade Context: {diagnostics['trade_context']}
-            Positions Accessible: {diagnostics.get('positions_accessible')}
+            Positions Accessible: {diagnostics['positions_accessible']}
             Final Status: {'Enabled' if expert_enabled else 'Disabled'}
+            Order Check Result: {diagnostics.get('order_check_retcode', 'N/A')}
             """)
             
             return {
@@ -111,7 +109,7 @@ class MT5Trader:
                 'error': None,
                 'diagnostics': diagnostics
             }
-            
+                
         except Exception as e:
             self.logger.error(f"Error checking expert status: {str(e)}", exc_info=True)
             return {
@@ -126,35 +124,33 @@ class MT5Trader:
         self.logger.info("MT5Trader logging system initialized")
 
     def _monitor_connection(self) -> bool:
-        """
-        Monitor and attempt to recover MT5 connection if needed
-        
-        Returns:
-            bool: True if connection is healthy or recovered successfully
-        """
-        self.logger.debug("Checking MT5 connection health")
-        
+        """Monitor MT5 connection status with proper error handling"""
         try:
-            # Check if terminal is accessible
-            if not mt5.terminal_info():
-                self.logger.error("MT5 terminal not accessible")
+            if not mt5.initialize():
+                self.logger.error("MT5 not initialized")
                 return self._attempt_reconnection()
+
+            # Get terminal info with retry
+            max_attempts = 3
+            for attempt in range(max_attempts):
+                terminal_info = mt5.terminal_info()
+                if terminal_info is not None:
+                    break
+                time.sleep(1)  # Wait before retry
                 
-            # Verify account access
-            account_info = mt5.account_info()
-            if account_info is None:
-                self.logger.error("Cannot access account information")
+            if terminal_info is None:
+                self.logger.error("Cannot get terminal info after retries")
                 return self._attempt_reconnection()
-                
-            # Verify market data access
-            test_symbol = "EURUSD"
-            if not mt5.symbol_select(test_symbol, True):
-                self.logger.error(f"Cannot select symbol {test_symbol}")
+
+            # Check connection status
+            terminal_dict = terminal_info._asdict()
+            if not terminal_dict.get('connected', False):
+                self.logger.error("Terminal not connected to broker")
                 return self._attempt_reconnection()
-                
+
             self.logger.debug("MT5 connection is healthy")
             return True
-            
+
         except Exception as e:
             self.logger.error(f"Error monitoring connection: {str(e)}")
             return self._attempt_reconnection()
@@ -262,83 +258,70 @@ class MT5Trader:
 
     @property
     def market_is_open(self) -> bool:
-        """Check if market is open with enhanced connection handling and logging"""
-        if not self.connected:
-            self.logger.warning("Market check failed: MT5 not connected")
-            return False
-                        
+        """Check if market is open with connection stability"""
         try:
-            self.logger.info("Starting market status check...")
-            
-            # Enhanced connection verification
+            if not self._monitor_connection():
+                return False
+
+            # Basic check first
             if not mt5.initialize():
-                self.logger.error("MT5 initialization required")
-                if not self._initialize_mt5():
-                    return False
-            
-            # Verify terminal connection first
-            terminal_info = mt5.terminal_info()
-            if terminal_info is None:
-                self.logger.error("Cannot get terminal info")
+                self.logger.error("MT5 not initialized")
                 return False
-                        
-            terminal_dict = terminal_info._asdict()
-            self.logger.info(f"Terminal connection state: {terminal_dict.get('connected', False)}")
-            
-            if not terminal_dict.get('connected', False):
-                self.logger.error("Terminal not connected")
-                return False
-                        
-            # Get current server time and log details
+
+            # Get a reference symbol tick
             tick = mt5.symbol_info_tick("EURUSD")
             if tick is None:
-                self.logger.error("Cannot get current server time")
-                return False
-                    
-            server_time = datetime.fromtimestamp(tick.time)
-            self.logger.info(f"Current server time: {server_time}")
-            self.logger.info(f"Current session: {self._get_current_session()}")
-            
-            # Check if market is actually receiving price updates
-            self.logger.info("Checking price feed updates...")
-            initial_tick = mt5.symbol_info_tick("EURUSD")
-            time.sleep(1)  # Wait a second
-            second_tick = mt5.symbol_info_tick("EURUSD")
-            
-            if initial_tick and second_tick:
-                self.logger.info(f"Initial tick: Bid={initial_tick.bid}, Ask={initial_tick.ask}, Time={datetime.fromtimestamp(initial_tick.time)}")
-                self.logger.info(f"Second tick: Bid={second_tick.bid}, Ask={second_tick.ask}, Time={datetime.fromtimestamp(second_tick.time)}")
-                
-                # Check if times are different
-                if initial_tick.time == second_tick.time:
-                    self.logger.warning("Price feed might be stale - timestamps are identical")
-                if initial_tick.bid == second_tick.bid and initial_tick.ask == second_tick.ask:
-                    self.logger.warning("Price feed might be stale - prices haven't changed")
-            else:
-                self.logger.error("Failed to get price updates")
+                self.logger.error("Cannot get price data")
                 return False
 
-            # Log final market state
-            market_state = bool(mt5.symbol_info_tick("EURUSD"))
-            self.logger.info(f"Final market state determination: {'Open' if market_state else 'Closed'}")
-            return market_state
+            current_time = datetime.now()
+            tick_time = datetime.fromtimestamp(tick.time)
+            time_diff = (current_time - tick_time).total_seconds()
+
+            self.logger.info(f"""
+            Market Status Check:
+            Current Time: {current_time}
+            Last Tick Time: {tick_time}
+            Time Difference: {time_diff:.1f} seconds
+            Session: {self._get_current_session()}
+            """)
+
+            # Consider market closed if price is too old
+            if time_diff > 180:  # 3 minutes
+                self.logger.warning(f"Price data is stale ({time_diff:.1f} seconds old)")
+                return False
+
+            return True
 
         except Exception as e:
-            self.logger.error(f"Error checking market status: {str(e)}", exc_info=True)
+            self.logger.error(f"Error checking market status: {str(e)}")
             return False
     
     def _get_current_session(self) -> str:
-        """Get current trading session based on Costa Rica time"""
-        current_hour = datetime.now().hour
-        
-        if 16 <= current_hour <= 23:  # 4 PM - 11 PM
-            return "Sydney/Tokyo Session"
-        elif 2 <= current_hour <= 11:  # 2 AM - 11 AM
-            return "London Session"
-        elif 7 <= current_hour <= 16:  # 7 AM - 4 PM
-            return "New York Session"
-        else:
-            return "Between Sessions"
+        """Get current trading session based on server time"""
+        try:
+            current_hour = datetime.now().hour
+            
+            if 8 <= current_hour <= 16:  # London
+                if 13 <= current_hour <= 16:
+                    return "London-NY Overlap"
+                return "London Session"
+            elif 13 <= current_hour <= 21:  # New York
+                return "New York Session"
+            elif 0 <= current_hour <= 9:  # Tokyo
+                if 8 <= current_hour <= 9:
+                    return "Tokyo-London Overlap"
+                return "Tokyo Session"
+            elif 22 <= current_hour or current_hour <= 7:  # Sydney
+                if 0 <= current_hour <= 2:
+                    return "Sydney-Tokyo Overlap"
+                return "Sydney Session"
+            else:
+                return "Between Sessions"
+                
+        except Exception as e:
+            self.logger.error(f"Error determining current session: {str(e)}")
+            return "Unknown Session"
 
     def _initialize_mt5(self) -> bool:
         """Initialize connection to MT5 terminal"""

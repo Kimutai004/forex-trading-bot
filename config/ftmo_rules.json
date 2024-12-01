@@ -5,25 +5,51 @@
         "max_total_loss": -10000,
         "profit_target": 10000,
         "max_positions": 3,
+        "position_duration": {
+            "max_minutes": 30,
+            "warning_threshold": 0.75
+        },
         "scaling_rules": {
             "initial_lots": 0.01,
             "max_lots": 1.0
         }
     },
     "time_rules": {
-        "max_position_duration": 120, 
+        "max_position_duration": 30,
         "restricted_hours": {
             "start": "22:00",
             "end": "23:00"
         }
     },
     "risk_parameters": {
-        "max_risk_per_trade": 1.0,  
+        "max_risk_per_trade": 1.0,
         "position_scaling": false,
         "max_correlation_positions": 2
     },
     "monitoring": {
         "warning_threshold_daily": -4000,
         "warning_threshold_total": -8000
+    },
+    "sessions": {
+        "london": {
+            "start": "08:00",
+            "end": "16:00",
+            "timezone": "GMT"
+        },
+        "newyork": {
+            "start": "13:00",
+            "end": "21:00",
+            "timezone": "GMT"
+        },
+        "tokyo": {
+            "start": "00:00",
+            "end": "09:00",
+            "timezone": "GMT"
+        },
+        "sydney": {
+            "start": "22:00",
+            "end": "07:00",
+            "timezone": "GMT"
+        }
     }
 }
