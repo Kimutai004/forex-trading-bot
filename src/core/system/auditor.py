@@ -135,6 +135,146 @@ class SystemAuditor:
                 message=f"Error during MT5 audit: {str(e)}",
                 timestamp=datetime.now()
             )  
+    
+    def audit_ftmo_phase1(self) -> AuditResult:
+        """
+        Comprehensive audit of FTMO Phase 1 implementation
+        Returns: AuditResult with detailed Phase 1 compliance status
+        """
+        try:
+            self.logger.info("Starting FTMO Phase 1 compliance audit...")
+            
+            # Initialize audit details
+            details = {
+                'rule_engine': {'status': 'OK', 'issues': []},
+                'logging_system': {'status': 'OK', 'issues': []},
+                'session_management': {'status': 'OK', 'issues': []},
+                'trading_days': {'status': 'OK', 'issues': []}
+            }
+
+            # 1. Rule Engine Verification
+            try:
+                import json
+                import os
+                ftmo_rules_path = os.path.join("config", "ftmo_rules.json")
+                
+                if not os.path.exists(ftmo_rules_path):
+                    details['rule_engine']['status'] = 'ERROR'
+                    details['rule_engine']['issues'].append('FTMO rules file not found')
+                else:
+                    with open(ftmo_rules_path, 'r') as f:
+                        rules = json.load(f)
+                    
+                    # Verify core rules exist
+                    required_rules = {
+                        'max_daily_loss': rules['trading_rules'].get('max_daily_loss'),
+                        'max_total_loss': rules['trading_rules'].get('max_total_loss'),
+                        'position_duration': rules['time_rules'].get('max_position_duration')
+                    }
+                    
+                    for rule, value in required_rules.items():
+                        if not value:
+                            details['rule_engine']['status'] = 'ERROR'
+                            details['rule_engine']['issues'].append(f'Missing {rule} rule')
+                        else:
+                            self.logger.info(f"Rule {rule} verified: {value}")
+            except Exception as e:
+                details['rule_engine']['status'] = 'ERROR'
+                details['rule_engine']['issues'].append(f'Rule verification error: {str(e)}')
+
+            # 2. Logging System Verification
+            log_dir = "trading_logs"
+            if not os.path.exists(log_dir):
+                details['logging_system']['status'] = 'ERROR'
+                details['logging_system']['issues'].append('Trading logs directory not found')
+            else:
+                # Check for specific log files
+                required_logs = ['ftmo_rule_manager', 'trading_session', 'trading_activity']
+                log_files = os.listdir(log_dir)
+                
+                for req_log in required_logs:
+                    if not any(req_log in f for f in log_files):
+                        details['logging_system']['status'] = 'WARNING'
+                        details['logging_system']['issues'].append(f'No recent {req_log} logs found')
+                    else:
+                        self.logger.info(f"Log type {req_log} verified")
+
+            # 3. Session Management Verification
+            from src.core.market.sessions import MarketSessionManager
+            session_manager = MarketSessionManager()
+            
+            # Verify session times
+            required_sessions = {
+                'London': ('08:00', '16:00'),
+                'NewYork': ('13:00', '21:00'),
+                'Tokyo': ('00:00', '09:00'),
+                'Sydney': ('22:00', '07:00')
+            }
+            
+            market_calendar = session_manager.calendar_data.get('sessions', {})
+            for session, times in required_sessions.items():
+                if session not in market_calendar:
+                    details['session_management']['status'] = 'ERROR'
+                    details['session_management']['issues'].append(f'Missing {session} session configuration')
+                elif market_calendar[session].get('open') != times[0] or market_calendar[session].get('close') != times[1]:
+                    details['session_management']['status'] = 'WARNING'
+                    details['session_management']['issues'].append(f'Incorrect {session} session times')
+                else:
+                    self.logger.info(f"Session {session} times verified")
+
+            # 4. Trading Days Tracking Verification
+            from src.core.ftmo_rule_manager import FTMORuleManager
+            ftmo_manager = FTMORuleManager()
+            
+            if not hasattr(ftmo_manager, '_get_trading_days_count'):
+                details['trading_days']['status'] = 'ERROR'
+                details['trading_days']['issues'].append('Trading days tracking not implemented')
+            else:
+                self.logger.info("Trading days tracking method verified")
+
+            # Generate overall status
+            status = 'OK'
+            if any(d['status'] == 'ERROR' for d in details.values()):
+                status = 'ERROR'
+            elif any(d['status'] == 'WARNING' for d in details.values()):
+                status = 'WARNING'
+
+            # Log comprehensive results
+            self.logger.info(f"""
+            ===== FTMO PHASE 1 AUDIT RESULTS =====
+            Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+            Overall Status: {status}
+            
+            Rule Engine Status: {details['rule_engine']['status']}
+            Issues: {', '.join(details['rule_engine']['issues']) if details['rule_engine']['issues'] else 'None'}
+            
+            Logging System Status: {details['logging_system']['status']}
+            Issues: {', '.join(details['logging_system']['issues']) if details['logging_system']['issues'] else 'None'}
+            
+            Session Management Status: {details['session_management']['status']}
+            Issues: {', '.join(details['session_management']['issues']) if details['session_management']['issues'] else 'None'}
+            
+            Trading Days Status: {details['trading_days']['status']}
+            Issues: {', '.join(details['trading_days']['issues']) if details['trading_days']['issues'] else 'None'}
+            =====================================
+            """)
+
+            return AuditResult(
+                module_name="FTMO_Phase1",
+                status=status,
+                message="Phase 1 audit completed",
+                timestamp=datetime.now(),
+                details=details
+            )
+
+        except Exception as e:
+            self.logger.error(f"Error during FTMO Phase 1 audit: {str(e)}")
+            return AuditResult(
+                module_name="FTMO_Phase1",
+                status="ERROR",
+                message=f"Audit failed: {str(e)}",
+                timestamp=datetime.now()
+            )
 
     def _check_mt5_expert_status(self) -> AuditResult:
         """Check MT5 expert status directly"""
@@ -516,6 +656,8 @@ class SystemAuditor:
         """Run full system audit"""
         # First check MT5 status directly
         mt5_status = self._check_mt5_expert_status()
+        ftmo_status = self.audit_ftmo_phase1()
+        self.results.append(ftmo_status)
         
         audit_functions = [
             self.audit_market_watcher,
@@ -525,7 +667,7 @@ class SystemAuditor:
             self.audit_menu_manager
         ]
         
-        self.results = []
+        self.results = [mt5_status, ftmo_status]
         
         # Add MT5 status first
         self.results.append(mt5_status)

@@ -83,40 +83,57 @@ class MarketSessionManager:
         return is_open
 
     def get_current_session_info(self) -> Dict:
-        """Get comprehensive session information"""
+        """Get comprehensive session information with weekend handling"""
         now = datetime.now(ZoneInfo("UTC"))
         active_sessions = []
         upcoming_sessions = []
 
-        # Check active sessions
+        # Check if it's weekend first
+        if now.weekday() >= 5:  # 5 is Saturday, 6 is Sunday
+            self.logger.info(f"Market closed - Weekend ({['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][now.weekday()]})")
+            
+            # Calculate time until market open (Sydney session on Sunday)
+            if now.weekday() == 5:  # Saturday
+                hours_until = 24 + 21  # 24 hours until Sunday + 21 hours until Sydney open
+                minutes_until = (hours_until * 60) - (now.hour * 60 + now.minute)
+            else:  # Sunday
+                if now.hour < 21:  # Before Sydney open
+                    minutes_until = (21 - now.hour) * 60 - now.minute
+                else:
+                    minutes_until = 0  # Sydney session about to open
+                    
+            upcoming_sessions.append({
+                'name': 'Sydney (Market Open)',
+                'opens_in': f"{minutes_until // 60}h {minutes_until % 60}m"
+            })
+            
+            return {
+                'active_sessions': [],
+                'upcoming_sessions': upcoming_sessions,
+                'market_status': 'CLOSED - Weekend'
+            }
+
+        # Regular session checks
         for session in self.sessions:
             if self.is_session_open(session):
                 active_sessions.append(session)
-
-        # Calculate upcoming sessions, including holiday-affected ones
-        for session, times in self.sessions.items():
-            if session not in active_sessions:
-                open_time = datetime.strptime(times["open"], "%H:%M").time()
+            else:
+                session_times = self.sessions[session]
+                open_time = datetime.strptime(session_times["open"], "%H:%M").time()
                 minutes_until = self._calculate_minutes_until(now.time(), open_time)
-                
-                # Adjust for holidays
-                if self.is_holiday(session):
-                    next_opening = now + timedelta(days=1)
-                    while self.is_holiday(session, next_opening):
-                        next_opening += timedelta(days=1)
-                        minutes_until += 24 * 60  # Add a day's worth of minutes
-
-                upcoming_sessions.append({
-                    'name': session,
-                    'opens_in': f"{minutes_until // 60}h {minutes_until % 60}m"
-                })
+                if minutes_until is not None:
+                    upcoming_sessions.append({
+                        'name': session,
+                        'opens_in': f"{minutes_until // 60}h {minutes_until % 60}m"
+                    })
 
         # Sort upcoming sessions by time until opening
-        upcoming_sessions.sort(key=lambda x: self._parse_time_string(x['opens_in']))
+        upcoming_sessions.sort(key=lambda x: int(x['opens_in'].split('h')[0]) * 60 + int(x['opens_in'].split('h')[1].split('m')[0]))
 
         return {
             'active_sessions': active_sessions,
-            'upcoming_sessions': upcoming_sessions
+            'upcoming_sessions': upcoming_sessions,
+            'market_status': 'OPEN' if active_sessions else 'CLOSED'
         }
 
     def _parse_time_string(self, time_str: str) -> int:
@@ -124,6 +141,84 @@ class MarketSessionManager:
         hours = int(time_str.split('h')[0])
         minutes = int(time_str.split('h')[1].strip().split('m')[0])
         return hours * 60 + minutes
+    
+    def verify_session_configuration(self) -> Dict:
+        """
+        Verify all session configurations and overlap periods
+        Returns Dict with verification results
+        """
+        try:
+            self.logger.info("Verifying session configurations...")
+            
+            verification = {
+                'sessions': {'status': 'OK', 'issues': []},
+                'overlaps': {'status': 'OK', 'issues': []}
+            }
+
+            # Verify main sessions
+            required_sessions = {
+                'Sydney': ('22:00', '07:00'),
+                'Tokyo': ('00:00', '09:00'),
+                'London': ('08:00', '16:00'),
+                'NewYork': ('13:00', '21:00')
+            }
+
+            for session, times in required_sessions.items():
+                if session not in self.sessions:
+                    verification['sessions']['status'] = 'ERROR'
+                    verification['sessions']['issues'].append(f'Missing {session} session')
+                    continue
+
+                session_config = self.sessions[session]
+                if session_config.get('open') != times[0] or session_config.get('close') != times[1]:
+                    verification['sessions']['status'] = 'WARNING'
+                    verification['sessions']['issues'].append(
+                        f"{session} session times mismatch - Expected: {times}, Got: {session_config.get('open')}-{session_config.get('close')}"
+                    )
+                else:
+                    self.logger.info(f"{session} session times verified: {times[0]}-{times[1]}")
+
+            # Verify overlap periods
+            required_overlaps = {
+                'Sydney-Tokyo': ('00:00', '02:00'),
+                'Tokyo-London': ('08:00', '09:00'),
+                'London-NY': ('13:00', '16:00')
+            }
+
+            overlap_data = self.calendar_data.get('overlaps', {})
+            for overlap, times in required_overlaps.items():
+                if overlap not in overlap_data:
+                    verification['overlaps']['status'] = 'WARNING'
+                    verification['overlaps']['issues'].append(f'Missing {overlap} overlap configuration')
+                    continue
+
+                overlap_config = overlap_data[overlap]
+                if overlap_config.get('start') != times[0] or overlap_config.get('end') != times[1]:
+                    verification['overlaps']['status'] = 'WARNING'
+                    verification['overlaps']['issues'].append(
+                        f"{overlap} overlap times mismatch - Expected: {times}, Got: {overlap_config.get('start')}-{overlap_config.get('end')}"
+                    )
+                else:
+                    self.logger.info(f"{overlap} overlap times verified: {times[0]}-{times[1]}")
+
+            # Log verification results
+            self.logger.info(f"""
+            Session Configuration Verification Results:
+            Sessions Status: {verification['sessions']['status']}
+            Session Issues: {', '.join(verification['sessions']['issues']) if verification['sessions']['issues'] else 'None'}
+            
+            Overlaps Status: {verification['overlaps']['status']}
+            Overlap Issues: {', '.join(verification['overlaps']['issues']) if verification['overlaps']['issues'] else 'None'}
+            """)
+
+            return verification
+
+        except Exception as e:
+            self.logger.error(f"Error verifying session configuration: {str(e)}")
+            return {
+                'sessions': {'status': 'ERROR', 'issues': [str(e)]},
+                'overlaps': {'status': 'ERROR', 'issues': [str(e)]}
+            }
 
     def _calculate_minutes_until(self, current: time, target: time) -> int:
         """

@@ -226,19 +226,69 @@ class ForexBot:
         print("0. Exit")
 
     def run_trading_loop(self):
-        """Main trading loop logic"""
+        """Main trading loop with continuous FTMO monitoring"""
         try:
-            # Check market status first
-            market_open = False
+            # Always monitor FTMO status, even during closed markets
+            ftmo_status = self.ftmo_manager.monitor_ftmo_status()
+            if 'error' in ftmo_status:
+                self.logger.error(f"FTMO monitoring error: {ftmo_status['error']}")
+                return
+
+            # Get account info for FTMO monitoring
+            account_info = self.mt5_trader.get_account_info()
+            
+            # Log FTMO metrics even during closed market
+            if self.ftmo_manager:
+                self.ftmo_manager.ftmo_logger.log_daily_loss(
+                    account_info['profit'],
+                    self.ftmo_manager.rules['trading_rules']['max_daily_loss']
+                )
+                
+                self.ftmo_manager.ftmo_logger.log_profit_update(
+                    account_info['profit'],
+                    self.ftmo_manager.rules['trading_rules']['profit_target']
+                )
+
+                # Track trading days requirement
+                trading_days_status = self.ftmo_manager.track_trading_days_requirement()
+                self.logger.info(f"""
+                Trading Days Requirement Status:
+                Status: {trading_days_status['status']}
+                Progress: {trading_days_status['days_completed']}/{trading_days_status['days_required']} days
+                Remaining: {trading_days_status['days_remaining']} days
+                """)
+
+            # Track FTMO metrics (even during closed market)
+            trading_days = self.ftmo_manager.track_trading_days()
+            drawdown = self.ftmo_manager.monitor_drawdown()
+            profit = self.ftmo_manager.track_profit_target()
+            
+            # Log comprehensive status
+            self.logger.info(f"""
+            FTMO Status Update:
+            Trading Days: {trading_days['status']} ({trading_days['days_completed']}/{trading_days['days_required']})
+            Drawdown: {drawdown['status']} ({drawdown['drawdown_percent']:.2f}%)
+            Profit: {profit['status']} (${profit['current_profit']:.2f})
+            """)
+
+            # Check market status
             try:
                 # Get current session info
                 session_info = self.session_manager.get_current_session_info()
                 market_open = len(session_info['active_sessions']) > 0
-                
-                # Check all positions regardless of market status
+
+                # Log trading cycle start
+                self.logger.info(f"""
+                Trading Cycle Start:
+                Market Status: {'OPEN' if market_open else 'CLOSED'}
+                Active Sessions: {', '.join(session_info['active_sessions']) if market_open else 'None'}
+                FTMO Status: {ftmo_status.get('market_status', 'Unknown')}
+                """)
+
+                # Check existing positions regardless of market status
                 positions = self.position_manager.get_open_positions()
                 self.logger.info(f"Checking {len(positions)} positions for FTMO compliance")
-                
+
                 for position in positions:
                     duration_check = self.ftmo_manager.check_position_duration(position)
                     if duration_check.get('needs_closure', False):
@@ -251,6 +301,10 @@ class ForexBot:
                             Status: MARKET CLOSED - Cannot close position
                             Action: Will attempt closure when market opens
                             """)
+                            self.ftmo_manager.ftmo_logger.log_warning(
+                                "Position Duration",
+                                f"Cannot close position {position['ticket']} - Market Closed"
+                            )
                         else:
                             self.logger.warning(f"""
                             Position Duration Check:
@@ -259,41 +313,54 @@ class ForexBot:
                             Duration: {duration_check['duration']}
                             Status: Attempting closure
                             """)
-                            # Attempt closure if market is open
                             success, message = self.mt5_trader.close_trade(position['ticket'])
                             self.logger.info(f"Position closure attempt: {success}, Message: {message}")
+                            if not success:
+                                self.ftmo_manager.ftmo_logger.log_violation(
+                                    "Position Duration",
+                                    f"Failed to close position {position['ticket']}: {message}"
+                                )
 
+                # If market is closed, only monitor
                 if not market_open:
-                    self.logger.info("Market CLOSED - Skipping trading operations")
+                    self.logger.info("""
+                    Market CLOSED - Monitoring Mode:
+                    - Position management active
+                    - FTMO compliance tracking active
+                    - Will resume trading when market opens
+                    """)
                     return
 
-                # Run position monitoring
+                # Run position monitoring if market is open
                 self.logger.info("[Trading Loop] Starting position duration monitoring cycle")
                 self.trading_logic.monitor_positions()
                 self.logger.info("[Trading Loop] Completed position duration monitoring cycle")
-                    
+
+                # Process new trades only if market is open
                 symbols = self.config.get_setting('favorite_symbols', [])
-                
                 for symbol in symbols:
                     try:
+                        # Check FTMO position limits
                         positions = self.position_manager.get_open_positions()
                         if len(positions) >= self.trading_logic.max_total_positions:
                             continue
-                            
+
+                        # Get and evaluate signals
                         signals = self.signal_manager.get_signals(symbol)
                         if not signals:
                             continue
-                            
+
                         consensus = self.signal_manager.get_consensus_signal(symbol)
                         if not consensus:
                             continue
-                            
+
+                        # Prepare and execute trade decision
                         decision = {
                             'symbol': symbol,
                             'signal': consensus,
                             'open_positions': len([p for p in positions if p['symbol'] == symbol])
                         }
-                        
+
                         if self.execute_trade(decision):
                             self.logger.info(f"Trade executed for {symbol}")
                             self.trading_logger.log_trade({
@@ -304,19 +371,20 @@ class ForexBot:
                                 'take_profit': consensus.take_profit,
                                 'volume': consensus.volume
                             })
-                            
+
                     except Exception as e:
                         self.logger.error(f"Error processing symbol {symbol}: {str(e)}")
                         continue
-                        
+
+                # End of cycle logging
                 self.trading_logger.log_system_state()
-                
+
             except Exception as e:
-                self.logger.error(f"Error checking market status: {str(e)}")
+                self.logger.error(f"Error in market operations: {str(e)}")
                 return
-                
+
         except Exception as e:
-            self.logger.error(f"Error in trading loop: {str(e)}")
+            self.logger.error(f"Critical error in trading loop: {str(e)}")
 
     def run(self):
         """Main bot loop with auto-refreshing dashboard"""
@@ -548,6 +616,14 @@ class ForexBot:
                     else:
                         self.logger.info(f"Audit OK: {result.module_name}")
                         print(f"[+] {result.module_name} - OK")
+
+            # Initialize FTMO monitoring
+            if self.ftmo_manager:
+                if not self.ftmo_manager.initialize_monitoring():
+                    warnings.append("FTMO monitoring initialization failed")
+                    self.logger.warning("Failed to initialize FTMO monitoring")
+                else:
+                    self.logger.info("FTMO monitoring initialized successfully")
 
             # Handle operational issues
             if operational_issues:

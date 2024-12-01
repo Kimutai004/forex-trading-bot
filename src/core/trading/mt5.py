@@ -124,36 +124,119 @@ class MT5Trader:
         self.logger.info("MT5Trader logging system initialized")
 
     def _monitor_connection(self) -> bool:
-        """Monitor MT5 connection status with proper error handling"""
+        """
+        Monitor MT5 connection status with enhanced error handling
+        Returns: True if connection is healthy
+        """
         try:
+            self.logger.info("Checking MT5 connection status...")
+            
+            # First check basic initialization
             if not mt5.initialize():
-                self.logger.error("MT5 not initialized")
+                error = mt5.last_error()
+                self.logger.error(f"MT5 not initialized. Error: {error[0]} - {error[1]}")
                 return self._attempt_reconnection()
 
             # Get terminal info with retry
+            terminal_info = None
             max_attempts = 3
+            
             for attempt in range(max_attempts):
                 terminal_info = mt5.terminal_info()
                 if terminal_info is not None:
                     break
-                time.sleep(1)  # Wait before retry
-                
+                self.logger.warning(f"Terminal info attempt {attempt + 1} failed, retrying...")
+                time.sleep(1)
+
             if terminal_info is None:
-                self.logger.error("Cannot get terminal info after retries")
+                self.logger.error("Failed to get terminal info after retries")
                 return self._attempt_reconnection()
 
             # Check connection status
             terminal_dict = terminal_info._asdict()
+            
+            self.logger.info(f"""
+            MT5 Connection Check:
+            Connected: {terminal_dict.get('connected', False)}
+            Trade Allowed: {terminal_dict.get('trade_allowed', False)}
+            Expert Enabled: {terminal_dict.get('trade_expert', False)}
+            Last Connected: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+            """)
+
             if not terminal_dict.get('connected', False):
                 self.logger.error("Terminal not connected to broker")
                 return self._attempt_reconnection()
 
-            self.logger.debug("MT5 connection is healthy")
+            # Test symbol access
+            test_symbols = ['EURUSD', 'GBPUSD', 'USDJPY']
+            symbol_status = []
+            
+            for symbol in test_symbols:
+                if mt5.symbol_select(symbol, True):
+                    tick = mt5.symbol_info_tick(symbol)
+                    if tick is not None:
+                        symbol_status.append(f"{symbol}: OK")
+                    else:
+                        symbol_status.append(f"{symbol}: No tick data")
+                else:
+                    symbol_status.append(f"{symbol}: Selection failed")
+
+            self.logger.info(f"""
+            Symbol Access Check:
+            {chr(10).join(symbol_status)}
+            """)
+
+            # Check account access
+            account_info = mt5.account_info()
+            if account_info is None:
+                self.logger.error("Cannot access account information")
+                return self._attempt_reconnection()
+
+            self.logger.info(f"""
+            Account Access Check:
+            Server: {account_info.server}
+            Balance: ${account_info.balance}
+            Leverage: 1:{account_info.leverage}
+            """)
+
+            self.connected = True
             return True
 
         except Exception as e:
-            self.logger.error(f"Error monitoring connection: {str(e)}")
+            self.logger.error(f"Error monitoring connection: {str(e)}", exc_info=True)
             return self._attempt_reconnection()
+        
+    def _maintain_weekend_connection(self) -> bool:
+        """
+        Maintain MT5 connection during weekends
+        Returns: True if connection is maintained
+        """
+        try:
+            self.logger.info("Maintaining weekend connection...")
+            
+            if not mt5.initialize():
+                self.logger.error("Could not initialize MT5 during weekend")
+                return False
+
+            # Verify minimal functionality
+            account_info = mt5.account_info()
+            if account_info is None:
+                self.logger.error("Cannot access account info during weekend")
+                return False
+
+            self.logger.info(f"""
+            Weekend Connection Status:
+            Server: {account_info.server}
+            Account: {account_info.login}
+            Connected: Yes
+            Last Check: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+            """)
+
+            return True
+
+        except Exception as e:
+            self.logger.error(f"Weekend connection error: {str(e)}")
+            return False
 
     def _attempt_reconnection(self) -> bool:
         """
