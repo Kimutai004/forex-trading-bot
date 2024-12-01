@@ -43,26 +43,44 @@ class MarketSessionManager:
 
     def is_session_open(self, session: str) -> bool:
         """Check if a trading session is currently open with enhanced logging"""
-        from src.utils.logger import setup_logger
-        logger = setup_logger('MarketSessionManager')
-        
-        logger.info(f"Checking if session {session} is open...")
+        self.logger.info(f"\n=== Session Open Check: {session} ===")
         
         if session not in self.sessions:
-            logger.warning(f"Session {session} not found in configuration")
+            self.logger.error(f"Configuration error: Session {session} not found in sessions: {self.sessions}")
             return False
 
         now = datetime.now(ZoneInfo("UTC"))
-        logger.info(f"Current UTC time: {now}")
+        self.logger.info(f"""
+        Time Check:
+        Current UTC: {now}
+        Weekday: {now.strftime('%A')}
+        Hour: {now.hour}
+        Minute: {now.minute}
+        """)
+        
+        # Get session configuration
+        session_config = self.sessions[session]
+        self.logger.info(f"Session Config for {session}: {session_config}")
         
         # Check for weekend
         if now.weekday() >= 5:  # 5 is Saturday, 6 is Sunday
-            logger.warning(f"Market should be closed - Current day is {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][now.weekday()]}")
-            return False
+            self.logger.info(f"Weekend Check - Day: {now.weekday()}")
             
+            # Special handling for Sydney/Tokyo transition
+            if now.weekday() == 6:  # Sunday
+                if session == "Sydney" and now.hour >= 21:
+                    self.logger.info("Sunday after 21:00 UTC - Sydney session should be active")
+                    return True
+                elif session == "Tokyo" and now.hour >= 22:  # Tokyo opens 1 hour after Sydney
+                    self.logger.info("Sunday after 22:00 UTC - Tokyo session should be active")
+                    return True
+            
+            self.logger.info(f"Weekend restriction applies for {session}")
+            return False
+                
         # Check for holidays
         if self.is_holiday(session):
-            logger.warning(f"Market should be closed - Holiday detected for session {session}")
+            self.logger.info(f"Holiday detected for {session}")
             return False
 
         session_times = self.sessions[session]
@@ -70,71 +88,94 @@ class MarketSessionManager:
         close_time = datetime.strptime(session_times["close"], "%H:%M").time()
         current_time = now.time()
 
-        logger.info(f"Session times - Open: {open_time}, Close: {close_time}, Current: {current_time}")
+        self.logger.info(f"""
+        Time Comparison:
+        Session: {session}
+        Open: {open_time}
+        Close: {close_time}
+        Current: {current_time}
+        """)
 
         # Handle sessions that cross midnight
         is_open = False
         if open_time > close_time:
             is_open = current_time >= open_time or current_time <= close_time
+            self.logger.info(f"Cross-midnight session calculation: {is_open}")
         else:
             is_open = open_time <= current_time <= close_time
+            self.logger.info(f"Same-day session calculation: {is_open}")
 
-        logger.info(f"Session {session} status: {'Open' if is_open else 'Closed'}")
+        self.logger.info(f"Final status for {session}: {'OPEN' if is_open else 'CLOSED'}\n")
         return is_open
 
     def get_current_session_info(self) -> Dict:
         """Get comprehensive session information with weekend handling"""
         now = datetime.now(ZoneInfo("UTC"))
+        self.logger.info(f"\n=== Session Info Calculation Start ===\nCurrent UTC: {now}\nWeekday: {now.strftime('%A')}\nHour: {now.hour}::{now.minute}")
+        
         active_sessions = []
         upcoming_sessions = []
 
         # Check if it's weekend first
         if now.weekday() >= 5:  # 5 is Saturday, 6 is Sunday
-            self.logger.info(f"Market closed - Weekend ({['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'][now.weekday()]})")
+            self.logger.info(f"Weekend detected - Day: {now.strftime('%A')}, Hour: {now.hour}")
             
             # Calculate time until market open (Sydney session on Sunday)
             if now.weekday() == 5:  # Saturday
                 hours_until = 24 + 21  # 24 hours until Sunday + 21 hours until Sydney open
                 minutes_until = (hours_until * 60) - (now.hour * 60 + now.minute)
+                self.logger.info(f"Saturday calculation - Hours until: {hours_until}, Minutes until: {minutes_until}")
             else:  # Sunday
                 if now.hour < 21:  # Before Sydney open
                     minutes_until = (21 - now.hour) * 60 - now.minute
+                    self.logger.info(f"Sunday before Sydney - Current hour: {now.hour}, Minutes until: {minutes_until}")
                 else:
                     minutes_until = 0  # Sydney session about to open
+                    self.logger.info("Sunday after 21:00 UTC - Sydney session imminent")
                     
             upcoming_sessions.append({
                 'name': 'Sydney (Market Open)',
                 'opens_in': f"{minutes_until // 60}h {minutes_until % 60}m"
             })
             
-            return {
+            self.logger.info(f"Upcoming sessions prepared: {upcoming_sessions}")
+            
+            result = {
                 'active_sessions': [],
                 'upcoming_sessions': upcoming_sessions,
                 'market_status': 'CLOSED - Weekend'
             }
+            self.logger.info(f"Final weekend result: {result}")
+            return result
 
         # Regular session checks
+        self.logger.info("Checking regular sessions (weekday)")
         for session in self.sessions:
             if self.is_session_open(session):
                 active_sessions.append(session)
+                self.logger.info(f"Active session found: {session}")
             else:
                 session_times = self.sessions[session]
                 open_time = datetime.strptime(session_times["open"], "%H:%M").time()
                 minutes_until = self._calculate_minutes_until(now.time(), open_time)
                 if minutes_until is not None:
-                    upcoming_sessions.append({
+                    session_info = {
                         'name': session,
                         'opens_in': f"{minutes_until // 60}h {minutes_until % 60}m"
-                    })
+                    }
+                    upcoming_sessions.append(session_info)
+                    self.logger.info(f"Upcoming session calculated: {session_info}")
 
         # Sort upcoming sessions by time until opening
         upcoming_sessions.sort(key=lambda x: int(x['opens_in'].split('h')[0]) * 60 + int(x['opens_in'].split('h')[1].split('m')[0]))
-
-        return {
+        
+        result = {
             'active_sessions': active_sessions,
             'upcoming_sessions': upcoming_sessions,
             'market_status': 'OPEN' if active_sessions else 'CLOSED'
         }
+        self.logger.info(f"Final result: {result}\n=== Session Info Calculation End ===\n")
+        return result
 
     def _parse_time_string(self, time_str: str) -> int:
         """Convert time string (e.g., '6h 30m') to minutes"""
@@ -221,76 +262,68 @@ class MarketSessionManager:
             }
 
     def _calculate_minutes_until(self, current: time, target: time) -> int:
-        """
-        Calculate minutes until target time, accounting for weekends and market hours
-        
-        Args:
-            current: Current time
-            target: Target session opening time
-            
-        Returns:
-            int: Minutes until next session
-        """
+        """Calculate minutes until target time, accounting for weekends and market hours"""
         try:
             now = datetime.now(ZoneInfo("UTC"))
             current_minutes = current.hour * 60 + current.minute
             target_minutes = target.hour * 60 + target.minute
             
             self.logger.info(f"""
-            Calculating next session time:
+            === Minutes Until Calculation ===
             Current UTC: {now}
             Current Day: {now.strftime('%A')}
+            Current Time: {current.strftime('%H:%M')}
             Target Time: {target.strftime('%H:%M')}
             Current Minutes: {current_minutes}
             Target Minutes: {target_minutes}
             """)
 
             if now.weekday() == 5:  # Saturday
-                # Calculate minutes until Sunday 21:00 UTC (Sydney open)
-                hours_until_sydney = 24 + 21  # 24 hours until Sunday + 21 hours until Sydney open
+                hours_until_sydney = 24 + 21
                 minutes_until_sydney = (hours_until_sydney * 60) - (current.hour * 60 + current.minute)
-                
-                self.logger.info(f"Saturday: Minutes until Sydney open: {minutes_until_sydney}")
+                self.logger.info(f"Saturday calculation - Minutes until Sydney: {minutes_until_sydney}")
 
                 if target.hour == 21:  # Sydney
                     return minutes_until_sydney
-                elif target.hour == 0:  # Tokyo (next day)
-                    return minutes_until_sydney + 180  # Sydney + 3 hours
+                elif target.hour == 0:  # Tokyo
+                    self.logger.info(f"Tokyo calculation - Adding 180 minutes to Sydney open")
+                    return minutes_until_sydney + 180
                 elif target.hour == 8:  # London
-                    return minutes_until_sydney + 660  # Sydney + 11 hours
+                    self.logger.info(f"London calculation - Adding 660 minutes to Sydney open")
+                    return minutes_until_sydney + 660
                 elif target.hour == 13:  # New York
-                    return minutes_until_sydney + 960  # Sydney + 16 hours
+                    self.logger.info(f"New York calculation - Adding 960 minutes to Sydney open")
+                    return minutes_until_sydney + 960
                     
             elif now.weekday() == 6:  # Sunday
-                if now.hour < 21:  # Before Sydney open
-                    # Minutes until Sydney open
+                self.logger.info(f"Sunday calculation - Hour: {now.hour}")
+                if now.hour < 21:
                     minutes_until_sydney = (21 - now.hour) * 60 - now.minute
-                    
-                    self.logger.info(f"Sunday before Sydney: Minutes until Sydney open: {minutes_until_sydney}")
+                    self.logger.info(f"Before Sydney - Minutes until: {minutes_until_sydney}")
 
                     if target.hour == 21:  # Sydney
                         return minutes_until_sydney
-                    elif target.hour == 0:  # Tokyo (next day)
-                        return minutes_until_sydney + 180  # Sydney + 3 hours
+                    elif target.hour == 0:  # Tokyo
+                        return minutes_until_sydney + 180
                     elif target.hour == 8:  # London
-                        return minutes_until_sydney + 660  # Sydney + 11 hours
+                        return minutes_until_sydney + 660
                     elif target.hour == 13:  # New York
-                        return minutes_until_sydney + 960  # Sydney + 16 hours
+                        return minutes_until_sydney + 960
                 else:
-                    # After Sydney open, normal calculation
+                    self.logger.info("After Sydney open - Normal calculation")
                     if target_minutes <= current_minutes:
                         target_minutes += 24 * 60
                     minutes_until = target_minutes - current_minutes
-                    self.logger.info(f"Sunday after Sydney: Normal calculation: {minutes_until}")
+                    self.logger.info(f"Normal calculation result: {minutes_until}")
                     return minutes_until
             else:
-                # Normal weekday calculation
+                self.logger.info("Weekday calculation")
                 if target_minutes <= current_minutes:
                     target_minutes += 24 * 60
                 minutes_until = target_minutes - current_minutes
-                self.logger.info(f"Weekday: Normal calculation: {minutes_until}")
+                self.logger.info(f"Weekday calculation result: {minutes_until}")
                 return minutes_until
-                
+                    
         except Exception as e:
             self.logger.error(f"Error calculating session time: {str(e)}")
             return 0

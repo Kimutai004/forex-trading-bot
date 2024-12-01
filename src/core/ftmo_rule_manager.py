@@ -3,6 +3,7 @@ from datetime import datetime
 import logging
 import json
 import os
+import MetaTrader5 as mt5
 
 class FTMORuleManager:
     def __init__(self, config_dir: str = "config"):
@@ -91,10 +92,7 @@ class FTMORuleManager:
             return False
     
     def track_trading_days_requirement(self) -> Dict:
-        """
-        Track and validate minimum trading days requirement
-        Returns: Dict with trading days status and validation
-        """
+        """Track and validate trading days requirement"""
         try:
             self.logger.info("Checking trading days requirement...")
             
@@ -102,62 +100,43 @@ class FTMORuleManager:
             from datetime import datetime, timedelta
             start_date = datetime.now() - timedelta(days=30)
             
-            # Get all positions (both open and closed)
-            positions = self.mt5_trader.get_positions_history(start_date)
+            # Use MT5's native history orders function
+            history_orders = mt5.history_orders_get(
+                start_date,
+                datetime.now()
+            )
             
-            # Track unique trading days and volume
-            trading_days = {}
-            for position in positions:
-                trade_date = datetime.fromtimestamp(position['time']).date()
-                if trade_date not in trading_days:
-                    trading_days[trade_date] = {
-                        'positions': 0,
-                        'volume': 0.0,
-                        'profit': 0.0
-                    }
-                trading_days[trade_date]['positions'] += 1
-                trading_days[trade_date]['volume'] += position['volume']
-                trading_days[trade_date]['profit'] += position['profit']
+            if history_orders is None:
+                history_orders = []
+                
+            self.logger.info(f"Retrieved {len(history_orders)} historical orders")
+            
+            # Track unique trading days
+            trading_days = set()
+            for order in history_orders:
+                if order.state == mt5.ORDER_STATE_FILLED:
+                    trade_date = datetime.fromtimestamp(order.time_setup).date()
+                    trading_days.add(trade_date)
 
             # Calculate trading days metrics
             min_required = self.rules['trading_rules'].get('min_trading_days', 4)
             days_completed = len(trading_days)
             days_remaining = max(0, min_required - days_completed)
-            
-            # Validate daily activity
-            valid_trading_days = 0
-            for date, stats in trading_days.items():
-                if stats['positions'] >= 1:  # At least one trade
-                    valid_trading_days += 1
 
             result = {
-                'status': 'COMPLIANT' if valid_trading_days >= min_required else 'PENDING',
-                'days_completed': valid_trading_days,
+                'status': 'COMPLIANT' if days_completed >= min_required else 'PENDING',
+                'days_completed': days_completed,
                 'days_required': min_required,
                 'days_remaining': days_remaining,
-                'trading_activity': trading_days,
-                'last_update': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                'trading_activity': sorted(list(trading_days))
             }
 
-            # Log detailed trading days status
-            self.ftmo_logger.log_trading_days_status(
-                valid_trading_days,
-                min_required,
-                trading_days
-            )
-
-            # Log to main logger
             self.logger.info(f"""
-            Trading Days Requirement Check:
+            Trading Days Requirement Status:
             Status: {result['status']}
-            Completed Days: {valid_trading_days}
-            Required Days: {min_required}
-            Remaining Days: {days_remaining}
-            
-            Trading Activity Summary:
-            Total Trading Days: {len(trading_days)}
-            Valid Trading Days: {valid_trading_days}
-            Last Update: {result['last_update']}
+            Progress: {days_completed}/{min_required} days
+            Remaining: {days_remaining} days
+            Trading Dates: {', '.join(d.strftime('%Y-%m-%d') for d in result['trading_activity'])}
             """)
 
             return result
@@ -166,10 +145,10 @@ class FTMORuleManager:
             self.logger.error(f"Error tracking trading days requirement: {str(e)}")
             return {
                 'status': 'ERROR',
-                'error': str(e),
                 'days_completed': 0,
                 'days_required': self.rules['trading_rules'].get('min_trading_days', 4),
-                'days_remaining': self.rules['trading_rules'].get('min_trading_days', 4)
+                'days_remaining': self.rules['trading_rules'].get('min_trading_days', 4),
+                'error': str(e)
             }
 
     def _load_rules(self) -> Dict:
@@ -576,10 +555,7 @@ class FTMORuleManager:
             self.logger.error(f"Error tracking FTMO compliance: {str(e)}", exc_info=True)
 
     def track_trading_days(self) -> Dict:
-        """
-        Track and validate trading days requirement
-        Returns: Dict with trading days status
-        """
+        """Track and validate trading days requirement"""
         try:
             self.logger.info("Starting trading days tracking...")
             
@@ -587,52 +563,54 @@ class FTMORuleManager:
             from datetime import datetime, timedelta
             start_date = datetime.now() - timedelta(days=30)
             
-            # Get all positions (both open and closed)
-            positions = self.mt5_trader.get_positions_history(start_date)
-            
-            # Track unique trading days
-            trading_days = set()
-            daily_volumes = {}
-            
-            for position in positions:
-                trade_date = datetime.fromtimestamp(position['time']).date()
-                trading_days.add(trade_date)
+            # Use MT5 history orders instead of non-existent method
+            if not hasattr(self.mt5_trader, 'get_positions_history'):
+                history_orders = mt5.history_orders_get(
+                    start_date,
+                    datetime.now()
+                )
+                if history_orders is None:
+                    history_orders = []
+                self.logger.info(f"Retrieved {len(history_orders)} historical orders")
                 
-                # Track volume per day
-                if trade_date not in daily_volumes:
-                    daily_volumes[trade_date] = 0
-                daily_volumes[trade_date] += position['volume']
+                # Track unique trading days
+                trading_days = set()
+                daily_volumes = {}
+                
+                for order in history_orders:
+                    if order.state == mt5.ORDER_STATE_FILLED:
+                        trade_date = datetime.fromtimestamp(order.time_setup).date()
+                        trading_days.add(trade_date)
+                        
+                        # Track volume per day
+                        if trade_date not in daily_volumes:
+                            daily_volumes[trade_date] = 0
+                        daily_volumes[trade_date] += order.volume_initial
 
-            # Calculate required days
-            required_days = self.rules['trading_rules'].get('min_trading_days', 4)
-            days_completed = len(trading_days)
-            days_remaining = max(0, required_days - days_completed)
+                # Calculate required days
+                required_days = self.rules['trading_rules'].get('min_trading_days', 4)
+                days_completed = len(trading_days)
+                days_remaining = max(0, required_days - days_completed)
 
-            result = {
-                'days_completed': days_completed,
-                'days_required': required_days,
-                'days_remaining': days_remaining,
-                'daily_volumes': daily_volumes,
-                'status': 'COMPLIANT' if days_completed >= required_days else 'PENDING',
-                'trading_dates': sorted(list(trading_days))
-            }
+                result = {
+                    'days_completed': days_completed,
+                    'days_required': required_days,
+                    'days_remaining': days_remaining,
+                    'daily_volumes': daily_volumes,
+                    'status': 'COMPLIANT' if days_completed >= required_days else 'PENDING',
+                    'trading_dates': sorted(list(trading_days))
+                }
 
-            # Log detailed tracking information
-            self.logger.info(f"""
-            Trading Days Status:
-            Completed Days: {days_completed}
-            Required Days: {required_days}
-            Remaining Days: {days_remaining}
-            Status: {result['status']}
-            
-            Trading Dates:
-            {chr(10).join(d.strftime('%Y-%m-%d') for d in result['trading_dates'])}
-            
-            Daily Volumes:
-            {chr(10).join(f"{date}: {volume} lots" for date, volume in daily_volumes.items())}
-            """)
+                self.logger.info(f"""
+                Trading Days Status:
+                Completed Days: {days_completed}
+                Required Days: {required_days}
+                Remaining Days: {days_remaining}
+                Status: {result['status']}
+                Trading Dates: {', '.join(d.strftime('%Y-%m-%d') for d in result['trading_dates'])}
+                """)
 
-            return result
+                return result
 
         except Exception as e:
             self.logger.error(f"Error tracking trading days: {str(e)}", exc_info=True)
@@ -654,12 +632,21 @@ class FTMORuleManager:
             
             account_info = self.mt5_trader.get_account_info()
             
-            # Calculate drawdown metrics
+            # Calculate current metrics
             current_balance = account_info['balance']
             current_equity = account_info['equity']
             
+            # Initialize peak balance and daily high if not exists
+            if not hasattr(self, 'peak_balance'):
+                self.peak_balance = current_balance
+                self.logger.info(f"Initialized peak balance: ${self.peak_balance:.2f}")
+                
+            if not hasattr(self, 'daily_equity_high'):
+                self.daily_equity_high = current_equity
+                self.logger.info(f"Initialized daily equity high: ${self.daily_equity_high:.2f}")
+
             # Update peak balance if needed
-            if not hasattr(self, 'peak_balance') or current_balance > self.peak_balance:
+            if current_balance > self.peak_balance:
                 self.peak_balance = current_balance
                 self.logger.info(f"New peak balance recorded: ${self.peak_balance:.2f}")
 
@@ -667,10 +654,11 @@ class FTMORuleManager:
             absolute_drawdown = self.peak_balance - current_equity
             percentage_drawdown = (absolute_drawdown / self.peak_balance * 100) if self.peak_balance else 0
             
-            # Calculate daily drawdown
-            daily_high = getattr(self, 'daily_equity_high', current_equity)
-            if current_equity > daily_high:
+            # Update daily high if needed
+            if current_equity > self.daily_equity_high:
                 self.daily_equity_high = current_equity
+                self.logger.info(f"New daily equity high: ${self.daily_equity_high:.2f}")
+                
             daily_drawdown = self.daily_equity_high - current_equity
             daily_drawdown_percent = (daily_drawdown / self.daily_equity_high * 100) if self.daily_equity_high else 0
 
@@ -684,30 +672,17 @@ class FTMORuleManager:
                 'status': self._get_drawdown_status(percentage_drawdown)
             }
 
-            # Log drawdown metrics
             self.logger.info(f"""
             Drawdown Monitoring Update:
             Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
-            
-            Overall Drawdown:
-            - Peak Balance: ${self.peak_balance:.2f}
-            - Current Equity: ${current_equity:.2f}
-            - Absolute Drawdown: ${absolute_drawdown:.2f}
-            - Drawdown Percentage: {percentage_drawdown:.2f}%
-            
-            Daily Metrics:
-            - Daily High: ${self.daily_equity_high:.2f}
-            - Daily Drawdown: ${daily_drawdown:.2f}
-            - Daily Drawdown Percentage: {daily_drawdown_percent:.2f}%
-            
+            Peak Balance: ${self.peak_balance:.2f}
+            Current Equity: ${current_equity:.2f}
+            Absolute Drawdown: ${absolute_drawdown:.2f}
+            Drawdown Percentage: {percentage_drawdown:.2f}%
+            Daily High: ${self.daily_equity_high:.2f}
+            Daily Drawdown: ${daily_drawdown:.2f}
             Status: {result['status']}
             """)
-
-            # Add warning logs for significant drawdown
-            if percentage_drawdown >= 8:  # 80% of 10% max drawdown
-                self.logger.warning(f"CRITICAL: Approaching maximum drawdown limit ({percentage_drawdown:.2f}%)")
-            elif percentage_drawdown >= 5:
-                self.logger.warning(f"WARNING: Significant drawdown detected ({percentage_drawdown:.2f}%)")
 
             return result
 
@@ -1157,23 +1132,32 @@ class FTMORuleManager:
     def _get_trading_days_count(self) -> int:
         """Calculate number of trading days in current period"""
         try:
-            # Get trading activity from MT5
+            self.logger.info("Calculating trading days count...")
             from datetime import datetime, timedelta
             
             start_date = datetime.now() - timedelta(days=30)  # Look back 30 days
             trading_days = set()  # Use set to count unique days
             
-            # Get all positions (both open and closed)
-            positions = self.mt5_trader.get_positions_history(start_date)
+            # Use MT5's native history orders function
+            history_orders = mt5.history_orders_get(
+                start_date,
+                datetime.now()
+            )
             
-            for position in positions:
-                trade_date = datetime.fromtimestamp(position['time']).date()
-                trading_days.add(trade_date)
+            if history_orders is None:
+                history_orders = []
                 
+            self.logger.info(f"Retrieved {len(history_orders)} historical orders")
+            
+            for order in history_orders:
+                if order.state == mt5.ORDER_STATE_FILLED:
+                    trade_date = datetime.fromtimestamp(order.time_setup).date()
+                    trading_days.add(trade_date)
+                    
             count = len(trading_days)
             self.logger.info(f"Trading days count: {count} in last 30 days")
             return count
-            
+                
         except Exception as e:
             self.logger.error(f"Error counting trading days: {str(e)}")
             return 0

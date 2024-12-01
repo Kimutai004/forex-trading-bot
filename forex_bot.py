@@ -142,7 +142,8 @@ class ForexBot:
             return None
     
     def update_dashboard(self):
-        """Update and display the dashboard with improved session and position timing information"""
+        """Update and display the dashboard with improved session and timing information"""
+        self.logger.info("\n=== Dashboard Update Started ===")
         self.menu.clear_screen()
 
         print("=" * 50)
@@ -151,37 +152,52 @@ class ForexBot:
         print()
 
         status = self.status_manager.get_bot_status()
+        self.logger.info(f"Bot Status Retrieved: {status}")
         print(f"System Status: {status['bot_status']['mode']}")
         print()
 
+        # Get and log session info
         session_info = self.session_manager.get_current_session_info()
+        self.logger.info(f"Session Info Retrieved: {session_info}")
         
         if session_info['active_sessions']:
+            self.logger.info(f"Active Sessions: {session_info['active_sessions']}")
             print(f"Current Sessions: {', '.join(session_info['active_sessions'])}")
         else:
+            self.logger.info("No active sessions")
             print("Current Sessions: No Major Markets Open")
 
+        self.logger.info(f"Upcoming Sessions: {session_info['upcoming_sessions']}")
         print("Next Sessions:")
         for next_session in session_info['upcoming_sessions']:
             print(f"- {next_session['name']} opens in {next_session['opens_in']}")
         print()
 
+        # Get and log trading signals
+        self.logger.info("Retrieving trading signals")
         print("Trading Signals:")
         print("-" * 50)
         print(f"{'Symbol':<8} {'Direction':<8} {'Strength':<8} {'Price':<12}")
         print("-" * 50)
 
         symbols = self.signal_manager.config_manager.get_setting('favorite_symbols', [])
+        self.logger.info(f"Processing symbols: {symbols}")
+        
         for symbol in symbols:
             signals = self.signal_manager.get_signals(symbol)
+            self.logger.info(f"Signals for {symbol}: {len(signals) if signals else 0} signals")
             if signals:
                 consensus = self.signal_manager.get_consensus_signal(symbol)
                 if consensus:
                     tick = mt5.symbol_info_tick(symbol)
                     price = f"{tick.bid:.5f}" if tick else "N/A"
+                    self.logger.info(f"Consensus for {symbol}: {consensus.type.value}, Price: {price}")
                     print(f"{symbol:<8} {consensus.type.value:<8} {'Strong':<8} {price:<12}")
 
+        # Get and log position information
         positions = self.position_manager.get_open_positions()
+        self.logger.info(f"Open Positions: {len(positions)}/{self.trading_logic.max_total_positions}")
+        
         if len(positions) >= self.trading_logic.max_total_positions:
             print(f"\nNote: All new positions temporarily on hold "
                 f"({len(positions)}/{self.trading_logic.max_total_positions} maximum positions reached)")
@@ -194,6 +210,7 @@ class ForexBot:
 
         for pos in positions:
             metrics = self.ftmo_manager.get_position_metrics(pos)
+            self.logger.info(f"Position Metrics for {pos['ticket']}: {metrics}")
             
             print(f"\n{pos['symbol']:<8} {pos['type']:<6} {pos['open_price']:.5f} "
                 f"{pos['current_price']:.5f} {'+' if pos['profit'] >= 0 else ''}"
@@ -210,7 +227,10 @@ class ForexBot:
 
         print("\n* Potential profit/loss if TP/SL hit")
 
+        # Get and log account information
         account_info = self.mt5_trader.get_account_info()
+        self.logger.info(f"Account Info: {account_info}")
+        
         print("\nAccount Summary:")
         print("-" * 50)
         print(f"Balance: ${account_info['balance']:.2f}")
@@ -224,6 +244,8 @@ class ForexBot:
         print("Options:")
         print("1. View Logs")
         print("0. Exit")
+        
+        self.logger.info("=== Dashboard Update Completed ===\n")
 
     def run_trading_loop(self):
         """Main trading loop with continuous FTMO monitoring"""
