@@ -37,52 +37,6 @@ class TradingLogic:
         impl_logger = get_implementation_logger()
         impl_logger.info("TradingLogic logging configured with centralized system")
         
-    def check_position_duration(self, position: Dict) -> Dict:
-        """
-        Check if position has exceeded maximum duration
-        
-        Args:
-            position: Position dictionary from PositionManager
-            
-        Returns:
-            Dict with status and duration information
-        """
-        try:
-            current_time = datetime.now()
-            max_duration = self.rules['time_rules']['max_position_duration']  # in minutes
-            
-            # Calculate position duration
-            open_time = datetime.fromtimestamp(position['open_timestamp'])
-            duration = current_time - open_time
-            duration_minutes = duration.total_seconds() / 60
-            
-            # Format duration string with full date if over 24 hours
-            if duration.total_seconds() >= 86400:  # 24 hours in seconds
-                duration_str = open_time.strftime('%Y-%m-%d %H:%M:%S')
-            else:
-                hours = int(duration_minutes // 60)
-                minutes = int(duration_minutes % 60)
-                duration_str = f"{hours}h {minutes}m"
-
-            return {
-                'needs_closure': duration_minutes >= max_duration,
-                'duration': duration_str,
-                'duration_minutes': duration_minutes,
-                'max_duration': max_duration,
-                'open_time': open_time.strftime('%Y-%m-%d %H:%M:%S'),
-                'warning': duration_minutes >= (max_duration * 0.75)  # Warning at 75% of max duration
-            }
-        except Exception as e:
-            self.logger.error(f"Error checking position duration: {str(e)}")
-            return {
-                'needs_closure': False,
-                'duration': "0h 0m",
-                'duration_minutes': 0,
-                'max_duration': max_duration,
-                'open_time': "Unknown",
-                'warning': False
-            }
-        
     def _validate_trading_conditions(self, symbol: str, signal: Signal) -> bool:
         """Validate if trading conditions are met"""
         # Check if we already have maximum positions
@@ -125,6 +79,7 @@ class TradingLogic:
             
             for position in positions:
                 try:
+                    # Only use FTMO manager's duration check
                     duration_check = self.ftmo_manager.check_position_duration(position)
                     
                     self.logger.info(
@@ -147,7 +102,16 @@ class TradingLogic:
                         )
                         
                         # Try to close position
+                        self.logger.info(f"Attempting to close position {position['ticket']}")
                         success, message = self.position_manager.close_position(position['ticket'])
+                        
+                        self.logger.info(f"""
+                        [Closure Attempt]
+                        Position: {position['ticket']}
+                        Success: {success}
+                        Message: {message}
+                        Market Open: {self.mt5_trader.market_is_open}
+                        """)
                         
                         if success:
                             self.logger.info(

@@ -27,8 +27,8 @@ class PositionManager:
             profit = position.profit
             pips = self._calculate_pips(position.symbol, position.price_open, current_price)
 
-            # Store the raw timestamp value for duration calculations
-            open_timestamp = position.time
+            # Convert MT5 server time (EET/UTC+2) to UTC by subtracting 2 hours
+            open_timestamp = position.time - 7200  # 2 hours in seconds
 
             formatted_positions.append({
                 'ticket': position.ticket,
@@ -42,7 +42,9 @@ class PositionManager:
                 'profit': profit,
                 'pips': pips,
                 'comment': position.comment,
-                'time': open_timestamp  # Pass the raw timestamp
+                'time': open_timestamp,  # UTC timestamp
+                'time_raw': position.time,  # Original server timestamp
+                'timezone': 'UTC'  # Mark the timezone explicitly
             })
 
         return formatted_positions

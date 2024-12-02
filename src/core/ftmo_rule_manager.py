@@ -4,6 +4,8 @@ import logging
 import json
 import os
 import MetaTrader5 as mt5
+import traceback
+import time
 
 class FTMORuleManager:
     def __init__(self, config_dir: str = "config"):
@@ -172,120 +174,135 @@ class FTMORuleManager:
     
     def check_position_duration(self, position: Dict) -> Dict:
         """
-        Enhanced position duration check with automatic closure and market status awareness
-        
-        Args:
-            position: Position dictionary from PositionManager
-                
-        Returns:
-            Dict with status and duration information
+        Enhanced position duration check with proper MT5 server time handling
         """
         try:
-            self.logger.info(f"Checking duration for position {position['ticket']}")
-            current_time = datetime.now()
+            from zoneinfo import ZoneInfo
             
-            # Get max duration from rules
-            max_duration_minutes = self.rules['time_rules']['max_position_duration']
-            warning_threshold = self.rules['trading_rules']['position_duration']['warning_threshold']
+            self.logger.info(f"""
+            ========== DURATION CHECK START ==========
+            Position: {position['ticket']}
+            Symbol: {position['symbol']}
+            Time Config:
+            - Max Duration: {self.rules['time_rules']['max_position_duration']} minutes
+            - Warning Threshold: {self.rules['trading_rules']['position_duration']['warning_threshold'] * 100}%
+            """)
             
-            # Convert timestamp to datetime
-            if isinstance(position['time'], str):
+            # Get current time in UTC
+            current_time = datetime.now(ZoneInfo("UTC"))
+            max_duration = self.rules['time_rules']['max_position_duration']
+            
+            # Convert MT5 server time (EET/UTC+2) to UTC by subtracting 2 hours
+            if isinstance(position['time'], (int, float)):
+                # Subtract 2 hours (7200 seconds) from the timestamp to convert from EET to UTC
+                utc_timestamp = position['time'] - 7200
+                open_time = datetime.fromtimestamp(utc_timestamp, ZoneInfo("UTC"))
+            else:
                 try:
                     open_time = datetime.strptime(position['time'], '%Y-%m-%d %H:%M:%S')
-                except ValueError:
-                    open_time = datetime.fromtimestamp(float(position['time']))
-            else:
-                open_time = datetime.fromtimestamp(position['time'])
+                    open_time = open_time.replace(tzinfo=ZoneInfo("UTC"))
+                except ValueError as e:
+                    self.logger.error(f"Time parsing error: {e}")
+                    return self._get_default_result()
 
+            self.logger.info(f"""
+            ========== TIMEZONE CORRECTED ANALYSIS ==========
+            Raw Position Time (EET): {datetime.fromtimestamp(position['time'] if isinstance(position['time'], (int, float)) else 0)}
+            Adjusted Open Time (UTC): {open_time}
+            Current Time (UTC): {current_time}
+            Time Difference: {(current_time - open_time).total_seconds() / 60:.2f} minutes
+            """)
+
+            # Calculate duration
             duration = current_time - open_time
             duration_minutes = duration.total_seconds() / 60
             
             # Format duration string
-            hours = int(duration_minutes // 60)
-            minutes = int(duration_minutes % 60)
+            hours = int(abs(duration_minutes) // 60)
+            minutes = int(abs(duration_minutes) % 60)
             duration_str = f"{hours}h {minutes}m"
+
+            # Calculate warning threshold
+            warning_threshold = max_duration * self.rules['trading_rules']['position_duration']['warning_threshold']
             
-            result = {
-                'needs_closure': duration_minutes >= max_duration_minutes,
-                'duration': duration_str,
-                'duration_minutes': duration_minutes,
-                'max_duration': max_duration_minutes,
-                'open_time': open_time.strftime('%Y-%m-%d %H:%M:%S'),
-                'warning': duration_minutes >= (max_duration_minutes * warning_threshold)
-            }
-
-            # Log appropriate warnings and take action
-            if result['warning'] and not result['needs_closure']:
-                warning_msg = f"Position {position['ticket']} approaching time limit. Duration: {duration_str}, Max: {max_duration_minutes}min"
-                self.logger.warning(warning_msg)
-                result['warning_message'] = warning_msg
-                
-            if result['needs_closure']:
-                closure_msg = f"Position {position['ticket']} exceeded time limit. Duration: {duration_str}, Max: {max_duration_minutes}min"
-                self.logger.warning(closure_msg)
-                result['closure_message'] = closure_msg
-                
-                # Check market status first
-                if hasattr(self, 'mt5_trader'):
-                    if self.mt5_trader.market_is_open:
-                        try:
-                            success, message = self.mt5_trader.close_trade(position['ticket'])
-                            result['closure_attempt'] = {
-                                'success': success,
-                                'message': message,
-                                'timestamp': current_time.strftime('%Y-%m-%d %H:%M:%S')
-                            }
-                            
-                            if success:
-                                self.logger.info(f"Successfully closed position {position['ticket']} due to duration limit")
-                            else:
-                                self.logger.error(f"Failed to close position {position['ticket']}: {message}")
-                        except Exception as e:
-                            self.logger.error(f"Error attempting to close position {position['ticket']}: {str(e)}")
-                            result['closure_attempt'] = {
-                                'success': False,
-                                'message': str(e),
-                                'timestamp': current_time.strftime('%Y-%m-%d %H:%M:%S')
-                            }
-                    else:
-                        market_status_msg = f"Market CLOSED - Cannot close position {position['ticket']} now. Will attempt closure when market opens."
-                        self.logger.warning(market_status_msg)
-                        result['market_closed'] = True
-                        result['closure_queued'] = True
-                        result['market_status_message'] = market_status_msg
-                        
-                        # Add to queued closures
-                        self._add_to_queued_closures(position['ticket'])
-                else:
-                    self.logger.warning(f"MT5 trader not initialized - Cannot close position {position['ticket']}")
-
-            # Log detailed duration check results
             self.logger.info(f"""
-            Position Duration Check Results:
-            Ticket: {position['ticket']}
-            Symbol: {position['symbol']}
+            Duration Calculation:
             Duration: {duration_str}
-            Max Allowed: {max_duration_minutes} minutes
-            Needs Closure: {result['needs_closure']}
-            Warning Level: {result['warning']}
-            Open Time: {result['open_time']}
-            Market Status: {'OPEN' if hasattr(self, 'mt5_trader') and self.mt5_trader.market_is_open else 'CLOSED'}
+            Minutes Elapsed: {duration_minutes:.2f}
+            Warning Threshold: {warning_threshold} minutes
+            Raw Duration Seconds: {duration.total_seconds()}
             """)
 
-            return result
-                
-        except Exception as e:
-            error_msg = f"Error checking position duration for ticket {position.get('ticket', 'unknown')}: {str(e)}"
-            self.logger.error(error_msg, exc_info=True)
-            return {
-                'needs_closure': False,
-                'duration': "0h 0m",
-                'duration_minutes': 0,
-                'max_duration': self.rules['time_rules']['max_position_duration'],
-                'open_time': "Unknown",
-                'warning': False,
-                'error': error_msg
+            result = {
+                'needs_closure': duration_minutes >= max_duration,
+                'duration': duration_str,
+                'duration_minutes': duration_minutes,
+                'max_duration': max_duration,
+                'open_time': open_time.strftime('%Y-%m-%d %H:%M:%S'),
+                'warning': duration_minutes >= warning_threshold,
+                'timezone_info': {
+                    'utc_time': current_time.strftime('%Y-%m-%d %H:%M:%S'),
+                    'position_time': open_time.strftime('%Y-%m-%d %H:%M:%S'),
+                    'timezone': 'UTC'
+                }
             }
+
+            self.logger.info(f"""
+            Duration Check Result:
+            Needs Closure: {result['needs_closure']}
+            Warning Active: {result['warning']}
+            Time Until Max: {max(0, max_duration - duration_minutes):.2f} minutes
+            Status: {'EXCEEDED' if result['needs_closure'] else 'WARNING' if result['warning'] else 'OK'}
+            """)
+
+            if result['needs_closure']:
+                self.ftmo_logger.log_violation(
+                    "Position Duration",
+                    f"""
+                    Position {position['ticket']} ({position['symbol']}) exceeded duration limit
+                    Duration: {duration_str}
+                    Max Allowed: {max_duration} minutes
+                    Exceeded by: {duration_minutes - max_duration:.2f} minutes
+                    Open Time (UTC): {result['open_time']}
+                    Current Time (UTC): {result['timezone_info']['utc_time']}
+                    """
+                )
+            elif result['warning']:
+                self.ftmo_logger.log_warning(
+                    "Position Duration",
+                    f"""
+                    Position {position['ticket']} ({position['symbol']}) approaching duration limit
+                    Current Duration: {duration_str}
+                    Max Allowed: {max_duration} minutes
+                    Time Remaining: {max_duration - duration_minutes:.2f} minutes
+                    Open Time (UTC): {result['open_time']}
+                    """
+                )
+
+            self.logger.info("========== DURATION CHECK END ==========\n")
+            return result
+
+        except Exception as e:
+            import traceback
+            self.logger.error(f"""
+            Duration Check Error:
+            Position: {position.get('ticket', 'unknown')}
+            Error: {str(e)}
+            Traceback: {traceback.format_exc()}
+            """)
+            return self._get_default_result()
+
+    def _get_default_result(self):
+        """Default result for error cases"""
+        return {
+            'needs_closure': False,
+            'duration': "0h 0m",
+            'duration_minutes': 0,
+            'max_duration': self.rules['time_rules']['max_position_duration'],
+            'open_time': "Unknown",
+            'warning': False,
+            'error': True
+        }
 
     def _add_to_queued_closures(self, ticket: int):
         """Add position to queued closures list"""
