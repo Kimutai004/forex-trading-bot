@@ -290,3 +290,73 @@ class MarketWatcher:
     def clear_cache(self):
         """Clear all cached data"""
         self.data_cache.clear()
+
+    def _check_market_status(self) -> dict:
+        """Detailed market status check with comprehensive logging"""
+        status = {
+            'is_open': False,
+            'connection_status': False,
+            'price_feed_status': False,
+            'login_status': False,
+            'details': {}
+        }
+        
+        try:
+            # Check MT5 initialization
+            init_status = mt5.initialize()
+            self.logger.info(f"""
+            Market Status Check Debug:
+            =========================
+            MT5 Initialization: {init_status}
+            Terminal Info: {mt5.terminal_info()._asdict() if mt5.terminal_info() else 'None'}
+            Symbol Info (EURUSD): {mt5.symbol_info("EURUSD")._asdict() if mt5.symbol_info("EURUSD") else 'None'}
+            Latest Tick: {mt5.symbol_info_tick("EURUSD")._asdict() if mt5.symbol_info_tick("EURUSD") else 'None'}
+            """)
+
+            if not init_status:
+                error = mt5.last_error()
+                self.logger.error("MT5 initialization failed: %s (%d)", error[1], error[0])
+                return status
+                
+            status['connection_status'] = True
+            
+            # Verify login
+            account_info = mt5.account_info()
+            if account_info is None:
+                error = mt5.last_error()
+                self.logger.error("Login verification failed: %s (%d)", error[1], error[0])
+                return status
+                
+            status['login_status'] = True
+            status['details']['account'] = {
+                'login': account_info.login,
+                'server': account_info.server,
+                'balance': account_info.balance
+            }
+            
+            # Check price feed
+            symbol = "EURUSD"
+            if not mt5.symbol_select(symbol, True):
+                self.logger.error("Failed to select symbol: %s", symbol)
+                return status
+                
+            tick = mt5.symbol_info_tick(symbol)
+            if tick is None:
+                error = mt5.last_error()
+                self.logger.error("Failed to get tick data: %s (%d)", error[1], error[0])
+                return status
+                
+            status['price_feed_status'] = True
+            status['details']['market'] = {
+                'symbol': symbol,
+                'bid': tick.bid,
+                'ask': tick.ask,
+                'time': datetime.fromtimestamp(tick.time).strftime('%Y-%m-%d %H:%M:%S')
+            }
+            
+            self.logger.info("Market status check results: %s", status)
+            return status
+                
+        except Exception as e:
+            self.logger.exception("Error in market status check")
+            return status

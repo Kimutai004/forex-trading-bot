@@ -1,4 +1,5 @@
 import logging
+from zoneinfo import ZoneInfo
 import MetaTrader5 as mt5
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime, timedelta
@@ -131,6 +132,49 @@ class ForexBot:
             self.logger.error(f"Failed to initialize menu manager: {str(e)}")
             raise RuntimeError(f"Menu initialization failed: {str(e)}")
 
+    def _log_session_status(self):
+        """Log detailed session status without MT5 health check"""
+        try:
+            self.logger.info("\n=== Session Status Check ===")
+            
+            # Get raw session data
+            session_data = self.session_manager.calendar_data.get("sessions", {})
+            self.logger.info(f"""
+            Raw Session Configuration:
+            Sydney: {session_data.get('Sydney', 'Not configured')}
+            Tokyo: {session_data.get('Tokyo', 'Not configured')}
+            London: {session_data.get('London', 'Not configured')}
+            NewYork: {session_data.get('NewYork', 'Not configured')}
+            """)
+
+            # Get current session status
+            current_time = datetime.now()
+            utc_time = datetime.now(ZoneInfo("UTC"))
+            self.logger.info(f"""
+            Time Information:
+            Local Time: {current_time}
+            UTC Time: {utc_time}
+            Weekday: {utc_time.strftime('%A')}
+            Hour: {utc_time.hour}
+            """)
+
+            # Check individual sessions
+            for session in ['Sydney', 'Tokyo', 'London', 'NewYork']:
+                is_open = self.session_manager.is_session_open(session)
+                self.logger.info(f"Session {session}: {'OPEN' if is_open else 'CLOSED'}")
+
+            # Log session manager's current info
+            session_info = self.session_manager.get_current_session_info()
+            self.logger.info(f"""
+            Session Manager Status:
+            Active Sessions: {session_info['active_sessions']}
+            Upcoming Sessions: {session_info['upcoming_sessions']}
+            Market Status: {session_info['market_status']}
+            """)
+
+        except Exception as e:
+            self.logger.error(f"Error logging session status: {str(e)}")
+
     def _initialize_system_auditor(self):
         """Initialize system auditor with proper dependencies"""
         try:
@@ -250,6 +294,15 @@ class ForexBot:
     def run_trading_loop(self):
         """Main trading loop with continuous FTMO monitoring"""
         try:
+            self._log_session_status()  # Add detailed session status logging
+            self._log_market_status()  # Add detailed market status logging
+            self.logger.info("\n=== Trading Loop Iteration Start ===")
+            self.logger.info(f"""
+            Current Time: {datetime.now()}
+            UTC Time: {datetime.now().replace(tzinfo=None)}
+            Market Status Check Starting
+            """)
+
             # Always monitor FTMO status, even during closed markets
             ftmo_status = self.ftmo_manager.monitor_ftmo_status()
             if 'error' in ftmo_status:
@@ -299,9 +352,20 @@ class ForexBot:
                 session_info = self.session_manager.get_current_session_info()
                 market_open = len(session_info['active_sessions']) > 0
 
+                # Log detailed market status
+                self.logger.info(f"""
+                Market Status Check:
+                Current Time: {datetime.now()}
+                UTC Time: {datetime.now().replace(tzinfo=None)}
+                Market Open: {market_open}
+                Active Sessions: {session_info['active_sessions'] if market_open else 'None'}
+                Session Info: {session_info}
+                MT5 Connection: {self.mt5_trader.connected}
+                """)
+
                 # Log trading cycle start
                 self.logger.info(f"""
-                Trading Cycle Start:
+                Trading Cycle Status:
                 Market Status: {'OPEN' if market_open else 'CLOSED'}
                 Active Sessions: {', '.join(session_info['active_sessions']) if market_open else 'None'}
                 FTMO Status: {ftmo_status.get('market_status', 'Unknown')}
@@ -408,6 +472,59 @@ class ForexBot:
         except Exception as e:
             self.logger.error(f"Critical error in trading loop: {str(e)}")
 
+    def _log_market_status(self):
+        """Log detailed market status information"""
+        try:
+            self.logger.info("\n=== Market Status Check ===")
+            
+            # Get raw session data
+            session_data = self.session_manager.calendar_data.get("sessions", {})
+            self.logger.info(f"""
+            Raw Session Configuration:
+            Sydney: {session_data.get('Sydney', 'Not configured')}
+            Tokyo: {session_data.get('Tokyo', 'Not configured')}
+            London: {session_data.get('London', 'Not configured')}
+            NewYork: {session_data.get('NewYork', 'Not configured')}
+            """)
+
+            # Get current session status
+            current_time = datetime.now()
+            utc_time = datetime.now(ZoneInfo("UTC"))
+            self.logger.info(f"""
+            Time Information:
+            Local Time: {current_time}
+            UTC Time: {utc_time}
+            Weekday: {utc_time.strftime('%A')}
+            Hour: {utc_time.hour}
+            """)
+
+            # Check MT5 status
+            mt5_status = self.mt5_trader.check_connection_health()
+            self.logger.info(f"""
+            MT5 Status:
+            Connected: {mt5_status['is_connected']}
+            Can Trade: {mt5_status['can_trade']}
+            Terminal Connected: {mt5_status['terminal_connected']}
+            Expert Enabled: {mt5_status['expert_enabled']}
+            """)
+
+            # Check individual sessions
+            for session in ['Sydney', 'Tokyo', 'London', 'NewYork']:
+                is_open = self.session_manager.is_session_open(session)
+                self.logger.info(f"Session {session}: {'OPEN' if is_open else 'CLOSED'}")
+
+            # Log session manager's current info
+            session_info = self.session_manager.get_current_session_info()
+            self.logger.info(f"""
+            Session Manager Status:
+            Active Sessions: {session_info['active_sessions']}
+            Upcoming Sessions: {session_info['upcoming_sessions']}
+            Market Status: {session_info['market_status']}
+            """)
+
+        except Exception as e:
+            self.logger.error(f"Error logging market status: {str(e)}")
+
     def run(self):
         """Main bot loop with auto-refreshing dashboard"""
         try:
@@ -436,23 +553,22 @@ class ForexBot:
             
             refresh_interval = 5  # seconds
             last_update = datetime.now().replace(tzinfo=None)
-            connection_check_interval = 30  # Check connection every 30 seconds
-            last_connection_check = datetime.now().replace(tzinfo=None)
+            last_session_check = datetime.now().replace(tzinfo=None)
+            session_check_interval = 60  # Check session every minute
 
             while self.running:
                 try:
                     current_time = datetime.now().replace(tzinfo=None)
                     
-                    # Periodic connection check
-                    if (current_time - last_connection_check).total_seconds() >= connection_check_interval:
-                        if not self.mt5_trader.connected:
-                            self.logger.error("MT5 connection lost. Attempting reconnection...")
-                            # Try to reconnect
-                            if not self.mt5_trader._attempt_reconnection():
-                                self.logger.error("Failed to reconnect to MT5")
-                                continue
-                        last_connection_check = current_time
-                        self.logger.info("Connection check completed")
+                    # Session status check (once per minute)
+                    if (current_time - last_session_check).total_seconds() >= session_check_interval:
+                        self.logger.info(f"""
+                        === Session Status Check ===
+                        Current Time: {current_time}
+                        UTC Time: {datetime.now(ZoneInfo("UTC"))}
+                        Session Info: {self.session_manager.get_current_session_info()}
+                        """)
+                        last_session_check = current_time
 
                     # Verify market state before processing
                     try:
@@ -507,7 +623,7 @@ class ForexBot:
                             except Exception as e:
                                 self.logger.error(f"Error handling keyboard input: {str(e)}")
 
-                    time.sleep(0.1)
+                    time.sleep(1)  # Reduced polling frequency to 1 second
 
                 except Exception as e:
                     self.logger.error(f"Error in main loop iteration: {str(e)}", exc_info=True)

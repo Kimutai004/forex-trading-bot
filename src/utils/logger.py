@@ -2,20 +2,21 @@ import logging
 from datetime import datetime
 import os
 from typing import Optional, Dict
+from logging.handlers import RotatingFileHandler
 
 # Global dictionary to track logger instances
 _LOGGERS: Dict[str, logging.Logger] = {}
 
 def setup_logger(name: str, log_dir: str = 'trading_logs') -> logging.Logger:
     """
-    Enhanced logger setup with strictly separated console and file handlers
+    Enhanced logger setup with rotation and cleanup
     
     Args:
         name: Logger name (e.g., 'ForexBot', 'MT5Trader')
         log_dir: Directory for log files
         
     Returns:
-        logging.Logger: Configured logger instance
+        logging.Logger: Configured logger instance with auto-cleanup
     """
     # If logger already exists, return it
     if name in _LOGGERS:
@@ -29,8 +30,6 @@ def setup_logger(name: str, log_dir: str = 'trading_logs') -> logging.Logger:
     # Clear any existing handlers
     logger.handlers.clear()
     
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    
     try:
         # Console Handler - ERROR only
         console_handler = logging.StreamHandler()
@@ -38,9 +37,21 @@ def setup_logger(name: str, log_dir: str = 'trading_logs') -> logging.Logger:
         console_handler.setFormatter(console_formatter)
         console_handler.setLevel(logging.ERROR)
         
-        # File Handler - All levels
-        log_file = os.path.join(log_dir, f'{name.lower()}_{timestamp}.log')
-        file_handler = logging.FileHandler(log_file, encoding='utf-8')
+        # File Handler with Rotation - All levels
+        log_file = os.path.join(log_dir, f'{name.lower()}.log')
+        
+        # Create a rotating handler that:
+        # - Rotates when file reaches 512KB
+        # - Keeps only 3 backup files
+        # - Deletes the oldest file when rotating beyond 3 backups
+        file_handler = RotatingFileHandler(
+            filename=log_file,
+            maxBytes=512*1024,    # 512KB
+            backupCount=3,        # Keep only 3 backup files
+            encoding='utf-8',
+            delay=True            # Don't create file until first write
+        )
+        
         file_formatter = logging.Formatter(
             '%(asctime)s - %(name)s - [%(levelname)s] - %(message)s\n'
             'File: %(filename)s:%(lineno)d\n'
@@ -58,12 +69,16 @@ def setup_logger(name: str, log_dir: str = 'trading_logs') -> logging.Logger:
         # Store logger in global dictionary
         _LOGGERS[name] = logger
         
-        # Log setup only for non-implementation loggers
-        if name != 'Implementation':
-            impl_logger = get_implementation_logger(log_dir)
-            impl_logger.info(f"Logger configuration updated for {name}")
-            impl_logger.info(f"Full debug logging enabled in {log_file}")
-            
+        # Log rotation settings
+        impl_logger = get_implementation_logger(log_dir)
+        impl_logger.info(f"""
+        Logger Setup for {name}:
+        - Main log file: {log_file}
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        """)
+        
         return logger
         
     except Exception as e:
@@ -77,17 +92,22 @@ def setup_logger(name: str, log_dir: str = 'trading_logs') -> logging.Logger:
         return basic_logger
 
 def get_implementation_logger(log_dir: str = 'trading_logs') -> logging.Logger:
-    """Get or create implementation logger"""
+    """Get or create implementation logger with rotation"""
     if 'Implementation' in _LOGGERS:
         return _LOGGERS['Implementation']
         
     logger = logging.getLogger('Implementation')
     logger.handlers.clear()
     
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    impl_file = os.path.join(log_dir, f'implementation_changes_{timestamp}.log')
+    impl_file = os.path.join(log_dir, 'implementation.log')
     
-    handler = logging.FileHandler(impl_file, encoding='utf-8')
+    handler = RotatingFileHandler(
+        filename=impl_file,
+        maxBytes=512*1024,    # 512KB
+        backupCount=2,        # Keep only 2 backup files
+        encoding='utf-8',
+        delay=True
+    )
     formatter = logging.Formatter('%(asctime)s - Implementation - %(message)s')
     handler.setFormatter(formatter)
     handler.setLevel(logging.INFO)

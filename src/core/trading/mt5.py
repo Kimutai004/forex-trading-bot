@@ -480,7 +480,7 @@ class MT5Trader:
         
     def check_connection_health(self) -> Dict:
         """
-        Perform comprehensive connection health check
+        Check MT5 connection health without reinitializing
         Returns dict with health status and diagnostics
         """
         health_info = {
@@ -496,35 +496,20 @@ class MT5Trader:
         }
         
         try:
-            # Check MT5 initialization
-            health_info['mt5_initialized'] = mt5.initialize()
-            if not health_info['mt5_initialized']:
-                error = mt5.last_error()
-                health_info.update({
-                    'error_code': error[0],
-                    'error_message': error[1]
-                })
-                self.logger.error(f"MT5 not initialized. Error: {error[0]} - {error[1]}")
-                return health_info
-
-            # Check terminal info
+            # Check terminal info without reinitializing
             terminal_info = mt5.terminal_info()
             if terminal_info is not None:
                 terminal_dict = terminal_info._asdict()
-                health_info['terminal_connected'] = terminal_dict.get('connected', False)
-                health_info['expert_enabled'] = terminal_dict.get('trade_expert', False)
-                health_info['can_trade'] = terminal_dict.get('trade_allowed', False)
-                health_info['diagnostics']['terminal'] = {
-                    'path': terminal_dict.get('path'),
-                    'data_path': terminal_dict.get('data_path'),
-                    'connected': terminal_dict.get('connected'),
-                    'community_account': terminal_dict.get('community_account'),
-                    'community_connection': terminal_dict.get('community_connection'),
-                    'dlls_allowed': terminal_dict.get('dlls_allowed'),
-                    'trade_allowed': terminal_dict.get('trade_allowed'),
-                    'trade_expert': terminal_dict.get('trade_expert'),
-                    'mqid': terminal_dict.get('mqid')
-                }
+                health_info.update({
+                    'is_connected': terminal_dict.get('connected', False),
+                    'terminal_connected': terminal_dict.get('connected', False),
+                    'expert_enabled': terminal_dict.get('trade_expert', False),
+                    'can_trade': terminal_dict.get('trade_allowed', False),
+                    'mt5_initialized': True
+                })
+                health_info['diagnostics'].update({
+                    'terminal': terminal_dict
+                })
 
             # Check account access
             account_info = mt5.account_info()
@@ -540,21 +525,9 @@ class MT5Trader:
                     'credit': account_info.credit,
                     'margin_free': account_info.margin_free
                 }
-            else:
-                error = mt5.last_error()
-                health_info['diagnostics']['account_error'] = f"{error[0]} - {error[1]}"
 
-            # Update overall connection status
-            health_info['is_connected'] = all([
-                health_info['mt5_initialized'],
-                health_info['terminal_connected'],
-                health_info['expert_enabled'],
-                health_info['account_accessible']
-            ])
-
-            # Log health check results
-            log_level = logging.INFO if health_info['is_connected'] else logging.ERROR
-            self.logger.log(log_level, f"""
+            # Log health check results only once
+            self.logger.info(f"""
             MT5 Connection Health Check Results:
             - Connected: {health_info['is_connected']}
             - MT5 Initialized: {health_info['mt5_initialized']}
@@ -564,13 +537,10 @@ class MT5Trader:
             - Account Accessible: {health_info['account_accessible']}
             """)
 
-            if not health_info['is_connected']:
-                self.logger.error("Connection health check failed. See detailed diagnostics above.")
-            
             return health_info
-            
+                
         except Exception as e:
-            self.logger.error(f"Error during health check: {str(e)}", exc_info=True)
+            self.logger.error(f"Error during health check: {str(e)}")
             health_info['error_message'] = str(e)
             return health_info
 
