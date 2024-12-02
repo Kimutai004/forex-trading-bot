@@ -7,6 +7,9 @@ import time
 from datetime import datetime
 import logging
 import traceback
+from zoneinfo import ZoneInfo
+from typing import Dict, List, Optional, Tuple
+from datetime import datetime, timedelta
 
 class MT5Trader:
     def __init__(self, config_path: str = "config.json", status_manager=None):
@@ -123,6 +126,132 @@ class MT5Trader:
         self.logger = setup_logger('MT5Trader')
         self.logger.info("MT5Trader logging system initialized")
 
+    def get_current_positions_detailed(self) -> List[Dict]:
+        """Get detailed information about current positions with time analysis"""
+        try:
+            self.logger.info(f"""
+            ========== FETCHING CURRENT POSITIONS ==========
+            Local Time: {datetime.now()}
+            Server Time: {datetime.fromtimestamp(mt5.symbol_info_tick("EURUSD").time)}
+            Time Difference: {-7200} seconds (EET offset)
+            """)
+
+            positions = mt5.positions_get()
+            if positions is None:
+                error = mt5.last_error()
+                self.logger.error(f"Failed to get positions: {error}")
+                return []
+
+            detailed_positions = []
+            for pos in positions:
+                pos_dict = pos._asdict()
+                open_time = pos_dict.get('time', 0)
+                
+                self.logger.info(f"""
+                Position Time Analysis:
+                Ticket: {pos_dict.get('ticket')}
+                Raw Time: {open_time}
+                Server Time (EET): {datetime.fromtimestamp(open_time)}
+                Local Time Equivalent: {datetime.fromtimestamp(open_time - 7200)}
+                Current Local Time: {datetime.now()}
+                Time Since Open: {(datetime.now() - datetime.fromtimestamp(open_time - 7200)).total_seconds()} seconds
+                
+                Position Details:
+                Symbol: {pos_dict.get('symbol')}
+                Type: {pos_dict.get('type')}
+                Volume: {pos_dict.get('volume')}
+                Open Price: {pos_dict.get('price_open')}
+                Current Price: {pos_dict.get('price_current')}
+                Profit: {pos_dict.get('profit')}
+                """)
+
+                detailed_positions.append({
+                    'ticket': pos_dict.get('ticket'),
+                    'symbol': pos_dict.get('symbol'),
+                    'type': pos_dict.get('type'),
+                    'volume': pos_dict.get('volume'),
+                    'open_time': open_time,
+                    'open_time_local': datetime.fromtimestamp(open_time - 7200),
+                    'price_open': pos_dict.get('price_open'),
+                    'price_current': pos_dict.get('price_current'),
+                    'profit': pos_dict.get('profit'),
+                    'raw_data': pos_dict
+                })
+
+            self.logger.info(f"""
+            Position Summary:
+            Total Positions: {len(detailed_positions)}
+            ========== END CURRENT POSITIONS ==========
+            """)
+
+            return detailed_positions
+
+        except Exception as e:
+            self.logger.error(f"Error getting detailed positions: {str(e)}")
+            return []
+
+    def get_raw_positions(self) -> List[Dict]:
+        """Get positions with raw timestamp data"""
+        try:
+            self.logger.info(f"""
+            ========== FETCHING RAW POSITIONS ==========
+            Local Time: {datetime.now()}
+            Local Timestamp: {int(datetime.now().timestamp())}
+            Server Time: {datetime.fromtimestamp(mt5.symbol_info_tick("EURUSD").time)}
+            Server Timestamp: {mt5.symbol_info_tick("EURUSD").time}
+            Time Offset: {-7200}  # EET to Local
+            """)
+
+            positions = mt5.positions_get()
+            if positions is None:
+                error = mt5.last_error()
+                self.logger.error(f"Failed to get positions: {error}")
+                return []
+
+            raw_positions = []
+            for pos in positions:
+                pos_dict = pos._asdict()
+                raw_time = pos_dict.get('time', 0)
+                
+                self.logger.info(f"""
+                Raw Position Data:
+                Ticket: {pos_dict.get('ticket')}
+                Raw Timestamp: {raw_time}
+                Raw Local Time: {datetime.fromtimestamp(raw_time)}
+                Raw Server Time: {datetime.fromtimestamp(raw_time + 7200)}
+                Time Since Open: {int(datetime.now().timestamp()) - raw_time} seconds
+                
+                Position Info:
+                Symbol: {pos_dict.get('symbol')}
+                Type: {pos_dict.get('type')}
+                Volume: {pos_dict.get('volume')}
+                Price: {pos_dict.get('price_open')}
+                Current: {pos_dict.get('price_current')}
+                Profit: {pos_dict.get('profit')}
+                """)
+
+                raw_positions.append({
+                    'ticket': pos_dict.get('ticket'),
+                    'raw_time': raw_time,
+                    'local_time': datetime.fromtimestamp(raw_time),
+                    'server_time': datetime.fromtimestamp(raw_time + 7200),
+                    'duration_seconds': int(datetime.now().timestamp()) - raw_time,
+                    'raw_data': pos_dict
+                })
+
+            self.logger.info(f"""
+            Raw Position Summary:
+            Total Positions: {len(raw_positions)}
+            Current Time: {datetime.now()}
+            ========== END RAW POSITIONS ==========
+            """)
+
+            return raw_positions
+
+        except Exception as e:
+            self.logger.error(f"Error getting raw positions: {str(e)}")
+            return []
+
     def _monitor_connection(self) -> bool:
         """
         Monitor MT5 connection status with enhanced error handling
@@ -205,6 +334,84 @@ class MT5Trader:
         except Exception as e:
             self.logger.error(f"Error monitoring connection: {str(e)}", exc_info=True)
             return self._attempt_reconnection()
+        
+    def get_position_history(self, from_date: Optional[datetime] = None) -> List[Dict]:
+        """Get detailed position history with timestamps"""
+        try:
+            if not from_date:
+                from_date = datetime.now() - timedelta(days=1)  # Last 24 hours by default
+
+            self.logger.info(f"""
+            ========== FETCHING POSITION HISTORY ==========
+            From Date: {from_date}
+            Current Time: {datetime.now()}
+            Server Time: {datetime.fromtimestamp(mt5.symbol_info_tick("EURUSD").time)}
+            """)
+
+            # Get history
+            positions = mt5.history_orders_get(from_date, datetime.now())
+            
+            if positions is None:
+                error = mt5.last_error()
+                self.logger.error(f"Failed to get position history: {error}")
+                return []
+
+            formatted_positions = []
+            for pos in positions:
+                pos_dict = pos._asdict()
+                
+                # Get raw timestamps
+                setup_time = pos_dict.get('time_setup', 0)
+                done_time = pos_dict.get('time_done', 0)
+                
+                self.logger.info(f"""
+                Position Details:
+                Ticket: {pos_dict.get('ticket')}
+                Symbol: {pos_dict.get('symbol')}
+                Type: {pos_dict.get('type')}
+                State: {pos_dict.get('state')}
+                Volume: {pos_dict.get('volume_initial')}
+                
+                Time Information:
+                Setup Time (Raw): {setup_time}
+                Setup Time (Local): {datetime.fromtimestamp(setup_time)}
+                Setup Time (Server): {datetime.fromtimestamp(setup_time + 7200)}  # EET adjustment
+                Done Time (Raw): {done_time}
+                Done Time (Local): {datetime.fromtimestamp(done_time) if done_time else 'Still Open'}
+                
+                Price Information:
+                Price Open: {pos_dict.get('price_open')}
+                Price Current: {pos_dict.get('price_current')}
+                SL: {pos_dict.get('sl')}
+                TP: {pos_dict.get('tp')}
+                """)
+                
+                formatted_positions.append({
+                    'ticket': pos_dict.get('ticket'),
+                    'symbol': pos_dict.get('symbol'),
+                    'type': pos_dict.get('type'),
+                    'volume': pos_dict.get('volume_initial'),
+                    'open_time': setup_time,
+                    'close_time': done_time,
+                    'open_price': pos_dict.get('price_open'),
+                    'close_price': pos_dict.get('price_current'),
+                    'profit': pos_dict.get('profit'),
+                    'state': pos_dict.get('state'),
+                    'raw_data': pos_dict
+                })
+
+            self.logger.info(f"""
+            Position History Summary:
+            Total Positions: {len(formatted_positions)}
+            Time Range: {from_date} to {datetime.now()}
+            ========== END POSITION HISTORY ==========
+            """)
+
+            return formatted_positions
+
+        except Exception as e:
+            self.logger.error(f"Error getting position history: {str(e)}")
+            return []
         
     def _maintain_weekend_connection(self) -> bool:
         """
@@ -413,6 +620,14 @@ class MT5Trader:
             mt5.shutdown()
             time.sleep(2)  # Wait for clean shutdown
             
+            # Add timezone logging
+            self.logger.info(f"""
+            ========== MT5 INITIALIZATION START ==========
+            Local System Time: {datetime.now()}
+            Local Timezone: {datetime.now().astimezone().tzinfo}
+            UTC Time: {datetime.now(ZoneInfo('UTC'))}
+            """)
+            
             # Initialize MT5 with extended timeout
             if not mt5.initialize(
                 login=int(self._load_or_create_credentials()['username']),
@@ -433,6 +648,11 @@ class MT5Trader:
             terminal_info = mt5.terminal_info()
             if terminal_info is not None:
                 terminal_dict = terminal_info._asdict()
+                
+                # Get first symbol tick for server time reference
+                tick = mt5.symbol_info_tick("EURUSD")
+                server_time = datetime.fromtimestamp(tick.time) if tick else None
+                
                 self.logger.info(f"""
                 MT5 Terminal Status:
                 - Community Account: {terminal_dict.get('community_account')}
@@ -440,6 +660,11 @@ class MT5Trader:
                 - Trade Allowed: {terminal_dict.get('trade_allowed')}
                 - Trade Expert: {terminal_dict.get('trade_expert')}
                 - Path: {terminal_dict.get('path')}
+                
+                Time Synchronization:
+                - Server Time: {server_time}
+                - Time Difference from Local: {(datetime.now() - server_time).total_seconds() if server_time else 'N/A'} seconds
+                - Raw Server Timestamp: {tick.time if tick else 'N/A'}
                 """)
 
                 # Check if AutoTrading is enabled
@@ -459,13 +684,18 @@ class MT5Trader:
 
             self.connected = True
             self.logger.info(f"""
-                            Successfully connected to MT5:
-                            - Account: ****{str(account_info.login)[-4:]}
-                            - Server: {account_info.server}
-                            - Balance: {account_info.balance}
-                            - Leverage: 1:{account_info.leverage}
-                            - Company: {account_info.company}
-                            """)
+            Successfully connected to MT5:
+            - Account: ****{str(account_info.login)[-4:]}
+            - Server: {account_info.server}
+            - Balance: {account_info.balance}
+            - Leverage: 1:{account_info.leverage}
+            - Company: {account_info.company}
+            
+            Time Information:
+            - Login Time: {datetime.now()}
+            - Server Time Zone: {account_info.server} (typically EET/UTC+2)
+            ========== MT5 INITIALIZATION END ==========
+            """)
             
             self.status_manager.update_module_status(
                 "MT5Trader",

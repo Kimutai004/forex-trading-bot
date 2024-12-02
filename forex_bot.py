@@ -209,6 +209,14 @@ class ForexBot:
         self.logger.info("\n=== Dashboard Update Started ===")
         self.menu.clear_screen()
 
+        # Add dashboard timing logs
+        self.logger.info(f"""
+        Dashboard Time Information:
+        Local Time: {datetime.now()}
+        UTC Time: {datetime.now(ZoneInfo('UTC'))}
+        Server Time: {datetime.fromtimestamp(mt5.symbol_info_tick("EURUSD").time)}
+        """)
+
         print("=" * 50)
         print("Forex Trading Bot - Live Dashboard".center(50))
         print("=" * 50)
@@ -257,9 +265,15 @@ class ForexBot:
                     self.logger.info(f"Consensus for {symbol}: {consensus.type.value}, Price: {price}")
                     print(f"{symbol:<8} {consensus.type.value:<8} {'Strong':<8} {price:<12}")
 
-        # Get and log position information
+        # Get and log position information with enhanced timing logs
         positions = self.position_manager.get_open_positions()
-        self.logger.info(f"Open Positions: {len(positions)}/{self.trading_logic.max_total_positions}")
+        self.logger.info(f"""
+        Position Information:
+        Total Positions: {len(positions)}/{self.trading_logic.max_total_positions}
+        Current Time: {datetime.now()}
+        UTC Time: {datetime.now(ZoneInfo('UTC'))}
+        Server Time: {datetime.fromtimestamp(mt5.symbol_info_tick("EURUSD").time)}
+        """)
         
         if len(positions) >= self.trading_logic.max_total_positions:
             print(f"\nNote: All new positions temporarily on hold "
@@ -272,8 +286,27 @@ class ForexBot:
         print("-" * 90)
 
         for pos in positions:
+            # Log raw position data before metrics calculation
+            self.logger.info(f"""
+            Raw Position Data:
+            Ticket: {pos.get('ticket')}
+            Symbol: {pos.get('symbol')}
+            Time: {pos.get('time')}
+            Time Type: {type(pos.get('time'))}
+            Server Time: {datetime.fromtimestamp(pos.get('time')) if pos.get('time') else 'N/A'}
+            Local Time: {datetime.fromtimestamp(pos.get('time') - 7200) if pos.get('time') else 'N/A'}
+            """)
+
             metrics = self.ftmo_manager.get_position_metrics(pos)
-            self.logger.info(f"Position Metrics for {pos['ticket']}: {metrics}")
+            self.logger.info(f"""
+            Position Display Metrics:
+            Ticket: {pos['ticket']}
+            Raw Metrics: {metrics}
+            Duration String: {metrics['duration']}
+            Open Time: {metrics['open_time']}
+            Current Time: {datetime.now()}
+            Time Difference: {(datetime.now() - datetime.strptime(metrics['open_time'], '%H:%M:%S')).total_seconds() / 60} minutes
+            """)
             
             print(f"\n{pos['symbol']:<8} {pos['type']:<6} {pos['open_price']:.5f} "
                 f"{pos['current_price']:.5f} {'+' if pos['profit'] >= 0 else ''}"

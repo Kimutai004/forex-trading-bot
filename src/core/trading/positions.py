@@ -2,6 +2,7 @@ from typing import List, Dict, Tuple, Optional
 import MetaTrader5 as mt5
 from datetime import datetime
 import json
+from zoneinfo import ZoneInfo
 
 class PositionManager:
     
@@ -120,6 +121,127 @@ class PositionManager:
         
         return ((current_price - open_price) * multiplier) if digits == 3 or digits == 5 else \
                ((current_price - open_price) * multiplier)
+    
+    def get_position_details(self) -> List[Dict]:
+        """Get detailed position information including all timestamps and history"""
+        try:
+            self.logger.info(f"""
+            =================== POSITION DETAILS START ===================
+            Current Time (Local): {datetime.now()}
+            Current Time (UTC): {datetime.now(ZoneInfo('UTC'))}
+            MT5 Connected: {self.mt5_instance.connected}
+            """)
+
+            # Get current positions
+            positions = mt5.positions_get()
+            if positions is None:
+                error = mt5.last_error()
+                self.logger.error(f"Failed to get positions: {error}")
+                return []
+
+            detailed_positions = []
+            for pos in positions:
+                pos_dict = pos._asdict()
+                
+                # Get raw position data
+                self.logger.info(f"""
+                Raw Position Data:
+                Ticket: {pos_dict.get('ticket')}
+                Time: {pos_dict.get('time')}
+                Time Setup: {pos_dict.get('time_setup')}
+                Time Update: {pos_dict.get('time_update', 'N/A')}
+                Raw Timestamp: {pos_dict.get('time')}
+                """)
+
+                # Get position history
+                history = mt5.history_orders_get(
+                    ticket=pos_dict.get('ticket')
+                )
+                if history:
+                    for hist in history:
+                        hist_dict = hist._asdict()
+                        self.logger.info(f"""
+                        Position History Entry:
+                        Order Ticket: {hist_dict.get('ticket')}
+                        Setup Time: {hist_dict.get('time_setup')}
+                        Done Time: {hist_dict.get('time_done')}
+                        State: {hist_dict.get('state')}
+                        Type: {hist_dict.get('type')}
+                        """)
+
+                # Get deal history
+                deals = mt5.history_deals_get(
+                    ticket=pos_dict.get('ticket')
+                )
+                if deals:
+                    for deal in deals:
+                        deal_dict = deal._asdict()
+                        self.logger.info(f"""
+                        Deal History Entry:
+                        Deal Ticket: {deal_dict.get('ticket')}
+                        Order Ticket: {deal_dict.get('order')}
+                        Time: {deal_dict.get('time')}
+                        Type: {deal_dict.get('type')}
+                        Entry: {deal_dict.get('entry')}
+                        """)
+
+                # Calculate all relevant times
+                position_time = pos_dict.get('time', 0)
+                server_time = datetime.fromtimestamp(position_time)
+                local_time = datetime.fromtimestamp(position_time - 7200)  # Convert from EET to local
+                
+                self.logger.info(f"""
+                Position Time Analysis:
+                Position: {pos_dict.get('ticket')}
+                Symbol: {pos_dict.get('symbol')}
+                Type: {'BUY' if pos_dict.get('type') == 0 else 'SELL'}
+                
+                Timestamps:
+                Raw Server Time: {position_time}
+                Server Time (EET): {server_time}
+                Local Time: {local_time}
+                Current Time: {datetime.now()}
+                
+                Duration Calculation:
+                Seconds Since Open: {(datetime.now() - local_time).total_seconds()}
+                Minutes Since Open: {(datetime.now() - local_time).total_seconds() / 60}
+                
+                Position State:
+                Open Price: {pos_dict.get('price_open')}
+                Current Price: {pos_dict.get('price_current')}
+                SL: {pos_dict.get('sl')}
+                TP: {pos_dict.get('tp')}
+                Profit: {pos_dict.get('profit')}
+                Volume: {pos_dict.get('volume')}
+                """)
+
+                detailed_positions.append({
+                    'ticket': pos_dict.get('ticket'),
+                    'symbol': pos_dict.get('symbol'),
+                    'type': pos_dict.get('type'),
+                    'volume': pos_dict.get('volume'),
+                    'time_raw': position_time,
+                    'time_server': server_time,
+                    'time_local': local_time,
+                    'price_open': pos_dict.get('price_open'),
+                    'price_current': pos_dict.get('price_current'),
+                    'profit': pos_dict.get('profit'),
+                    'sl': pos_dict.get('sl'),
+                    'tp': pos_dict.get('tp'),
+                    'raw_data': pos_dict
+                })
+
+            self.logger.info(f"""
+            Position Summary:
+            Total Positions: {len(detailed_positions)}
+            =================== POSITION DETAILS END ===================
+            """)
+
+            return detailed_positions
+
+        except Exception as e:
+            self.logger.error(f"Error getting position details: {str(e)}")
+            return []
 
     def close_position(self, ticket: int) -> Tuple[bool, str]:
         """Close specific position by ticket"""

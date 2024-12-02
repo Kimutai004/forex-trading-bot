@@ -6,6 +6,7 @@ import os
 import MetaTrader5 as mt5
 import traceback
 import time
+from zoneinfo import ZoneInfo
 
 class FTMORuleManager:
     def __init__(self, config_dir: str = "config"):
@@ -208,8 +209,10 @@ class FTMORuleManager:
             return False, f"Error checking position: {str(e)}"
     
     def check_position_duration(self, position: Dict) -> Dict:
-        """Enhanced position duration check with market condition logging"""
+        """Enhanced position duration check with detailed time logging"""
         try:
+            from zoneinfo import ZoneInfo  # Import at the start of the method
+
             self.logger.info(f"""
             ================== DURATION CHECK START ==================
             Position: {position['ticket']}
@@ -219,21 +222,61 @@ class FTMORuleManager:
             - Server Time: {datetime.now()}
             """)
 
-            from zoneinfo import ZoneInfo
+            # Add detailed position logging
+            self.logger.info(f"""
+            Position Raw Data:
+            - Ticket: {position.get('ticket')}
+            - Symbol: {position.get('symbol')}
+            - Type: {position.get('type')}
+            - Raw Time: {position.get('time')}
+            - Raw Time Type: {type(position.get('time'))}
+            """)
+
+            # Log timezone information
+            server_now = datetime.fromtimestamp(mt5.symbol_info_tick("EURUSD").time)
+            local_now = datetime.now()
+            utc_now = datetime.now(ZoneInfo('UTC'))
+
+            self.logger.info(f"""
+            Current Time Information:
+            - Local Time: {local_now}
+            - Server Time (EET): {server_now}
+            - UTC Time: {utc_now}
+            - Local Timezone: {local_now.astimezone().tzinfo}
+            - Time Differences:
+            * Local to Server: {(server_now - local_now).total_seconds()} seconds
+            * Local to UTC: {(utc_now.replace(tzinfo=None) - local_now).total_seconds()} seconds
+            """)
             
             # Get current time in UTC
             current_time = datetime.now(ZoneInfo("UTC"))
-            max_duration = self.rules['time_rules']['max_position_duration']
             
             # Convert MT5 server time (EET/UTC+2) to UTC
             if isinstance(position['time'], (int, float)):
+                # Log raw timestamp handling
+                self.logger.info(f"""
+                Timestamp Conversion:
+                - Raw Timestamp: {position['time']}
+                - As Local: {datetime.fromtimestamp(position['time'])}
+                - As Server (EET): {datetime.fromtimestamp(position['time'])}
+                - As UTC: {datetime.fromtimestamp(position['time'] - 7200)}
+                """)
+
                 # Subtract 2 hours (7200 seconds) from the timestamp to convert from EET to UTC
                 utc_timestamp = position['time'] - 7200
                 open_time = datetime.fromtimestamp(utc_timestamp, ZoneInfo("UTC"))
+                
+                self.logger.info(f"""
+                Time Conversion Result:
+                - UTC Timestamp: {utc_timestamp}
+                - Converted Open Time: {open_time}
+                - Current Time: {current_time}
+                """)
             else:
                 try:
                     open_time = datetime.strptime(position['time'], '%Y-%m-%d %H:%M:%S')
                     open_time = open_time.replace(tzinfo=ZoneInfo("UTC"))
+                    self.logger.info(f"Parsed string time to datetime: {open_time}")
                 except ValueError as e:
                     self.logger.error(f"Time parsing error: {e}")
                     return self._get_default_result()
@@ -247,10 +290,21 @@ class FTMORuleManager:
             minutes = int(duration_minutes % 60)
             duration_str = f"{hours}h {minutes}m"
 
+            self.logger.info(f"""
+            Duration Calculation:
+            - Open Time (UTC): {open_time}
+            - Current Time (UTC): {current_time}
+            - Duration: {duration}
+            - Total Minutes: {duration_minutes}
+            - Formatted: {duration_str}
+            - Raw Duration Seconds: {duration.total_seconds()}
+            """)
+
             # Calculate warning threshold
+            max_duration = self.rules['time_rules']['max_position_duration']
             warning_threshold = max_duration * self.rules['trading_rules']['position_duration']['warning_threshold']
 
-            # Create result before using it
+            # Create result
             result = {
                 'needs_closure': duration_minutes >= max_duration,
                 'duration': duration_str,
@@ -265,16 +319,15 @@ class FTMORuleManager:
                 }
             }
 
-            # Your existing logging code continues here...
-            if result['needs_closure']:
-                self.logger.info(f"""
-                Position Needs Closure:
-                - Symbol: {position['symbol']}
-                - Current P/L: {position['profit']}
-                - Duration: {result['duration']}
-                - Market State: {'OPEN' if self.mt5_trader.market_is_open else 'CLOSED'}
-                ================== DURATION CHECK END ==================
-                """)
+            self.logger.info(f"""
+            Duration Check Result:
+            - Needs Closure: {result['needs_closure']}
+            - Warning Active: {result['warning']}
+            - Current Duration: {result['duration']}
+            - Max Allowed: {max_duration} minutes
+            - Warning Threshold: {warning_threshold} minutes
+            ================== DURATION CHECK END ==================
+            """)
                 
             return result
 
@@ -372,21 +425,76 @@ class FTMORuleManager:
             return []
 
     def get_position_metrics(self, position: Dict) -> Dict:
-        """Calculate position metrics with proper timestamp handling"""
+        """Calculate position metrics with proper timezone handling"""
         try:
-            # Handle timestamp conversion
+            self.logger.info(f"""
+            ========== POSITION METRICS CALCULATION START ==========
+            Position Ticket: {position.get('ticket')}
+            Raw Position Time: {position.get('time')}
+            Current Time: {datetime.now()}
+            """)
+
+            # Log MT5 server information (keeping existing logs)
+            terminal_info = mt5.terminal_info()
+            if terminal_info:
+                terminal_dict = terminal_info._asdict()
+                self.logger.info(f"""
+                MT5 Server Information:
+                Path: {terminal_dict.get('path')}
+                Data Path: {terminal_dict.get('data_path')}
+                Connected: {terminal_dict.get('connected')}
+                """)
+
+            # Enhanced timezone logging
+            local_tz = datetime.now().astimezone().tzinfo
+            utc_now = datetime.now(ZoneInfo('UTC'))
+            server_time = datetime.fromtimestamp(mt5.symbol_info_tick("EURUSD").time if mt5.symbol_info_tick("EURUSD") else 0)
+            
+            self.logger.info(f"""
+            Enhanced Timezone Information:
+            Local TZ: {local_tz}
+            Local Time: {datetime.now()}
+            UTC Time: {utc_now}
+            Server Time (EET): {server_time}
+            UTC Offset: {datetime.now(ZoneInfo('UTC')).utcoffset()}
+            """)
+
+            # Handle timestamp conversion with enhanced logging
             if isinstance(position['time'], str):
-                # If it's already a datetime string, parse it
                 try:
                     open_time = datetime.strptime(position['time'], '%Y-%m-%d %H:%M:%S')
+                    self.logger.info(f"Parsed string time to datetime: {open_time}")
                 except ValueError:
-                    # If the format is different, try to convert from timestamp string
                     open_time = datetime.fromtimestamp(float(position['time']))
+                    self.logger.info(f"Converted string timestamp to datetime: {open_time}")
             else:
-                # If it's already a number (int or float)
-                open_time = datetime.fromtimestamp(position['time'])
+                # Convert EET to UTC for proper comparison
+                raw_timestamp = position['time']
+                server_time = datetime.fromtimestamp(raw_timestamp)
+                utc_time = datetime.fromtimestamp(raw_timestamp - 7200)  # Convert EET to UTC
+                
+                self.logger.info(f"""
+                Enhanced Timestamp Conversion Steps:
+                1. Raw Timestamp: {raw_timestamp}
+                2. Server Time (EET): {server_time}
+                3. UTC Time: {utc_time}
+                4. Timestamp Type: {type(position['time'])}
+                5. EET to UTC Offset Applied: -7200 seconds
+                """)
+                
+                open_time = utc_time  # Use UTC time for comparison
+                self.logger.info(f"Final converted UTC open time: {open_time}")
             
-            current_time = datetime.now()
+            # Convert current time to UTC for comparison
+            current_time = datetime.now(ZoneInfo('UTC'))
+            current_time = current_time.replace(tzinfo=None)  # Strip timezone for comparison
+            
+            self.logger.info(f"""
+            Time Comparison Setup:
+            Open Time (UTC): {open_time}
+            Current Time (UTC): {current_time}
+            """)
+            
             duration = current_time - open_time
             
             total_minutes = int(duration.total_seconds() / 60)
@@ -394,16 +502,42 @@ class FTMORuleManager:
             minutes = total_minutes % 60
             duration_str = f"{hours}h {minutes}m"
 
+            self.logger.info(f"""
+            Time Calculations:
+            Open Time: {open_time}
+            Current Time: {current_time}
+            Duration Total Minutes: {total_minutes}
+            Formatted Duration: {duration_str}
+            
+            Raw Duration Data:
+            Total Seconds: {duration.total_seconds()}
+            Days: {duration.days}
+            Seconds: {duration.seconds}
+            
+            Additional Time Debug:
+            Open Time Timestamp: {open_time.timestamp()}
+            Current Time Timestamp: {current_time.timestamp()}
+            Time Difference (seconds): {current_time.timestamp() - open_time.timestamp()}
+            """)
+
             max_duration = self.rules['time_rules']['max_position_duration']
             within_limit = total_minutes <= max_duration
 
-            return {
+            result = {
                 'duration': duration_str,
                 'open_time': open_time.strftime('%H:%M:%S'),
                 'within_time_limit': within_limit,
                 'total_minutes': total_minutes
             }
-            
+
+            self.logger.info(f"""
+            Final Metrics:
+            {json.dumps(result, indent=2)}
+            ========== POSITION METRICS CALCULATION END ==========
+            """)
+                
+            return result
+                
         except Exception as e:
             self.logger.error(f"Error calculating position metrics: {str(e)}")
             return {
