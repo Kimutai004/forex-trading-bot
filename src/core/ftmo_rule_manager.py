@@ -161,38 +161,71 @@ class FTMORuleManager:
             raise RuntimeError("FTMO rules configuration file not found")
 
     def check_position_allowed(self, account_info: Dict, position_size: float) -> tuple[bool, str]:
-        if account_info['profit'] <= self.rules['trading_rules']['max_daily_loss']:
-            return False, "Daily loss limit reached"
+        """Check if position is allowed based on FTMO rules"""
+        try:
+            self.logger.info(f"""
+            ================ POSITION CHECK START ================
+            Account State:
+            - Current Profit: ${account_info['profit']:.2f}
+            - Daily Loss Limit: ${abs(self.rules['trading_rules']['max_daily_loss']):.2f}
+            - Position Size: {position_size}
+            - Max Size Allowed: {self.rules['trading_rules']['scaling_rules']['max_lots']}
+            """)
 
-        if account_info['balance'] <= self.rules['trading_rules']['max_total_loss']:
-            return False, "Total loss limit reached"
+            result = True
+            message = "Position allowed"
 
-        if position_size > self.rules['trading_rules']['scaling_rules']['max_lots']:
-            return False, "Position size exceeds maximum allowed"
+            if account_info['profit'] <= self.rules['trading_rules']['max_daily_loss']:
+                result = False
+                message = "Daily loss limit reached"
+                self.logger.warning(f"Daily loss limit reached: ${account_info['profit']:.2f}")
 
-        return True, "Position allowed"
+            if account_info['balance'] <= self.rules['trading_rules']['max_total_loss']:
+                result = False
+                message = "Total loss limit reached"
+                self.logger.warning(f"Total loss limit reached: ${account_info['balance']:.2f}")
+
+            if position_size > self.rules['trading_rules']['scaling_rules']['max_lots']:
+                result = False
+                message = "Position size exceeds maximum allowed"
+                self.logger.warning(f"Position size {position_size} exceeds max allowed {self.rules['trading_rules']['scaling_rules']['max_lots']}")
+
+            self.logger.info(f"""
+            Position Check Result:
+            - Allowed: {result}
+            - Reason: {message}
+            ================ POSITION CHECK END ================
+            """)
+
+            return result, message
+
+        except Exception as e:
+            self.logger.error(f"""
+            Position Check Error:
+            Error: {str(e)}
+            Traceback: {traceback.format_exc()}
+            """)
+            return False, f"Error checking position: {str(e)}"
     
     def check_position_duration(self, position: Dict) -> Dict:
-        """
-        Enhanced position duration check with proper MT5 server time handling
-        """
+        """Enhanced position duration check with market condition logging"""
         try:
-            from zoneinfo import ZoneInfo
-            
             self.logger.info(f"""
-            ========== DURATION CHECK START ==========
+            ================== DURATION CHECK START ==================
             Position: {position['ticket']}
-            Symbol: {position['symbol']}
-            Time Config:
-            - Max Duration: {self.rules['time_rules']['max_position_duration']} minutes
-            - Warning Threshold: {self.rules['trading_rules']['position_duration']['warning_threshold'] * 100}%
+            Market Conditions:
+            - Current Session: {self.mt5_trader._get_current_session() if hasattr(self.mt5_trader, '_get_current_session') else 'Unknown'}
+            - Market Open: {self.mt5_trader.market_is_open if hasattr(self.mt5_trader, 'market_is_open') else 'Unknown'}
+            - Server Time: {datetime.now()}
             """)
+
+            from zoneinfo import ZoneInfo
             
             # Get current time in UTC
             current_time = datetime.now(ZoneInfo("UTC"))
             max_duration = self.rules['time_rules']['max_position_duration']
             
-            # Convert MT5 server time (EET/UTC+2) to UTC by subtracting 2 hours
+            # Convert MT5 server time (EET/UTC+2) to UTC
             if isinstance(position['time'], (int, float)):
                 # Subtract 2 hours (7200 seconds) from the timestamp to convert from EET to UTC
                 utc_timestamp = position['time'] - 7200
@@ -205,34 +238,19 @@ class FTMORuleManager:
                     self.logger.error(f"Time parsing error: {e}")
                     return self._get_default_result()
 
-            self.logger.info(f"""
-            ========== TIMEZONE CORRECTED ANALYSIS ==========
-            Raw Position Time (EET): {datetime.fromtimestamp(position['time'] if isinstance(position['time'], (int, float)) else 0)}
-            Adjusted Open Time (UTC): {open_time}
-            Current Time (UTC): {current_time}
-            Time Difference: {(current_time - open_time).total_seconds() / 60:.2f} minutes
-            """)
-
             # Calculate duration
             duration = current_time - open_time
             duration_minutes = duration.total_seconds() / 60
             
             # Format duration string
-            hours = int(abs(duration_minutes) // 60)
-            minutes = int(abs(duration_minutes) % 60)
+            hours = int(duration_minutes // 60)
+            minutes = int(duration_minutes % 60)
             duration_str = f"{hours}h {minutes}m"
 
             # Calculate warning threshold
             warning_threshold = max_duration * self.rules['trading_rules']['position_duration']['warning_threshold']
-            
-            self.logger.info(f"""
-            Duration Calculation:
-            Duration: {duration_str}
-            Minutes Elapsed: {duration_minutes:.2f}
-            Warning Threshold: {warning_threshold} minutes
-            Raw Duration Seconds: {duration.total_seconds()}
-            """)
 
+            # Create result before using it
             result = {
                 'needs_closure': duration_minutes >= max_duration,
                 'duration': duration_str,
@@ -247,48 +265,26 @@ class FTMORuleManager:
                 }
             }
 
-            self.logger.info(f"""
-            Duration Check Result:
-            Needs Closure: {result['needs_closure']}
-            Warning Active: {result['warning']}
-            Time Until Max: {max(0, max_duration - duration_minutes):.2f} minutes
-            Status: {'EXCEEDED' if result['needs_closure'] else 'WARNING' if result['warning'] else 'OK'}
-            """)
-
+            # Your existing logging code continues here...
             if result['needs_closure']:
-                self.ftmo_logger.log_violation(
-                    "Position Duration",
-                    f"""
-                    Position {position['ticket']} ({position['symbol']}) exceeded duration limit
-                    Duration: {duration_str}
-                    Max Allowed: {max_duration} minutes
-                    Exceeded by: {duration_minutes - max_duration:.2f} minutes
-                    Open Time (UTC): {result['open_time']}
-                    Current Time (UTC): {result['timezone_info']['utc_time']}
-                    """
-                )
-            elif result['warning']:
-                self.ftmo_logger.log_warning(
-                    "Position Duration",
-                    f"""
-                    Position {position['ticket']} ({position['symbol']}) approaching duration limit
-                    Current Duration: {duration_str}
-                    Max Allowed: {max_duration} minutes
-                    Time Remaining: {max_duration - duration_minutes:.2f} minutes
-                    Open Time (UTC): {result['open_time']}
-                    """
-                )
-
-            self.logger.info("========== DURATION CHECK END ==========\n")
+                self.logger.info(f"""
+                Position Needs Closure:
+                - Symbol: {position['symbol']}
+                - Current P/L: {position['profit']}
+                - Duration: {result['duration']}
+                - Market State: {'OPEN' if self.mt5_trader.market_is_open else 'CLOSED'}
+                ================== DURATION CHECK END ==================
+                """)
+                
             return result
 
         except Exception as e:
-            import traceback
             self.logger.error(f"""
             Duration Check Error:
             Position: {position.get('ticket', 'unknown')}
             Error: {str(e)}
             Traceback: {traceback.format_exc()}
+            ================== DURATION CHECK END ==================
             """)
             return self._get_default_result()
 

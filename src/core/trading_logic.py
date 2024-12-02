@@ -4,6 +4,9 @@ from typing import Dict, Optional
 from datetime import datetime
 import logging
 from src.signals.providers.base import Signal, SignalType
+import traceback
+import MetaTrader5 as mt5
+import json
 
 class TradingLogic:
     """Handles automated trading decisions and execution"""
@@ -75,72 +78,104 @@ class TradingLogic:
                 return
 
             positions = self.position_manager.get_open_positions()
-            self.logger.info(f"[Duration Monitor] Checking {len(positions)} positions for time limits")
+            self.logger.info(f"""
+            =================== POSITION MONITORING START ===================
+            Current Time: {datetime.now()}
+            Total Positions: {len(positions)}
+            Market Status: {'OPEN' if self.mt5_trader.market_is_open else 'CLOSED'}
+            ===========================================================
+            """)
             
             for position in positions:
                 try:
+                    # Log position details before duration check
+                    self.logger.info(f"""
+                    Checking Position:
+                    - Ticket: {position['ticket']}
+                    - Symbol: {position['symbol']}
+                    - Type: {position['type']}
+                    - Open Time: {position['time']}
+                    - Current Time: {datetime.now()}
+                    """)
+                    
                     # Only use FTMO manager's duration check
                     duration_check = self.ftmo_manager.check_position_duration(position)
                     
-                    self.logger.info(
-                        f"[Duration Check] Position {position['ticket']} ({position['symbol']}) "
-                        f"Duration: {duration_check['duration']} | "
-                        f"Max allowed: {duration_check['max_duration']}min | "
-                        f"Needs closure: {duration_check['needs_closure']}"
-                    )
+                    self.logger.info(f"""
+                    Duration Check Results:
+                    - Position: {position['ticket']}
+                    - Symbol: {position['symbol']}
+                    - Duration: {duration_check['duration']}
+                    - Max Allowed: {duration_check['max_duration']}min
+                    - Needs Closure: {duration_check['needs_closure']}
+                    - Warning Active: {duration_check['warning']}
+                    """)
                     
                     if duration_check['warning']:
-                        self.logger.warning(
-                            f"[Duration Warning] Position {position['ticket']} ({position['symbol']}) "
-                            f"approaching time limit - Current duration: {duration_check['duration']}"
-                        )
+                        self.logger.warning(f"""
+                        DURATION WARNING:
+                        - Position: {position['ticket']}
+                        - Symbol: {position['symbol']}
+                        - Current Duration: {duration_check['duration']}
+                        """)
                     
                     if duration_check['needs_closure']:
-                        self.logger.warning(
-                            f"[Duration Exceeded] Position {position['ticket']} ({position['symbol']}) "
-                            f"exceeded maximum duration. Current: {duration_check['duration']}"
-                        )
+                        self.logger.warning(f"""
+                        DURATION EXCEEDED - ATTEMPTING CLOSURE:
+                        - Position: {position['ticket']}
+                        - Symbol: {position['symbol']}
+                        - Final Duration: {duration_check['duration']}
+                        """)
                         
                         # Try to close position
-                        self.logger.info(f"Attempting to close position {position['ticket']}")
                         success, message = self.position_manager.close_position(position['ticket'])
                         
                         self.logger.info(f"""
-                        [Closure Attempt]
-                        Position: {position['ticket']}
-                        Success: {success}
-                        Message: {message}
-                        Market Open: {self.mt5_trader.market_is_open}
+                        Position Closure Attempt:
+                        - Ticket: {position['ticket']}
+                        - Success: {success}
+                        - Message: {message}
+                        - Market Status: {'OPEN' if self.mt5_trader.market_is_open else 'CLOSED'}
                         """)
                         
-                        if success:
-                            self.logger.info(
-                                f"[Closure Success] Position {position['ticket']} closed successfully"
-                            )
-                        else:
-                            if "10018" in message:  # Market closed error
-                                self.logger.warning(
-                                    f"[Closure Delayed] Market closed for {position['symbol']}. "
-                                    f"Will attempt closure when market opens"
-                                )
-                            else:
-                                self.logger.error(
-                                    f"[Closure Failed] Failed to close position {position['ticket']}. "
-                                    f"Error: {message}"
-                                )
-                            
                 except Exception as e:
-                    self.logger.error(f"[Monitor Error] Error monitoring position {position.get('ticket', 'unknown')}: {str(e)}")
+                    self.logger.error(f"""
+                    Position Monitoring Error:
+                    - Position: {position.get('ticket', 'unknown')}
+                    - Error: {str(e)}
+                    - Traceback: {traceback.format_exc()}
+                    """)
                     continue
                     
         except Exception as e:
-            self.logger.error(f"[Monitor Error] Error in position monitoring: {str(e)}")
+            self.logger.error(f"""
+            Position Monitoring Critical Error:
+            Error: {str(e)}
+            Traceback: {traceback.format_exc()}
+            """)
 
     def process_symbol(self, symbol: str) -> Optional[Dict]:
         """Process trading logic for a symbol"""
         try:
+            self.logger.info(f"""
+            =============== TRADE PROCESSING START ===============
+            Symbol: {symbol}
+            Time: {datetime.now()}
+            Market Status: {self.mt5_trader.market_is_open}
+            """)
+            
+            # Get market state 
+            market_state = self.mt5_trader.log_market_state()
+            
             # Get all signals for the symbol
             signals = self.signal_manager.get_signals(symbol)
+            self.logger.info(f"""
+            Signal Check:
+            - Total Signals: {len(signals) if signals else 0}
+            - Market Session: {market_state.get('session', 'Unknown')}
+            - Market Active: {market_state.get('market_active', False)}
+            """)
+            
             if not signals:
                 return None
                 
@@ -149,8 +184,15 @@ class TradingLogic:
             if not consensus or consensus.type == SignalType.NONE:
                 return None
                 
-            # Check if we have a strong enough signal
+            # Log signal strength calculation
             signal_strength = len([s for s in signals if s.type == consensus.type]) / len(signals)
+            self.logger.info(f"""
+            Signal Analysis:
+            - Consensus Type: {consensus.type}
+            - Signal Strength: {signal_strength:.2f}
+            - Required Strength: {self.required_signal_strength}
+            """)
+            
             if signal_strength < self.required_signal_strength:
                 self.logger.info(f"Signal strength ({signal_strength:.2f}) below required ({self.required_signal_strength})")
                 return None
@@ -165,6 +207,18 @@ class TradingLogic:
             # Create a simple comment without special characters
             comment = f"MT5Bot_{consensus.type.value}"
             
+            self.logger.info(f"""
+            Trade Preparation:
+            - Symbol: {symbol}
+            - Type: {consensus.type.value}
+            - Volume: {volume}
+            - Entry: {consensus.entry_price}
+            - SL: {consensus.stop_loss}
+            - TP: {consensus.take_profit}
+            - Server Time: {datetime.fromtimestamp(mt5.symbol_info_tick(symbol).time if mt5.symbol_info_tick(symbol) else 0)}
+            - Raw Server Time: {mt5.symbol_info_tick(symbol).time if mt5.symbol_info_tick(symbol) else 0}
+            """)
+            
             # Execute the trade
             success, message = self.mt5_trader.place_trade(
                 symbol=symbol,
@@ -176,8 +230,15 @@ class TradingLogic:
                 comment=comment
             )
             
+            self.logger.info(f"""
+            Trade Execution Result:
+            - Success: {success}
+            - Message: {message}
+            - Execution Time: {datetime.now()}
+            =============== TRADE PROCESSING END ===============
+            """)
+            
             if success:
-                self.logger.info(f"Trade executed for {symbol}: {message}")
                 return {
                     'symbol': symbol,
                     'signal': consensus,
@@ -189,8 +250,74 @@ class TradingLogic:
                 return None
                 
         except Exception as e:
-            self.logger.error(f"Error processing {symbol}: {str(e)}")
+            self.logger.error(f"""
+            Trade Processing Error:
+            Symbol: {symbol}
+            Error: {str(e)}
+            Traceback: {traceback.format_exc()}
+            """)
             return None
+    
+    def execute_trade(self, decision: Dict) -> bool:
+        """Execute trading decision"""
+        try:
+            self.logger.info(f"""
+            ================== TRADE EXECUTION START ==================
+            Time: {datetime.now()}
+            Decision Parameters: {json.dumps(decision, default=str, indent=2)}
+            Market Status: {self.mt5_trader.market_is_open}
+            """)
+
+            if not decision or not decision['signal']:
+                self.logger.info("No valid decision or signal")
+                return False
+                
+            signal = decision['signal']
+            symbol = decision['symbol']
+            current_positions = decision['open_positions']
+            
+            if current_positions > 0:
+                self.logger.info(f"Already have {current_positions} positions for {symbol}")
+                return False
+                
+            if signal.type not in [SignalType.BUY, SignalType.SELL]:
+                self.logger.info(f"Invalid signal type: {signal.type}")
+                return False
+                    
+            volume = signal.volume or 0.01
+                
+            success, message = self.mt5_trader.place_trade(
+                symbol=symbol,
+                order_type=signal.type.value,
+                volume=volume,
+                price=signal.entry_price,
+                stop_loss=signal.stop_loss,
+                take_profit=signal.take_profit,
+                comment=f"Auto trade: {signal.type.value}"
+            )
+            
+            self.logger.info(f"""
+            Trade Execution Result:
+            - Success: {success}
+            - Message: {message}
+            - Time: {datetime.now()}
+            ================== TRADE EXECUTION END ==================
+            """)
+            
+            if success:
+                self.logger.info(f"Successfully executed {signal.type.value} trade for {symbol}")
+            else:
+                self.logger.error(f"Failed to execute trade: {message}")
+                
+            return success
+                
+        except Exception as e:
+            self.logger.error(f"""
+            Trade Execution Error:
+            Error: {str(e)}
+            Traceback: {traceback.format_exc()}
+            """)
+            return False
 
     def get_position_summary(self) -> Dict:
         """Get summary of current positions and trading status"""

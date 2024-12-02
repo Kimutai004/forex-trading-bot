@@ -3,6 +3,8 @@ from dataclasses import dataclass
 from typing import Dict, Optional, List
 from datetime import datetime
 from enum import Enum
+import json
+import traceback
 
 class SignalType(Enum):
     """Type of trading signal"""
@@ -64,17 +66,93 @@ class SignalProvider(ABC):
         
     @abstractmethod
     def calculate_signal(self, symbol: str, candles: List[Dict]) -> Signal:
-        """
-        Calculate trading signal based on market data
-        
-        Args:
-            symbol: Trading symbol
-            candles: List of OHLCV candles with indicators
+        """Calculate signal with detailed logging"""
+        try:
+            self.logger.info(f"""
+            ================== SIGNAL CALCULATION START ==================
+            Symbol: {symbol}
+            Provider: {self.name}
+            Time: {datetime.now()}
+            Candles Available: {len(candles)}
+            Last Candle Time: {candles[-1]['timestamp'] if candles else 'No candles'}
+            Parameters: {json.dumps(self._parameters, indent=2)}
+            """)
+
+            # Calculate fast MA
+            fast_ma = sum(c['close'] for c in candles[-self._parameters['fast_period']:]) / self._parameters['fast_period']
             
-        Returns:
-            Signal instance with trading decision
-        """
-        pass
+            # Calculate slow MA
+            slow_ma = sum(c['close'] for c in candles[-self._parameters['slow_period']:]) / self._parameters['slow_period']
+            
+            current_price = candles[-1]['close']
+
+            self.logger.info(f"""
+            Technical Analysis:
+            - Fast MA ({self._parameters['fast_period']}): {fast_ma}
+            - Slow MA ({self._parameters['slow_period']}): {slow_ma}
+            - Current Price: {current_price}
+            - MA Difference: {fast_ma - slow_ma}
+            """)
+
+            # Determine signal type
+            if fast_ma > slow_ma:
+                signal_type = SignalType.BUY
+                stop_loss = min(c['low'] for c in candles[-5:]) - 0.0010
+                take_profit = current_price + (current_price - stop_loss) * 2
+                self.logger.info("BUY Signal Detected")
+            elif fast_ma < slow_ma:
+                signal_type = SignalType.SELL
+                stop_loss = max(c['high'] for c in candles[-5:]) + 0.0010
+                take_profit = current_price - (stop_loss - current_price) * 2
+                self.logger.info("SELL Signal Detected")
+            else:
+                self.logger.info("No Signal - MAs Equal")
+                return Signal(
+                    type=SignalType.NONE,
+                    symbol=symbol,
+                    timestamp=datetime.now(),
+                    provider=self.name,
+                    comment="MAs Equal"
+                )
+
+            signal = Signal(
+                type=signal_type,
+                symbol=symbol,
+                timestamp=datetime.now(),
+                provider=self.name,
+                entry_price=current_price,
+                stop_loss=stop_loss,
+                take_profit=take_profit,
+                volume=0.01,
+                comment=f"MA{self._parameters['fast_period']}/{self._parameters['slow_period']} Crossover"
+            )
+
+            self.logger.info(f"""
+            Signal Generated:
+            - Type: {signal_type}
+            - Entry: {current_price}
+            - Stop Loss: {stop_loss}
+            - Take Profit: {take_profit}
+            - Risk/Reward: {abs(take_profit - current_price) / abs(current_price - stop_loss):.2f}
+            ================== SIGNAL CALCULATION END ==================
+            """)
+
+            return signal
+
+        except Exception as e:
+            self.logger.error(f"""
+            Signal Calculation Error:
+            Symbol: {symbol}
+            Error: {str(e)}
+            Traceback: {traceback.format_exc()}
+            """)
+            return Signal(
+                type=SignalType.NONE,
+                symbol=symbol,
+                timestamp=datetime.now(),
+                provider=self.name,
+                comment=f"Error: {str(e)}"
+            )
     
     @abstractmethod
     def validate_parameters(self, parameters: Dict) -> bool:

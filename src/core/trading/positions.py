@@ -1,8 +1,10 @@
 from typing import List, Dict, Tuple, Optional
 import MetaTrader5 as mt5
 from datetime import datetime
+import json
 
 class PositionManager:
+    
     def __init__(self, mt5_instance):
         """
         Initialize Position Manager
@@ -11,15 +13,32 @@ class PositionManager:
             mt5_instance: Instance of MT5Trader class
         """
         self.mt5_instance = mt5_instance
+        self._setup_logging()
+        
+    def _setup_logging(self):
+        """Setup logging for position manager"""
+        from src.utils.logger import setup_logger
+        self.logger = setup_logger('PositionManager')
 
     def get_open_positions(self) -> List[Dict]:
         """Get all open positions with formatted information"""
+        self.logger.info(f"""
+        ================ POSITION CHECK START ================
+        Time: {datetime.now()}
+        MT5 Connected: {self.mt5_instance.connected}
+        """)
+        
         if not self.mt5_instance.connected:
+            self.logger.warning("MT5 not connected - cannot get positions")
             return []
 
         positions = mt5.positions_get()
         if positions is None:
+            error = mt5.last_error()
+            self.logger.error(f"Failed to get positions: {error}")
             return []
+
+        self.logger.info(f"Retrieved {len(positions) if positions else 0} positions from MT5")
 
         formatted_positions = []
         for position in positions:
@@ -27,8 +46,28 @@ class PositionManager:
             profit = position.profit
             pips = self._calculate_pips(position.symbol, position.price_open, current_price)
 
-            # Convert MT5 server time (EET/UTC+2) to UTC by subtracting 2 hours
-            open_timestamp = position.time - 7200  # 2 hours in seconds
+            # Detailed position timestamp logging
+            raw_timestamp = position.time
+            server_time = datetime.fromtimestamp(raw_timestamp)
+            utc_time = datetime.fromtimestamp(raw_timestamp - 7200)  # Convert EET to UTC
+
+            self.logger.info(f"""
+            Position Details:
+            - Ticket: {position.ticket}
+            - Symbol: {position.symbol}
+            - Type: {'BUY' if position.type == 0 else 'SELL'}
+            - Volume: {position.volume}
+            - Open Price: {position.price_open}
+            - Current Price: {current_price}
+            - Profit: {profit}
+            - Pips: {pips}
+            
+            Time Information:
+            - Raw Server Timestamp: {raw_timestamp}
+            - Server Time (EET): {server_time}
+            - UTC Time: {utc_time}
+            - Current Time: {datetime.now()}
+            """)
 
             formatted_positions.append({
                 'ticket': position.ticket,
@@ -42,10 +81,24 @@ class PositionManager:
                 'profit': profit,
                 'pips': pips,
                 'comment': position.comment,
-                'time': open_timestamp,  # UTC timestamp
-                'time_raw': position.time,  # Original server timestamp
-                'timezone': 'UTC'  # Mark the timezone explicitly
+                'time': raw_timestamp,  # Keep raw timestamp
+                'time_raw': raw_timestamp,  # Store original timestamp
+                'server_time': server_time.strftime('%Y-%m-%d %H:%M:%S'),
+                'utc_time': utc_time.strftime('%Y-%m-%d %H:%M:%S'),
+                'timezone': 'UTC'
             })
+
+        self.logger.info(f"""
+        ================ POSITION CHECK END ================
+        Total Positions: {len(formatted_positions)}
+        Position Times:
+        {json.dumps([{
+            'ticket': p['ticket'],
+            'server_time': p['server_time'],
+            'utc_time': p['utc_time']
+        } for p in formatted_positions], indent=2)}
+        Current Time: {datetime.now()}
+        """)
 
         return formatted_positions
 

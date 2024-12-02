@@ -43,7 +43,13 @@ class MarketSessionManager:
 
     def is_session_open(self, session: str) -> bool:
         """Check if a trading session is currently open with enhanced logging"""
-        self.logger.info(f"\n=== Session Open Check: {session} ===")
+        self.logger.info(f"""
+        ================ SESSION CHECK START ================
+        Session: {session}
+        Current Time: {datetime.now()}
+        UTC Time: {datetime.now(ZoneInfo("UTC"))}
+        Server Time: {datetime.now(ZoneInfo("Europe/Kiev"))}  # EET timezone
+        """)
         
         if session not in self.sessions:
             self.logger.error(f"Session {session} not found in configuration")
@@ -59,6 +65,11 @@ class MarketSessionManager:
         Hour: {now.hour}
         Minute: {now.minute}
         Session Config: {self.sessions[session]}
+        
+        Time Conversions:
+        - UTC: {now}
+        - Local: {datetime.now()}
+        - Server (EET): {datetime.now(ZoneInfo("Europe/Kiev"))}
         """)
         
         # Weekend check with special Sydney handling
@@ -91,22 +102,29 @@ class MarketSessionManager:
         current_time = now.time()
 
         self.logger.info(f"""
-        Session Time Comparison:
+        Session Time Check:
         Open Time: {open_time}
         Close Time: {close_time}
         Current Time: {current_time}
+        Timezone: UTC
+        Is Cross-Midnight: {open_time > close_time}
         """)
 
         # Handle sessions that cross midnight
         is_open = False
         if open_time > close_time:
             is_open = current_time >= open_time or current_time <= close_time
-            self.logger.info(f"Cross-midnight calculation: {is_open}")
+            self.logger.info(f"Cross-midnight session check: {is_open}")
         else:
             is_open = open_time <= current_time <= close_time
-            self.logger.info(f"Same-day calculation: {is_open}")
+            self.logger.info(f"Same-day session check: {is_open}")
 
-        self.logger.info(f"Final status for {session}: {'OPEN' if is_open else 'CLOSED'}\n")
+        self.logger.info(f"""
+        ================ SESSION CHECK END ================
+        Session: {session}
+        Final Status: {'OPEN' if is_open else 'CLOSED'}
+        """)
+        
         return is_open
 
     def get_current_session_info(self) -> Dict:

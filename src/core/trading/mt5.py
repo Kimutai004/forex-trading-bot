@@ -478,6 +478,64 @@ class MT5Trader:
             self.logger.error(f"Unexpected error during MT5 initialization: {str(e)}", exc_info=True)
             return False
         
+    def log_market_state(self) -> Dict:
+        """Detailed market state logging"""
+        try:
+            self.logger.info("""
+            =============== MT5 MARKET STATE CHECK ===============
+            """)
+            
+            # Get terminal info
+            terminal_info = mt5.terminal_info()
+            if terminal_info:
+                terminal_dict = terminal_info._asdict()
+                self.logger.info(f"""
+                Terminal State:
+                - Connected: {terminal_dict.get('connected')}
+                - Trade Allowed: {terminal_dict.get('trade_allowed')}
+                - Expert Enabled: {terminal_dict.get('trade_expert')}
+                - Server Time: {datetime.now()}
+                - Raw Server Time: {mt5.symbol_info_tick("EURUSD").time if mt5.symbol_info_tick("EURUSD") else 'N/A'}
+                """)
+
+            # Get session info
+            current_session = self._get_current_session()
+            self.logger.info(f"""
+            Session Information:
+            - Current Session: {current_session}
+            - Server Time (Raw): {mt5.symbol_info_tick("EURUSD").time if mt5.symbol_info_tick("EURUSD") else 'N/A'}
+            - Local Time: {datetime.now()}
+            """)
+
+            # Test market activity
+            symbols = ["EURUSD", "GBPUSD", "USDJPY"]
+            for symbol in symbols:
+                tick = mt5.symbol_info_tick(symbol)
+                if tick:
+                    self.logger.info(f"""
+                    {symbol} Activity:
+                    - Last Tick Time: {datetime.fromtimestamp(tick.time)}
+                    - Raw Tick Time: {tick.time}
+                    - Bid: {tick.bid}
+                    - Ask: {tick.ask}
+                    - Volume: {tick.volume}
+                    """)
+
+            self.logger.info("=============== END MARKET STATE CHECK ===============")
+            
+            return {
+                'session': current_session,
+                'market_active': bool(mt5.symbol_info_tick("EURUSD"))
+            }
+
+        except Exception as e:
+            self.logger.error(f"""
+            Market State Check Error:
+            Error: {str(e)}
+            Traceback: {traceback.format_exc()}
+            """)
+            return {'error': str(e)}
+        
     def check_connection_health(self) -> Dict:
         """
         Check MT5 connection health without reinitializing
@@ -582,87 +640,179 @@ class MT5Trader:
         price: Optional[float] = None,
         stop_loss: Optional[float] = None,
         take_profit: Optional[float] = None,
-        comment: str = "MT5Bot"  # Default comment that is known to work
+        comment: str = "MT5Bot"
     ) -> Tuple[bool, str]:
-        
-        """
-        Place a trade with specified parameters
-        
-        Args:
-            symbol (str): Trading instrument symbol
-            order_type (str): 'BUY' or 'SELL'
-            volume (float): Trade volume in lots
-            price (float, optional): Price for pending orders
-            stop_loss (float, optional): Stop loss price
-            take_profit (float, optional): Take profit price
-            comment (str, optional): Trade comment
-            
-        Returns:
-            Tuple[bool, str]: Success status and message
-        """
-        
-        """Place trade with connection monitoring"""
+        """Place trade with enhanced logging"""
         if not self._monitor_connection():
             return False, "MT5 connection unavailable"
 
-
-        if not self.connected:
-            return False, "Not connected to MT5"
-
+        # Define error code descriptions
+        ERROR_CODES = {
+            10004: "Trade requote",
+            10006: "Trade request rejected",
+            10007: "Trade request canceled by trader",
+            10008: "Trade request placed",
+            10009: "Trade request executed",
+            10010: "Only part of request executed",
+            10011: "Trade request processing error",
+            10012: "Trade request timeout",
+            10013: "Invalid trade request price",
+            10014: "Invalid trade request stops",
+            10015: "Invalid trade request volume",
+            10016: "Market closed or invalid trade parameters",
+            10017: "No connection with trade server",
+            10018: "Trade is blocked",
+            10019: "Invalid trade order filling type",
+            10020: "No connection with trade server",
+            10021: "Trade request too many",
+            10022: "Trade request queued",
+            10023: "Trade request too many",
+            10024: "Trade orders limit exceeded",
+            10025: "Trade modify denied",
+            10026: "Trade context busy",
+            10027: "Trade expiration denied",
+            10028: "Trade too many positions",
+            10029: "Trade hedge prohibited",
+            10030: "Trade prohibited by fifo rule"
+        }
+        
         try:
-            # Verify symbol is available
+            self.logger.info(f"""
+            ================== TRADE REQUEST START ==================
+            Basic Parameters:
+            - Symbol: {symbol}
+            - Order Type: {order_type}
+            - Volume: {volume}
+            - Price: {price}
+            - SL: {stop_loss}
+            - TP: {take_profit}
+            """)
+
+            # Get and log symbol information
             symbol_info = mt5.symbol_info(symbol)
-            if symbol_info is None:
-                return False, f"Symbol {symbol} not found"
-                
-            if not mt5.symbol_select(symbol, True):
-                return False, f"Symbol {symbol} not selected"
+            if symbol_info is not None:
+                symbol_dict = symbol_info._asdict()
+                self.logger.info(f"""
+                Symbol Information:
+                - Contract Size: {symbol_dict.get('trade_contract_size')}
+                - Min Volume: {symbol_dict.get('volume_min')}
+                - Max Volume: {symbol_dict.get('volume_max')}
+                - Volume Step: {symbol_dict.get('volume_step')}
+                - Trade Stops Level: {symbol_dict.get('trade_stops_level')}
+                - Points: {symbol_dict.get('point')}
+                - Digits: {symbol_dict.get('digits')}
+                - Trade Mode: {symbol_dict.get('trade_mode')}
+                - Trade Execution Mode: {symbol_dict.get('trade_exemode')}
+                - Spread: {symbol_dict.get('spread')}
+                - Swap Long: {symbol_dict.get('swap_long')}
+                - Swap Short: {symbol_dict.get('swap_short')}
+                """)
 
-            # Get current price if not provided
-            if not price:
-                tick = mt5.symbol_info_tick(symbol)
-                if tick is None:
-                    return False, f"Cannot get price for {symbol}"
-                price = tick.ask if order_type == "BUY" else tick.bid
+            # Get and log tick information
+            tick = mt5.symbol_info_tick(symbol)
+            if tick is not None:
+                tick_dict = tick._asdict()
+                self.logger.info(f"""
+                Current Market Data:
+                - Bid: {tick_dict.get('bid')}
+                - Ask: {tick_dict.get('ask')}
+                - Last: {tick_dict.get('last')}
+                - Volume: {tick_dict.get('volume')}
+                - Time: {datetime.fromtimestamp(tick_dict.get('time', 0))}
+                - Last Update: {datetime.now()}
+                - Spread: {tick_dict.get('ask', 0) - tick_dict.get('bid', 0)}
+                """)
 
-            # Clean and validate comment
-            # Remove any special characters and limit length
-            clean_comment = "".join(c for c in comment if c.isalnum() or c.isspace())[:31]
+            # Get and log account state
+            account_info = mt5.account_info()
+            if account_info is not None:
+                acc_dict = account_info._asdict()
+                self.logger.info(f"""
+                Account State Before Trade:
+                - Balance: {acc_dict.get('balance')}
+                - Equity: {acc_dict.get('equity')}
+                - Margin: {acc_dict.get('margin')}
+                - Free Margin: {acc_dict.get('margin_free')}
+                - Margin Level: {acc_dict.get('margin_level')}
+                - Leverage: 1:{acc_dict.get('leverage')}
+                """)
 
-            # Prepare the trade request
+            # Prepare trade request
             request = {
                 "action": mt5.TRADE_ACTION_DEAL,
                 "symbol": symbol,
-                "volume": float(volume),  # Ensure volume is float
+                "volume": float(volume),
                 "type": mt5.ORDER_TYPE_BUY if order_type == "BUY" else mt5.ORDER_TYPE_SELL,
-                "price": float(price),    # Ensure price is float
+                "price": price or (tick.ask if order_type == "BUY" else tick.bid),
                 "deviation": 20,
                 "magic": 123456,
-                "comment": clean_comment,
+                "comment": comment,
                 "type_time": mt5.ORDER_TIME_GTC,
                 "type_filling": mt5.ORDER_FILLING_IOC,
             }
 
-            # Add stop loss and take profit if provided
             if stop_loss is not None:
                 request["sl"] = float(stop_loss)
             if take_profit is not None:
                 request["tp"] = float(take_profit)
 
-            # Log the request for debugging
-            self.logger.info(f"Sending trade request: {request}")
+            self.logger.info(f"""
+            Trade Request Details:
+            {json.dumps(request, indent=2)}
+            """)
 
-            # Send the trade request
+            # Check order before sending
+            check_result = mt5.order_check(request)
+            if check_result is not None:
+                check_dict = check_result._asdict()
+                self.logger.info(f"""
+                Order Check Results:
+                - Retcode: {check_dict.get('retcode')}
+                - Balance: {check_dict.get('balance')}
+                - Equity: {check_dict.get('equity')}
+                - Margin: {check_dict.get('margin')}
+                - Margin Free: {check_dict.get('margin_free')}
+                - Expected Profit: {check_dict.get('profit')}
+                - Comment: {check_dict.get('comment')}
+                - Request ID: {check_dict.get('request_id')}
+                """)
+
+            # Send trade request
             result = mt5.order_send(request)
             if result is None:
                 error = mt5.last_error()
-                error_msg = f"Trade failed. MT5 Error: {error[0]} - {error[1]}"
-                self.logger.error(error_msg)
-                return False, error_msg
+                error_message = f"Trade failed. MT5 Error: {error[0]} - {error[1]}"
+                self.logger.error(f"""
+                Trade Execution Failed:
+                Error Code: {error[0]}
+                Description: {error[1]}
+                Known Error: {ERROR_CODES.get(error[0], 'Unknown error code')}
+                Time: {datetime.now()}
+                """)
+                return False, error_message
+
+            # Log trade result
+            result_dict = result._asdict()
+            self.logger.info(f"""
+            Trade Execution Result:
+            - Retcode: {result_dict.get('retcode')}
+            - Description: {ERROR_CODES.get(result_dict.get('retcode'), 'Unknown code')}
+            - Deal ID: {result_dict.get('deal')}
+            - Order ID: {result_dict.get('order')}
+            - Volume: {result_dict.get('volume')}
+            - Price: {result_dict.get('price')}
+            - Bid: {result_dict.get('bid')}
+            - Ask: {result_dict.get('ask')}
+            - Comment: {result_dict.get('comment')}
+            - Request ID: {result_dict.get('request_id')}
+            - Retcode External: {result_dict.get('retcode_external')}
+            Time: {datetime.now()}
+            ================== TRADE REQUEST END ==================
+            """)
 
             if result.retcode != mt5.TRADE_RETCODE_DONE:
-                error_msg = f"Trade failed. Error code: {result.retcode}"
-                self.logger.error(error_msg)
+                error_msg = f"Trade failed. Error code: {result.retcode} - {ERROR_CODES.get(result.retcode, 'Unknown error')}"
+                self.logger.error(f"Trade execution failed: {error_msg}")
                 return False, error_msg
             
             success_msg = f"Trade successfully placed. Ticket: {result.order}"
@@ -670,9 +820,9 @@ class MT5Trader:
             return True, success_msg
             
         except Exception as e:
-            error_msg = f"Error placing trade: {str(e)}"
+            error_msg = f"Error placing trade: {str(e)}\nTraceback: {traceback.format_exc()}"
             self.logger.error(error_msg)
-            return False, error_msg
+            return False, str(e)
 
     def modify_trade(
         self,

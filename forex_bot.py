@@ -185,6 +185,25 @@ class ForexBot:
             self.logger.error(f"Failed to initialize system auditor: {str(e)}")
             return None
     
+    def _create_error_log(self, error_messages: List[str]) -> Optional[str]:
+        """Create error log file"""
+        try:
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            error_log_path = os.path.join(self.logs_dir, f"startup_errors_{timestamp}.log")
+            
+            with open(error_log_path, 'w') as f:
+                f.write("=== STARTUP ERRORS ===\n")
+                f.write(f"Time: {datetime.now()}\n\n")
+                for error in error_messages:
+                    f.write(f"ERROR: {error}\n")
+                    
+            self.logger.info(f"Created error log at: {error_log_path}")
+            return error_log_path
+            
+        except Exception as e:
+            self.logger.error(f"Failed to create error log: {str(e)}")
+            return None
+    
     def update_dashboard(self):
         """Update and display the dashboard with improved session and timing information"""
         self.logger.info("\n=== Dashboard Update Started ===")

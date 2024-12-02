@@ -3,6 +3,7 @@ from datetime import datetime
 import logging
 from .base import SignalProvider, Signal, SignalType
 from .evaluator import SignalEvaluator
+import json
 
 
 class SignalManager:
@@ -113,12 +114,22 @@ class SignalManager:
                 self.active_symbols.update(provider.symbols)
     
     def get_signals(self, symbol: str) -> List[Signal]:
-        """Get signals from all active providers for symbol"""
+        """Get signals from all active providers for symbol with enhanced logging"""
         current_time = datetime.now()
+        
+        self.logger.info(f"""
+        ================ SIGNAL GENERATION START ================
+        Symbol: {symbol}
+        Time: {current_time}
+        Cache Status: {symbol in self._signal_cache}
+        Last Evaluation: {self._last_evaluation_time.get(symbol, 'Never')}
+        Active Providers: {len(self.providers)}
+        """)
         
         # Check cache first (valid for 1 minute)
         if (symbol in self._signal_cache and symbol in self._last_evaluation_time and
             (current_time - self._last_evaluation_time[symbol]).total_seconds() < 60):
+            self.logger.info("Returning cached signals")
             return self._signal_cache[symbol]
             
         if not self.providers:
@@ -137,16 +148,41 @@ class SignalManager:
             self.logger.warning(f"No market data available for {symbol}")
             return signals
         
+        self.logger.info(f"""
+        Market Data Retrieved:
+        - Candles: {len(candles)}
+        - Latest Candle Time: {candles[-1]['timestamp'] if candles else 'N/A'}
+        - Latest Close: {candles[-1]['close'] if candles else 'N/A'}
+        """)
+        
         # Get signals from each active provider
         for provider in self.providers.values():
             if not provider.is_active or symbol not in provider.symbols:
                 continue
                 
             try:
+                self.logger.info(f"""
+                Calculating Signal:
+                Provider: {provider.name}
+                Timeframe: {provider.timeframe}
+                Active: {provider.is_active}
+                """)
+                
                 signal = provider.calculate_signal(symbol, candles)
                 if signal and signal.is_valid():
+                    self.logger.info(f"""
+                    Signal Generated:
+                    - Type: {signal.type}
+                    - Entry: {signal.entry_price}
+                    - SL: {signal.stop_loss}
+                    - TP: {signal.take_profit}
+                    - Volume: {signal.volume}
+                    - Timestamp: {signal.timestamp}
+                    """)
                     signals.append(signal)
-                    
+                else:
+                    self.logger.info(f"No valid signal from provider {provider.name}")
+                        
             except Exception as e:
                 self.logger.error(
                     f"Error getting signal from {provider.name}: {str(e)}"
@@ -157,22 +193,33 @@ class SignalManager:
             try:
                 evaluation = self.signal_evaluator.evaluate_signal(symbol, signals)
                 
+                self.logger.info(f"""
+                Signal Evaluation:
+                - Strength: {evaluation['signal_strength']:.2f}
+                - Status: {evaluation['status']}
+                - Trading Eligible: {evaluation['trading_eligible']}
+                - Details: {json.dumps(evaluation['details'], indent=2)}
+                """)
+                
                 # Update signal strengths based on evaluation
                 for signal in signals:
                     signal.strength = evaluation['signal_strength']
                     signal.trading_eligible = evaluation['trading_eligible']
                     signal.evaluation_details = evaluation['details']
                     
-                self.logger.info(
-                    f"Got signals for {symbol}: Strength={evaluation['signal_strength']:.2f}, "
-                    f"Status={evaluation['status']}, Eligible={evaluation['trading_eligible']}"
-                )
             except Exception as e:
                 self.logger.error(f"Error evaluating signals: {str(e)}")
         
         # Update cache
         self._signal_cache[symbol] = signals
         self._last_evaluation_time[symbol] = current_time
+        
+        self.logger.info(f"""
+        ================ SIGNAL GENERATION END ================
+        Total Signals Generated: {len(signals)}
+        Signals Cached: {bool(signals)}
+        Cache Time: {current_time}
+        """)
         
         return signals
     
