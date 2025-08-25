@@ -1,0 +1,2276 @@
+2025-03-21 11:18:41,606 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-03-21 11:18:43,660 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-03-21 11:18:45,716 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-03-21 11:18:45,719 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-03-21 11:18:47,742 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-03-21 11:18:47,747 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-03-21 11:18:49,771 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-03-21 11:18:49,785 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-03-21 11:20:07,773 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-03-21 11:20:07,773 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-03-21 11:20:07,774 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-03-21 11:20:07,775 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-03-21 11:20:07,775 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-03-21 11:20:07,776 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-03-21 11:20:07,777 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-03-21 11:20:07,778 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-03-21 11:20:07,779 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-03-21 11:20:07,781 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-05-25 08:47:03,549 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-05-25 08:47:05,971 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-05-25 08:47:08,226 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-05-25 08:47:08,230 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-05-25 08:47:10,358 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-05-25 08:47:10,377 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-05-25 08:47:12,401 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-05-25 08:47:12,422 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-05-25 08:48:42,131 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-05-25 08:48:42,131 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-05-25 08:48:42,136 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-05-25 08:48:42,137 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-05-25 08:48:42,139 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-05-25 08:48:42,142 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-05-25 08:48:42,145 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-05-25 08:48:42,145 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-05-25 08:48:42,156 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-05-25 08:48:42,158 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-05-26 09:15:57,566 - BotStatusManager - [WARNING] - Module Dashboard: Dashboard update failed: 'NoneType' object has no attribute 'time'
+File: monitor.py:88
+Function: update_module_status
+----------------------------------------
+2025-05-26 09:20:32,228 - BotStatusManager - [WARNING] - Module Dashboard: Dashboard update failed: 'NoneType' object has no attribute 'time'
+File: monitor.py:88
+Function: update_module_status
+----------------------------------------
+2025-05-26 09:25:07,063 - BotStatusManager - [WARNING] - Module Dashboard: Dashboard update failed: 'NoneType' object has no attribute 'time'
+File: monitor.py:88
+Function: update_module_status
+----------------------------------------
+2025-06-03 12:27:01,063 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 12:27:03,097 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 12:27:05,168 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 12:27:05,168 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 12:27:07,193 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 12:27:07,193 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 12:27:09,231 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 12:27:09,231 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 12:27:14,365 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-03 12:27:14,365 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-03 12:27:14,365 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-03 12:27:14,365 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-03 12:27:14,365 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-03 12:27:14,365 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-03 12:27:14,380 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-03 12:27:14,380 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-03 12:27:14,380 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-03 12:27:14,380 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-03 15:34:48,181 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 15:34:50,227 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 15:34:52,376 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 15:34:52,379 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 15:34:54,410 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 15:34:54,417 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 15:34:56,492 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 15:34:56,578 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-03 15:34:58,732 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-03 15:34:58,732 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-03 15:34:58,744 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-03 15:34:58,747 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-03 15:34:58,752 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-03 15:34:58,761 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-03 15:34:58,767 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-03 15:34:58,770 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-03 15:34:58,777 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-03 15:34:58,782 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-11 09:17:56,053 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 09:17:58,138 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 09:18:00,235 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 09:18:00,237 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 09:18:02,273 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 09:18:02,279 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 09:18:04,301 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 09:18:04,319 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 09:18:17,167 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 09:18:17,170 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-11 09:18:17,173 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-11 09:18:17,177 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 09:18:17,180 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-11 09:18:17,182 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-11 09:18:17,188 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 09:18:17,189 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-11 09:18:17,197 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 09:18:17,197 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-11 16:14:36,944 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:14:38,987 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:14:41,025 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:14:41,027 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:14:43,052 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:14:43,058 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:14:45,076 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:14:45,098 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:14:46,758 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 16:14:46,759 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-11 16:14:46,760 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-11 16:14:46,760 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 16:14:46,761 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-11 16:14:46,762 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-11 16:14:46,763 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 16:14:46,764 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-11 16:14:46,765 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 16:14:46,766 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-11 16:16:58,874 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 16:16:58,875 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-11 16:16:59,888 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 16:16:59,889 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-11 16:17:11,178 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:17:13,330 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:17:15,451 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:17:15,453 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:17:17,480 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:17:17,480 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:17:19,511 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:17:19,525 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-11 16:17:20,816 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 16:17:20,816 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-11 16:17:20,820 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-11 16:17:20,822 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 16:17:20,823 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-11 16:17:20,825 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-11 16:17:20,828 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 16:17:20,829 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-11 16:17:20,832 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-11 16:17:20,832 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-15 10:34:46,339 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 10:34:48,478 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 10:34:50,627 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 10:34:50,627 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 10:34:52,670 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 10:34:52,679 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 10:34:54,724 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 10:34:54,856 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 10:40:28,972 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 10:40:28,972 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-15 10:40:28,972 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-15 10:40:28,975 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 10:40:28,975 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-15 10:40:28,975 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-15 10:40:28,975 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 10:40:28,975 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-15 10:40:28,975 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 10:40:28,975 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-15 13:22:06,934 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:22:08,980 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:22:11,067 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:22:11,070 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:22:13,106 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:22:13,115 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:22:15,139 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:22:15,152 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:22:29,745 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 13:22:29,746 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-15 13:22:29,747 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-15 13:22:29,748 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 13:22:29,748 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-15 13:22:29,749 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-15 13:22:29,750 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 13:22:29,750 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-15 13:22:29,752 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 13:22:29,752 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-15 13:28:16,541 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:28:18,643 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:28:20,823 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:28:20,824 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:28:22,867 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:28:22,872 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:28:24,913 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:28:24,933 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-15 13:28:36,218 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 13:28:36,219 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-15 13:28:36,220 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-15 13:28:36,221 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 13:28:36,221 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-15 13:28:36,229 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-15 13:28:36,233 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 13:28:36,234 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-15 13:28:36,235 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-15 13:28:36,236 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-16 08:40:01,197 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:40:03,301 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:40:05,475 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:40:05,478 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:40:07,502 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:40:07,514 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:40:09,567 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:40:09,620 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:40:11,962 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-16 08:40:11,963 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-16 08:40:11,964 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-16 08:40:11,965 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-16 08:40:11,965 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-16 08:40:11,967 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-16 08:40:11,968 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-16 08:40:11,969 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-16 08:40:11,971 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-16 08:40:11,972 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-16 08:48:05,903 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:48:07,962 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:48:10,056 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:48:10,059 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:48:12,138 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:48:12,151 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:48:14,189 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:48:14,208 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-16 08:49:30,027 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-16 08:49:30,028 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-16 08:49:30,028 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-16 08:49:30,029 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-16 08:49:30,029 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-16 08:49:30,031 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-16 08:49:30,033 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-16 08:49:30,034 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-16 08:49:30,036 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-16 08:49:30,037 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-16 15:34:48,505 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-16 15:34:48,509 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-16 15:34:49,512 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-16 15:34:49,512 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-23 11:06:10,592 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-23 11:06:12,627 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-23 11:06:14,726 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-23 11:06:14,729 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-23 11:06:16,764 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-23 11:06:16,769 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-23 11:06:18,793 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-23 11:06:18,809 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-23 11:06:22,715 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-23 11:06:22,715 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-23 11:06:22,716 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-23 11:06:22,717 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-23 11:06:22,717 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-23 11:06:22,720 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-23 11:06:22,722 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-23 11:06:22,723 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-23 11:06:22,724 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-23 11:06:22,724 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-23 11:06:51,028 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-23 11:06:51,029 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-23 11:06:52,030 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-23 11:06:52,030 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-24 10:07:59,914 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-24 10:08:01,947 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-24 10:08:04,011 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-24 10:08:04,012 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-24 10:08:06,041 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-24 10:08:06,047 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-24 10:08:08,069 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-24 10:08:08,096 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-24 10:08:33,375 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-24 10:08:33,379 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-24 10:08:33,385 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-24 10:08:33,387 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-24 10:08:33,389 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-24 10:08:33,394 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-24 10:08:33,402 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-24 10:08:33,404 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-24 10:08:33,410 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-24 10:08:33,411 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-24 10:09:49,926 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-24 10:09:49,927 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-24 10:09:50,928 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-24 10:09:50,928 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-25 09:43:59,989 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 09:44:02,077 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 09:44:04,283 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 09:44:04,289 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 09:44:06,374 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 09:44:06,398 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 09:44:08,468 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 09:44:08,552 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 09:44:54,313 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-25 09:44:54,313 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-25 09:44:54,319 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-25 09:44:54,319 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-25 09:44:54,330 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-25 09:44:54,336 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-25 09:44:54,341 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-25 09:44:54,348 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-25 09:44:54,360 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-25 09:44:54,363 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-25 09:45:05,355 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-25 09:45:05,355 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-25 09:45:06,357 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-25 09:45:06,360 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-25 10:21:38,530 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 10:21:40,662 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 10:21:42,861 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 10:21:42,867 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 10:21:44,964 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 10:21:44,994 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 10:21:47,067 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 10:21:47,154 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-25 10:21:52,465 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-25 10:21:52,465 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-25 10:21:52,482 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-25 10:21:52,486 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-25 10:21:52,492 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-25 10:21:52,500 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-25 10:21:52,517 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-25 10:21:52,519 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-25 10:21:52,536 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-25 10:21:52,541 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-25 10:56:38,204 - BotStatusManager - [WARNING] - Module Dashboard: Dashboard update failed: 'NoneType' object has no attribute 'time'
+File: monitor.py:88
+Function: update_module_status
+----------------------------------------
+2025-06-25 11:01:13,363 - BotStatusManager - [WARNING] - Module Dashboard: Dashboard update failed: 'NoneType' object has no attribute 'time'
+File: monitor.py:88
+Function: update_module_status
+----------------------------------------
+2025-06-26 08:49:39,116 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-26 08:49:41,151 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-26 08:49:43,189 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-26 08:49:43,190 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-26 08:49:45,214 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-26 08:49:45,218 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-26 08:49:47,243 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-26 08:49:47,257 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-26 08:50:11,040 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-26 08:50:11,041 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-26 08:50:11,042 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-26 08:50:11,043 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-26 08:50:11,044 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-26 08:50:11,046 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-26 08:50:11,048 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-26 08:50:11,048 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-26 08:50:11,051 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-26 08:50:11,052 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-26 08:50:24,238 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-26 08:50:24,239 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-26 08:50:25,240 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-26 08:50:25,240 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-27 10:39:16,372 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-27 10:39:18,426 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-27 10:39:20,556 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-27 10:39:20,559 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-27 10:39:22,585 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-27 10:39:22,592 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-27 10:39:24,619 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-27 10:39:24,641 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-27 10:46:25,714 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-27 10:46:25,720 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-27 10:46:25,723 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-27 10:46:25,725 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-27 10:46:25,727 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-27 10:46:25,743 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-27 10:46:25,755 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-27 10:46:25,756 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-27 10:46:25,770 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-27 10:46:25,771 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-27 10:57:42,342 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-27 10:57:42,343 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-27 10:57:43,345 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-27 10:57:43,346 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-30 10:02:57,236 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-30 10:02:59,446 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-30 10:03:02,101 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-30 10:03:02,113 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-30 10:03:04,497 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-30 10:03:04,504 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-30 10:03:06,662 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-30 10:03:06,994 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-06-30 10:03:08,860 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-30 10:03:08,861 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-06-30 10:03:08,864 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-06-30 10:03:08,864 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-30 10:03:08,865 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-06-30 10:03:08,901 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-06-30 10:03:08,911 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-30 10:03:08,913 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-30 10:03:08,943 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-30 10:03:08,944 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-30 10:03:28,840 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-30 10:03:28,841 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-06-30 10:03:29,843 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-06-30 10:03:29,843 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-01 10:18:18,079 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 10:18:20,117 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 10:18:22,162 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 10:18:22,162 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 10:18:24,178 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 10:18:24,195 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 10:18:26,212 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 10:18:26,228 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 10:18:33,617 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-01 10:18:33,617 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-07-01 10:18:33,617 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-07-01 10:18:33,617 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-01 10:18:33,617 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-07-01 10:18:33,626 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-07-01 10:18:33,628 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-01 10:18:33,628 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-01 10:18:33,628 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-01 10:18:33,628 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-01 10:18:51,692 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-01 10:18:51,692 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-01 10:18:52,705 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-01 10:18:52,705 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-01 14:53:07,231 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 14:53:09,320 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 14:53:11,549 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 14:53:11,558 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 14:53:13,657 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 14:53:13,680 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 14:53:15,755 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 14:53:15,839 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-01 14:53:17,143 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-01 14:53:17,145 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-07-01 14:53:17,146 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-07-01 14:53:17,147 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-01 14:53:17,147 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-07-01 14:53:17,154 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-07-01 14:53:17,156 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-01 14:53:17,156 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-01 14:53:17,158 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-01 14:53:17,158 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-02 10:34:37,349 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-02 10:34:39,385 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-02 10:34:41,440 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-02 10:34:41,443 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-02 10:34:43,465 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-02 10:34:43,471 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-02 10:34:45,493 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-02 10:34:45,520 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-02 10:58:47,364 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-02 10:58:47,367 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-07-02 10:58:47,371 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-07-02 10:58:47,372 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-02 10:58:47,373 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-07-02 10:58:47,375 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-07-02 10:58:47,376 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-02 10:58:47,377 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-02 10:58:47,384 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-02 10:58:47,385 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-02 11:04:36,119 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-02 11:04:36,120 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-02 11:04:37,122 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-02 11:04:37,122 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-03 13:43:31,477 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-03 13:43:34,188 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-03 13:43:36,395 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-03 13:43:36,412 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-03 13:43:38,463 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-03 13:43:38,477 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-03 13:43:40,493 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-03 13:43:40,526 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-03 13:43:42,472 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-03 13:43:42,472 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-07-03 13:43:42,472 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-07-03 13:43:42,472 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-03 13:43:42,477 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-07-03 13:43:42,477 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-07-03 13:43:42,477 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-03 13:43:42,477 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-03 13:43:42,477 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-03 13:43:42,477 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-03 13:44:06,243 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-03 13:44:06,243 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-03 13:44:07,256 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-03 13:44:07,256 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-04 11:43:27,725 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-04 11:43:29,757 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-04 11:43:31,808 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-04 11:43:31,810 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-04 11:43:33,836 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-04 11:43:33,840 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-04 11:43:35,858 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-04 11:43:35,876 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-04 11:45:04,500 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-04 11:45:04,501 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-07-04 11:45:04,502 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-07-04 11:45:04,503 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-04 11:45:04,503 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-07-04 11:45:04,505 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-07-04 11:45:04,509 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-04 11:45:04,509 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-04 11:45:04,512 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-04 11:45:04,512 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-04 11:50:46,396 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-04 11:50:46,398 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-04 11:50:47,399 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-04 11:50:47,400 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-08 11:11:39,948 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-08 11:11:41,989 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-08 11:11:44,066 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-08 11:11:44,068 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-08 11:11:46,089 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-08 11:11:46,093 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-08 11:11:48,124 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-08 11:11:48,153 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-07-08 11:11:58,426 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-08 11:11:58,427 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-07-08 11:11:58,429 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-07-08 11:11:58,430 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-08 11:11:58,430 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-07-08 11:11:58,433 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-07-08 11:11:58,437 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-08 11:11:58,437 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-08 11:11:58,439 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-08 11:11:58,440 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-08 11:22:19,981 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-08 11:22:19,982 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-07-08 11:22:20,983 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-07-08 11:22:20,983 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-08-04 09:00:06,805 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-04 09:00:08,852 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-04 09:00:10,934 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-04 09:00:10,936 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-04 09:00:12,968 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-04 09:00:12,975 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-04 09:00:15,000 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-04 09:00:15,026 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-04 09:00:42,200 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-04 09:00:42,200 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-08-04 09:00:42,202 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-08-04 09:00:42,203 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-04 09:00:42,204 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-08-04 09:00:42,206 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-08-04 09:00:42,207 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-04 09:00:42,208 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-08-04 09:00:42,210 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-04 09:00:42,211 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-08-04 09:02:11,248 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-04 09:02:11,249 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-08-04 09:02:12,251 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-04 09:02:12,252 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-08-05 12:40:16,532 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-05 12:40:18,577 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-05 12:40:20,641 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-05 12:40:20,643 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-05 12:40:22,667 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-05 12:40:22,672 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-05 12:40:24,695 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-05 12:40:24,709 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-05 12:40:33,454 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-05 12:40:33,455 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-08-05 12:40:33,457 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-08-05 12:40:33,458 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-05 12:40:33,459 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-08-05 12:40:33,459 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-08-05 12:40:33,461 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-05 12:40:33,462 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-08-05 12:40:33,464 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-05 12:40:33,465 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-08-05 12:46:57,754 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped by user
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-05 12:46:57,755 - BotStatusManager - [INFO] - Action: Bot stopped by user
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-08-05 12:46:58,758 - BotStatusManager - [DEBUG] - Activity logged: Bot stopped
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-05 12:46:58,758 - BotStatusManager - [INFO] - Action: Bot stopped
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-08-25 14:44:55,945 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-25 14:44:57,999 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-25 14:45:00,195 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-25 14:45:00,241 - BotStatusManager - [DEBUG] - Module MarketWatcher status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-25 14:45:02,284 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-25 14:45:02,291 - BotStatusManager - [DEBUG] - Module PositionManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-25 14:45:04,336 - BotStatusManager - [DEBUG] - Module MT5Trader status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-25 14:45:04,466 - BotStatusManager - [DEBUG] - Module SignalManager status updated: OK
+File: monitor.py:90
+Function: update_module_status
+----------------------------------------
+2025-08-25 14:45:07,320 - BotStatusManager - [DEBUG] - Activity logged: Mode changed to AUTOMATED
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-25 14:45:07,320 - BotStatusManager - [ERROR] - Bot Mode: AUTOMATED
+File: monitor.py:70
+Function: set_mode
+----------------------------------------
+2025-08-25 14:45:07,323 - BotStatusManager - [INFO] - Operation mode updated to AUTOMATED
+File: monitor.py:71
+Function: set_mode
+----------------------------------------
+2025-08-25 14:45:07,324 - BotStatusManager - [DEBUG] - Activity logged: Bot started
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-25 14:45:07,324 - BotStatusManager - [ERROR] - Bot Started
+File: monitor.py:54
+Function: start_bot
+----------------------------------------
+2025-08-25 14:45:07,326 - BotStatusManager - [INFO] - Bot startup sequence completed
+File: monitor.py:55
+Function: start_bot
+----------------------------------------
+2025-08-25 14:45:07,327 - BotStatusManager - [DEBUG] - Activity logged: Bot initialized and ready for trading
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-25 14:45:07,328 - BotStatusManager - [INFO] - Action: Bot initialized and ready for trading
+File: monitor.py:99
+Function: log_action
+----------------------------------------
+2025-08-25 14:45:07,330 - BotStatusManager - [DEBUG] - Activity logged: Bot started in automated mode
+File: monitor.py:112
+Function: _log_activity
+----------------------------------------
+2025-08-25 14:45:07,330 - BotStatusManager - [INFO] - Action: Bot started in automated mode
+File: monitor.py:99
+Function: log_action
+----------------------------------------

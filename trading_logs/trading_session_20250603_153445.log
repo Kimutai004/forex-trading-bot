@@ -1,0 +1,76 @@
+2025-06-03 15:34:45,923 - ForexBot - INFO - === New Trading Session Started ===
+2025-06-03 15:34:45,924 - ForexBot - INFO - Session ID: 20250603_153445
+2025-06-03 15:34:45,925 - ForexBot - INFO - Log File: trading_logs/trading_session_20250603_153445.log
+2025-06-03 15:34:45,949 - ForexBot - INFO - Configuration manager initialized
+2025-06-03 15:34:45,986 - ForexBot - INFO - FTMO rule manager initialized
+2025-06-03 15:34:45,989 - ForexBot - INFO - Status manager initialized
+2025-06-03 15:34:48,182 - ForexBot - INFO - MT5 trader initialized and connected
+2025-06-03 15:34:48,183 - ForexBot - INFO - Position manager initialized
+2025-06-03 15:34:48,186 - ForexBot - INFO - Signal manager initialized
+2025-06-03 15:34:48,187 - ForexBot - INFO - Trading logic initialized
+2025-06-03 15:34:48,187 - ForexBot - INFO - Menu manager initialized with all dependencies
+2025-06-03 15:34:48,187 - ForexBot - INFO - System auditor initialized
+2025-06-03 15:34:48,192 - ForexBot - INFO - ForexBot initialization completed successfully
+2025-06-03 15:34:48,192 - ForexBot - INFO - Starting bot startup sequence...
+2025-06-03 15:34:48,198 - ForexBot - INFO - Running system audit...
+2025-06-03 15:34:56,606 - ForexBot - WARNING - Warning: Phase 1 audit completed
+2025-06-03 15:34:56,621 - ForexBot - INFO - Audit OK: MarketWatcher
+2025-06-03 15:34:56,630 - ForexBot - INFO - Audit OK: PositionManager
+2025-06-03 15:34:56,634 - ForexBot - INFO - Audit OK: SignalManager
+2025-06-03 15:34:56,636 - ForexBot - INFO - Audit OK: ConfigManager
+2025-06-03 15:34:56,639 - ForexBot - INFO - Audit OK: MenuManager
+2025-06-03 15:34:56,674 - ForexBot - INFO - FTMO monitoring initialized successfully
+2025-06-03 15:34:56,675 - ForexBot - WARNING - Startup warnings found
+2025-06-03 15:34:58,732 - ForexBot - INFO - User chose to continue despite warnings
+2025-06-03 15:34:58,761 - ForexBot - INFO - Startup sequence completed successfully
+2025-06-03 15:34:59,204 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:34:59,497 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:34:59,715 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:01,216 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:01,251 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:01,285 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:02,724 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:02,768 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:02,798 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:04,256 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:04,290 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:04,321 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:05,973 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:06,006 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:06,039 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:07,694 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:07,737 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:07,782 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:09,168 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:09,197 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:09,230 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:10,898 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:10,933 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:10,969 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:12,506 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:12,542 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:12,579 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:14,042 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:14,082 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:14,116 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:15,623 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:15,652 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:15,684 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:17,291 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:17,321 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:17,352 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:18,988 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:19,027 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:19,060 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:20,436 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:20,467 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:20,498 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:21,905 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:21,938 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:21,973 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:23,708 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:23,740 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:23,833 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:25,765 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:25,798 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-03 15:35:25,838 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type

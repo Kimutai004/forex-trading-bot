@@ -1,0 +1,334 @@
+
+============================== TRADE EXECUTION ==============================
+Time: 2025-06-25 09:44:55
+symbol: EURUSD
+type: BUY
+entry_price: 1.16147
+stop_loss: 1.15988
+take_profit: 1.16465
+volume: 0.01
+==============================================================================
+
+==================================================
+SYSTEM STATE UPDATE - 2025-06-25 09:44:56
+==================================================
+
+MARKET INFORMATION:
+Current Session: London Session
+Market Status: Open
+
+SYMBOL PRICES:
+EURUSD:
+  Bid: 1.16151
+  Ask: 1.16166
+  Spread: 0.00014999999999987246
+  Last Update: 12:44:57
+AUDUSD:
+  Bid: 0.65007
+  Ask: 0.65025
+  Spread: 0.00017999999999995797
+  Last Update: 12:44:56
+GBPUSD:
+  Bid: 1.36265
+  Ask: 1.3627799999999999
+  Spread: 0.00012999999999996348
+  Last Update: 12:44:56
+USDJPY:
+  Bid: 145.153
+  Ask: 145.166
+  Spread: 0.01300000000000523
+  Last Update: 12:44:56
+XAUUSD:
+  Bid: 3332.26
+  Ask: 3332.48
+  Spread: 0.2199999999997999
+  Last Update: 12:44:57
+
+ACCOUNT INFORMATION:
+Balance: $14.56
+Equity: $14.45
+Profit: $-0.11
+Margin Level: 124.35456110154905%
+
+OPEN POSITIONS:
+Symbol: EURUSD
+  Type: BUY
+  Volume: 0.01
+  Open Price: 1.16162
+  Current Price: 1.16151
+  Profit: $-0.11
+  Pips: -0.0
+  Duration: -1h 0m
+  Time Limit Status: OK
+
+==================================================
+
+==================================================
+SYSTEM STATE UPDATE - 2025-06-25 09:44:58
+==================================================
+
+MARKET INFORMATION:
+Current Session: London Session
+Market Status: Open
+
+SYMBOL PRICES:
+EURUSD:
+  Bid: 1.16151
+  Ask: 1.16166
+  Spread: 0.00014999999999987246
+  Last Update: 12:44:57
+AUDUSD:
+  Bid: 0.65006
+  Ask: 0.65025
+  Spread: 0.00019000000000002348
+  Last Update: 12:44:57
+GBPUSD:
+  Bid: 1.36265
+  Ask: 1.3627799999999999
+  Spread: 0.00012999999999996348
+  Last Update: 12:44:56
+USDJPY:
+  Bid: 145.153
+  Ask: 145.167
+  Spread: 0.014000000000010004
+  Last Update: 12:44:57
+XAUUSD:
+  Bid: 3332.23
+  Ask: 3332.46
+  Spread: 0.2300000000000182
+  Last Update: 12:44:57
+
+ACCOUNT INFORMATION:
+Balance: $14.56
+Equity: $14.45
+Profit: $-0.11
+Margin Level: 124.35456110154905%
+
+OPEN POSITIONS:
+Symbol: EURUSD
+  Type: BUY
+  Volume: 0.01
+  Open Price: 1.16162
+  Current Price: 1.16151
+  Profit: $-0.11
+  Pips: -0.0
+  Duration: -1h 0m
+  Time Limit Status: OK
+
+==================================================
+
+==================================================
+SYSTEM STATE UPDATE - 2025-06-25 09:44:59
+==================================================
+
+MARKET INFORMATION:
+Current Session: London Session
+Market Status: Open
+
+SYMBOL PRICES:
+EURUSD:
+  Bid: 1.1616
+  Ask: 1.16174
+  Spread: 0.000140000000000029
+  Last Update: 12:45:00
+AUDUSD:
+  Bid: 0.65007
+  Ask: 0.65028
+  Spread: 0.00020999999999993246
+  Last Update: 12:45:00
+GBPUSD:
+  Bid: 1.3626800000000001
+  Ask: 1.3628
+  Spread: 0.00011999999999989797
+  Last Update: 12:44:59
+USDJPY:
+  Bid: 145.153
+  Ask: 145.166
+  Spread: 0.01300000000000523
+  Last Update: 12:45:00
+XAUUSD:
+  Bid: 3332.25
+  Ask: 3332.47
+  Spread: 0.2199999999997999
+  Last Update: 12:45:00
+
+ACCOUNT INFORMATION:
+Balance: $14.56
+Equity: $14.54
+Profit: $-0.02
+Margin Level: 125.12908777969018%
+
+OPEN POSITIONS:
+Symbol: EURUSD
+  Type: BUY
+  Volume: 0.01
+  Open Price: 1.16162
+  Current Price: 1.1616
+  Profit: $-0.02
+  Pips: -0.0
+  Duration: -1h 0m
+  Time Limit Status: OK
+
+==================================================
+
+==================================================
+SYSTEM STATE UPDATE - 2025-06-25 09:45:01
+==================================================
+
+MARKET INFORMATION:
+Current Session: London Session
+Market Status: Open
+
+SYMBOL PRICES:
+EURUSD:
+  Bid: 1.16159
+  Ask: 1.16174
+  Spread: 0.0001500000000000945
+  Last Update: 12:45:02
+AUDUSD:
+  Bid: 0.65011
+  Ask: 0.65029
+  Spread: 0.000180000000000069
+  Last Update: 12:45:02
+GBPUSD:
+  Bid: 1.36266
+  Ask: 1.3628
+  Spread: 0.000140000000000029
+  Last Update: 12:45:01
+USDJPY:
+  Bid: 145.158
+  Ask: 145.171
+  Spread: 0.01300000000000523
+  Last Update: 12:45:01
+XAUUSD:
+  Bid: 3332.15
+  Ask: 3332.38
+  Spread: 0.2300000000000182
+  Last Update: 12:45:02
+
+ACCOUNT INFORMATION:
+Balance: $14.56
+Equity: $14.53
+Profit: $-0.03
+Margin Level: 125.04302925989674%
+
+OPEN POSITIONS:
+Symbol: EURUSD
+  Type: BUY
+  Volume: 0.01
+  Open Price: 1.16162
+  Current Price: 1.16159
+  Profit: $-0.03
+  Pips: -0.0
+  Duration: -1h 0m
+  Time Limit Status: OK
+
+==================================================
+
+==================================================
+SYSTEM STATE UPDATE - 2025-06-25 09:45:03
+==================================================
+
+MARKET INFORMATION:
+Current Session: London Session
+Market Status: Open
+
+SYMBOL PRICES:
+EURUSD:
+  Bid: 1.1616
+  Ask: 1.16174
+  Spread: 0.000140000000000029
+  Last Update: 12:45:02
+AUDUSD:
+  Bid: 0.65013
+  Ask: 0.6503
+  Spread: 0.00017000000000000348
+  Last Update: 12:45:04
+GBPUSD:
+  Bid: 1.36266
+  Ask: 1.3628
+  Spread: 0.000140000000000029
+  Last Update: 12:45:01
+USDJPY:
+  Bid: 145.159
+  Ask: 145.171
+  Spread: 0.012000000000000455
+  Last Update: 12:45:03
+XAUUSD:
+  Bid: 3332.0
+  Ask: 3332.23
+  Spread: 0.2300000000000182
+  Last Update: 12:45:04
+
+ACCOUNT INFORMATION:
+Balance: $14.56
+Equity: $14.54
+Profit: $-0.02
+Margin Level: 125.12908777969018%
+
+OPEN POSITIONS:
+Symbol: EURUSD
+  Type: BUY
+  Volume: 0.01
+  Open Price: 1.16162
+  Current Price: 1.1616
+  Profit: $-0.02
+  Pips: -0.0
+  Duration: -1h 0m
+  Time Limit Status: OK
+
+==================================================
+
+==================================================
+SYSTEM STATE UPDATE - 2025-06-25 09:45:05
+==================================================
+
+MARKET INFORMATION:
+Current Session: London Session
+Market Status: Open
+
+SYMBOL PRICES:
+EURUSD:
+  Bid: 1.16161
+  Ask: 1.16175
+  Spread: 0.000140000000000029
+  Last Update: 12:45:05
+AUDUSD:
+  Bid: 0.65013
+  Ask: 0.65031
+  Spread: 0.000180000000000069
+  Last Update: 12:45:05
+GBPUSD:
+  Bid: 1.36266
+  Ask: 1.3628
+  Spread: 0.000140000000000029
+  Last Update: 12:45:01
+USDJPY:
+  Bid: 145.158
+  Ask: 145.17
+  Spread: 0.012000000000000455
+  Last Update: 12:45:05
+XAUUSD:
+  Bid: 3332.35
+  Ask: 3332.58
+  Spread: 0.2300000000000182
+  Last Update: 12:45:05
+
+ACCOUNT INFORMATION:
+Balance: $14.56
+Equity: $14.55
+Profit: $-0.01
+Margin Level: 125.21514629948368%
+
+OPEN POSITIONS:
+Symbol: EURUSD
+  Type: BUY
+  Volume: 0.01
+  Open Price: 1.16162
+  Current Price: 1.16161
+  Profit: $-0.01
+  Pips: -0.0
+  Duration: -1h 0m
+  Time Limit Status: OK
+
+==================================================

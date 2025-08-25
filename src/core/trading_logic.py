@@ -30,8 +30,8 @@ class TradingLogic:
         # Trading parameters
         self.min_risk_reward = 2.0
         self.max_positions_per_symbol = 1
-        self.max_total_positions = 3
-        self.required_signal_strength = 0.7
+        self.max_total_positions = 5
+        self.required_signal_strength = 0.8
 
     def _setup_logging(self):
         """Setup centralized logging for trading logic"""

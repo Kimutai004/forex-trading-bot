@@ -1,0 +1,252 @@
+2025-06-23 11:06:18,842 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.00
+        Maximum Allowed: $500.00
+        Percentage Used: 0.00%
+        
+2025-06-23 11:06:18,843 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $0.00
+        Target: $1000.00
+        Progress: 0.00%
+        
+2025-06-23 11:06:18,843 - FTMO - WARNING - 
+        FTMO RULE WARNING:
+        Type: Startup
+        Details: FTMO Monitoring Started
+                Balance: $19.67
+                Equity: $19.67
+                Profit Target: $1000.00
+                Daily Loss Limit: $500.00
+                Total Loss Limit: $1000.00
+                
+        Time: 2025-06-23 11:06:18
+        
+2025-06-23 11:06:22,930 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.00
+        Maximum Allowed: $500.00
+        Percentage Used: 0.00%
+        
+2025-06-23 11:06:22,930 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $0.00
+        Target: $1000.00
+        Progress: 0.00%
+        
+2025-06-23 11:06:24,923 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.13
+        Maximum Allowed: $500.00
+        Percentage Used: 0.03%
+        
+2025-06-23 11:06:24,923 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.13
+        Target: $1000.00
+        Progress: -0.01%
+        
+2025-06-23 11:06:26,416 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.13
+        Maximum Allowed: $500.00
+        Percentage Used: 0.03%
+        
+2025-06-23 11:06:26,416 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.13
+        Target: $1000.00
+        Progress: -0.01%
+        
+2025-06-23 11:06:27,882 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.13
+        Maximum Allowed: $500.00
+        Percentage Used: 0.03%
+        
+2025-06-23 11:06:27,882 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.13
+        Target: $1000.00
+        Progress: -0.01%
+        
+2025-06-23 11:06:29,491 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.14
+        Maximum Allowed: $500.00
+        Percentage Used: 0.03%
+        
+2025-06-23 11:06:29,491 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.14
+        Target: $1000.00
+        Progress: -0.01%
+        
+2025-06-23 11:06:30,966 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.14
+        Maximum Allowed: $500.00
+        Percentage Used: 0.03%
+        
+2025-06-23 11:06:30,966 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.14
+        Target: $1000.00
+        Progress: -0.01%
+        
+2025-06-23 11:06:32,490 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.12
+        Maximum Allowed: $500.00
+        Percentage Used: 0.02%
+        
+2025-06-23 11:06:32,490 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.12
+        Target: $1000.00
+        Progress: -0.01%
+        
+2025-06-23 11:06:33,974 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.13
+        Maximum Allowed: $500.00
+        Percentage Used: 0.03%
+        
+2025-06-23 11:06:33,974 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.13
+        Target: $1000.00
+        Progress: -0.01%
+        
+2025-06-23 11:06:35,611 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.13
+        Maximum Allowed: $500.00
+        Percentage Used: 0.03%
+        
+2025-06-23 11:06:35,612 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.13
+        Target: $1000.00
+        Progress: -0.01%
+        
+2025-06-23 11:06:37,083 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.13
+        Maximum Allowed: $500.00
+        Percentage Used: 0.03%
+        
+2025-06-23 11:06:37,083 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.13
+        Target: $1000.00
+        Progress: -0.01%
+        
+2025-06-23 11:06:38,593 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.04
+        Maximum Allowed: $500.00
+        Percentage Used: 0.01%
+        
+2025-06-23 11:06:38,593 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.04
+        Target: $1000.00
+        Progress: -0.00%
+        
+2025-06-23 11:06:40,100 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.04
+        Maximum Allowed: $500.00
+        Percentage Used: 0.01%
+        
+2025-06-23 11:06:40,101 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.04
+        Target: $1000.00
+        Progress: -0.00%
+        
+2025-06-23 11:06:41,730 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.02
+        Maximum Allowed: $500.00
+        Percentage Used: 0.00%
+        
+2025-06-23 11:06:41,730 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.02
+        Target: $1000.00
+        Progress: -0.00%
+        
+2025-06-23 11:06:43,171 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.01
+        Maximum Allowed: $500.00
+        Percentage Used: 0.00%
+        
+2025-06-23 11:06:43,171 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.01
+        Target: $1000.00
+        Progress: -0.00%
+        
+2025-06-23 11:06:44,627 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.02
+        Maximum Allowed: $500.00
+        Percentage Used: 0.00%
+        
+2025-06-23 11:06:44,628 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.02
+        Target: $1000.00
+        Progress: -0.00%
+        
+2025-06-23 11:06:46,103 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.04
+        Maximum Allowed: $500.00
+        Percentage Used: 0.01%
+        
+2025-06-23 11:06:46,104 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $0.04
+        Target: $1000.00
+        Progress: 0.00%
+        
+2025-06-23 11:06:47,748 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.03
+        Maximum Allowed: $500.00
+        Percentage Used: 0.01%
+        
+2025-06-23 11:06:47,748 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.03
+        Target: $1000.00
+        Progress: -0.00%
+        
+2025-06-23 11:06:49,208 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.03
+        Maximum Allowed: $500.00
+        Percentage Used: 0.01%
+        
+2025-06-23 11:06:49,208 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $-0.03
+        Target: $1000.00
+        Progress: -0.00%
+        
+2025-06-23 11:06:50,663 - FTMO - INFO - 
+        Daily Loss Update:
+        Current Loss: $0.01
+        Maximum Allowed: $500.00
+        Percentage Used: 0.00%
+        
+2025-06-23 11:06:50,663 - FTMO - INFO - 
+        Profit Tracking Update:
+        Current Profit: $0.01
+        Target: $1000.00
+        Progress: 0.00%
+        

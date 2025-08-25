@@ -1,0 +1,25 @@
+2025-06-15 13:22:04,743 - ForexBot - INFO - === New Trading Session Started ===
+2025-06-15 13:22:04,744 - ForexBot - INFO - Session ID: 20250615_132204
+2025-06-15 13:22:04,745 - ForexBot - INFO - Log File: trading_logs/trading_session_20250615_132204.log
+2025-06-15 13:22:04,747 - ForexBot - INFO - Configuration manager initialized
+2025-06-15 13:22:04,754 - ForexBot - INFO - FTMO rule manager initialized
+2025-06-15 13:22:04,756 - ForexBot - INFO - Status manager initialized
+2025-06-15 13:22:06,935 - ForexBot - INFO - MT5 trader initialized and connected
+2025-06-15 13:22:06,936 - ForexBot - INFO - Position manager initialized
+2025-06-15 13:22:06,937 - ForexBot - INFO - Signal manager initialized
+2025-06-15 13:22:06,939 - ForexBot - INFO - Trading logic initialized
+2025-06-15 13:22:06,943 - ForexBot - INFO - Menu manager initialized with all dependencies
+2025-06-15 13:22:06,944 - ForexBot - INFO - System auditor initialized
+2025-06-15 13:22:06,948 - ForexBot - INFO - ForexBot initialization completed successfully
+2025-06-15 13:22:06,948 - ForexBot - INFO - Starting bot startup sequence...
+2025-06-15 13:22:06,953 - ForexBot - INFO - Running system audit...
+2025-06-15 13:22:15,161 - ForexBot - WARNING - Warning: Phase 1 audit completed
+2025-06-15 13:22:15,163 - ForexBot - INFO - Audit OK: MarketWatcher
+2025-06-15 13:22:15,163 - ForexBot - INFO - Audit OK: PositionManager
+2025-06-15 13:22:15,164 - ForexBot - INFO - Audit OK: SignalManager
+2025-06-15 13:22:15,165 - ForexBot - INFO - Audit OK: ConfigManager
+2025-06-15 13:22:15,166 - ForexBot - INFO - Audit OK: MenuManager
+2025-06-15 13:22:15,192 - ForexBot - INFO - FTMO monitoring initialized successfully
+2025-06-15 13:22:15,193 - ForexBot - WARNING - Startup warnings found
+2025-06-15 13:22:29,745 - ForexBot - INFO - User chose to continue despite warnings
+2025-06-15 13:22:29,750 - ForexBot - INFO - Startup sequence completed successfully

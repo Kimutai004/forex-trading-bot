@@ -3,12 +3,14 @@
     "default_volume": 0.01,
     "default_sl_pips": 50,
     "default_tp_pips": 100,
-    "risk_percent": 1.0,
+    "risk_percent": 5.0,
     "favorite_symbols": [
         "EURUSD",
+        "AUDUSD",
         "GBPUSD",
-        "USDJPY"
+        "USDJPY",
+        "XAUUSD"
     ],
-    "last_modified": "2024-12-02 15:31:35",
+    "last_modified": "2025-08-25 14:45:04",
     "test_setting": "test_value"
 }

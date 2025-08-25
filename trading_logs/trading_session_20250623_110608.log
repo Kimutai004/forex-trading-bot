@@ -1,0 +1,101 @@
+2025-06-23 11:06:08,400 - ForexBot - INFO - === New Trading Session Started ===
+2025-06-23 11:06:08,400 - ForexBot - INFO - Session ID: 20250623_110608
+2025-06-23 11:06:08,401 - ForexBot - INFO - Log File: trading_logs/trading_session_20250623_110608.log
+2025-06-23 11:06:08,416 - ForexBot - INFO - Configuration manager initialized
+2025-06-23 11:06:08,439 - ForexBot - INFO - FTMO rule manager initialized
+2025-06-23 11:06:08,441 - ForexBot - INFO - Status manager initialized
+2025-06-23 11:06:10,594 - ForexBot - INFO - MT5 trader initialized and connected
+2025-06-23 11:06:10,595 - ForexBot - INFO - Position manager initialized
+2025-06-23 11:06:10,597 - ForexBot - INFO - Signal manager initialized
+2025-06-23 11:06:10,599 - ForexBot - INFO - Trading logic initialized
+2025-06-23 11:06:10,600 - ForexBot - INFO - Menu manager initialized with all dependencies
+2025-06-23 11:06:10,601 - ForexBot - INFO - System auditor initialized
+2025-06-23 11:06:10,604 - ForexBot - INFO - ForexBot initialization completed successfully
+2025-06-23 11:06:10,604 - ForexBot - INFO - Starting bot startup sequence...
+2025-06-23 11:06:10,606 - ForexBot - INFO - Running system audit...
+2025-06-23 11:06:18,812 - ForexBot - WARNING - Warning: Phase 1 audit completed
+2025-06-23 11:06:18,813 - ForexBot - INFO - Audit OK: MarketWatcher
+2025-06-23 11:06:18,814 - ForexBot - INFO - Audit OK: PositionManager
+2025-06-23 11:06:18,821 - ForexBot - INFO - Audit OK: SignalManager
+2025-06-23 11:06:18,822 - ForexBot - INFO - Audit OK: ConfigManager
+2025-06-23 11:06:18,824 - ForexBot - INFO - Audit OK: MenuManager
+2025-06-23 11:06:18,844 - ForexBot - INFO - FTMO monitoring initialized successfully
+2025-06-23 11:06:18,845 - ForexBot - WARNING - Startup warnings found
+2025-06-23 11:06:22,714 - ForexBot - INFO - User chose to continue despite warnings
+2025-06-23 11:06:22,722 - ForexBot - INFO - Startup sequence completed successfully
+2025-06-23 11:06:23,394 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:23,512 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:23,641 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:23,717 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:25,150 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:25,183 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:25,205 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:25,225 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:26,627 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:26,649 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:26,672 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:26,700 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:28,090 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:28,111 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:28,132 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:28,154 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:29,700 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:29,720 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:29,742 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:29,760 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:31,190 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:31,216 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:31,235 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:31,268 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:32,708 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:32,735 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:32,760 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:32,780 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:34,208 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:34,232 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:34,255 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:34,274 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:35,834 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:35,856 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:35,875 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:35,896 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:37,311 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:37,333 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:37,353 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:37,374 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:38,825 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:38,848 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:38,874 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:38,893 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:40,330 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:40,354 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:40,373 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:40,393 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:41,935 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:41,954 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:41,974 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:41,992 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:43,372 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:43,393 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:43,415 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:43,435 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:44,846 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:44,868 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:44,889 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:44,911 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:46,321 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:46,344 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:46,363 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:46,382 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:47,949 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:47,969 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:47,987 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:48,007 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:49,424 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:49,440 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:49,459 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:49,479 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type
+2025-06-23 11:06:50,871 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:50,891 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:50,910 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10016 - Market closed or invalid trade parameters
+2025-06-23 11:06:50,928 - ForexBot - ERROR - Failed to execute trade: Trade failed. Error code: 10019 - Invalid trade order filling type

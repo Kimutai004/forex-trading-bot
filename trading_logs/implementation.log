@@ -1,0 +1,1708 @@
+2025-03-21 11:18:34,864 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-03-21 11:18:34,873 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-03-21 11:18:34,874 - Implementation - FTMORuleManager logging configured with centralized system
+2025-03-21 11:18:34,886 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-03-21 11:18:34,887 - Implementation - BotStatusManager initialized with centralized logging
+2025-03-21 11:18:34,888 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-03-21 11:18:41,609 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-03-21 11:18:41,613 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-03-21 11:18:41,613 - Implementation - TradingLogic logging configured with centralized system
+2025-03-21 11:18:41,617 - Implementation - BotStatusManager initialized with centralized logging
+2025-03-21 11:18:41,619 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-03-21 11:18:43,683 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-03-21 11:18:43,686 - Implementation - FTMORuleManager logging configured with centralized system
+2025-05-25 08:47:01,141 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-05-25 08:47:01,164 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-05-25 08:47:01,166 - Implementation - FTMORuleManager logging configured with centralized system
+2025-05-25 08:47:01,190 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-05-25 08:47:01,190 - Implementation - BotStatusManager initialized with centralized logging
+2025-05-25 08:47:01,191 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-05-25 08:47:03,554 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-05-25 08:47:03,561 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-05-25 08:47:03,561 - Implementation - TradingLogic logging configured with centralized system
+2025-05-25 08:47:03,566 - Implementation - BotStatusManager initialized with centralized logging
+2025-05-25 08:47:03,569 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-05-25 08:47:06,040 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-05-25 08:47:06,051 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-03 12:26:58,728 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 12:26:58,751 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 12:26:58,751 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-03 12:26:58,766 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 12:26:58,766 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-03 12:26:58,766 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 12:27:01,063 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 12:27:01,071 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 12:27:01,071 - Implementation - TradingLogic logging configured with centralized system
+2025-06-03 12:27:01,073 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-03 12:27:01,073 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 12:27:03,111 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 12:27:03,111 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-03 15:34:45,916 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 15:34:45,951 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 15:34:45,952 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-03 15:34:45,988 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 15:34:45,989 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-03 15:34:45,990 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 15:34:48,183 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 15:34:48,187 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 15:34:48,187 - Implementation - TradingLogic logging configured with centralized system
+2025-06-03 15:34:48,187 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-03 15:34:48,187 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 15:34:50,262 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-03 15:34:50,274 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-11 09:17:53,663 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 09:17:53,688 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 09:17:53,688 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-11 09:17:53,715 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 09:17:53,716 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-11 09:17:53,717 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 09:17:56,055 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 09:17:56,077 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 09:17:56,079 - Implementation - TradingLogic logging configured with centralized system
+2025-06-11 09:17:56,086 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-11 09:17:56,092 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 09:17:58,173 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 09:17:58,191 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-11 16:14:33,877 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:14:33,912 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:14:33,913 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-11 16:14:33,922 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:14:33,922 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-11 16:14:33,923 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:14:36,947 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:14:36,953 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:14:36,953 - Implementation - TradingLogic logging configured with centralized system
+2025-06-11 16:14:36,957 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-11 16:14:36,957 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:14:38,995 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:14:38,997 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-11 16:17:08,677 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:17:08,700 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:17:08,700 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-11 16:17:08,710 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:17:08,710 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-11 16:17:08,720 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:17:11,180 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:17:11,190 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:17:11,201 - Implementation - TradingLogic logging configured with centralized system
+2025-06-11 16:17:11,222 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-11 16:17:11,222 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:17:13,348 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-11 16:17:13,387 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-15 10:34:43,868 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 10:34:43,939 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 10:34:43,940 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-15 10:34:44,083 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 10:34:44,084 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-15 10:34:44,088 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 10:34:46,344 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 10:34:46,345 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 10:34:46,345 - Implementation - TradingLogic logging configured with centralized system
+2025-06-15 10:34:46,355 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-15 10:34:46,355 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 10:34:48,556 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 10:34:48,569 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-15 13:22:04,738 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:22:04,747 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:22:04,748 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-15 13:22:04,755 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:22:04,756 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-15 13:22:04,758 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:22:06,936 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:22:06,938 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:22:06,938 - Implementation - TradingLogic logging configured with centralized system
+2025-06-15 13:22:06,944 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-15 13:22:06,946 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:22:09,001 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:22:09,004 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-15 13:28:09,780 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:28:09,791 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:28:09,791 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-15 13:28:09,800 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:28:09,802 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-15 13:28:09,803 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:28:16,545 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:28:16,557 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:28:16,558 - Implementation - TradingLogic logging configured with centralized system
+2025-06-15 13:28:16,572 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-15 13:28:16,573 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:28:18,660 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-15 13:28:18,670 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-16 08:39:58,810 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:39:58,842 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:39:58,844 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-16 08:39:58,873 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:39:58,873 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-16 08:39:58,875 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:40:01,202 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:40:01,208 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:40:01,209 - Implementation - TradingLogic logging configured with centralized system
+2025-06-16 08:40:01,212 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-16 08:40:01,214 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:40:03,326 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:40:03,330 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-16 08:48:03,585 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:48:03,627 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:48:03,628 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-16 08:48:03,676 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:48:03,677 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-16 08:48:03,678 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:48:05,906 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:48:05,923 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:48:05,924 - Implementation - TradingLogic logging configured with centralized system
+2025-06-16 08:48:05,925 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-16 08:48:05,927 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:48:08,003 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-16 08:48:08,022 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-23 11:06:08,393 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-23 11:06:08,417 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-23 11:06:08,417 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-23 11:06:08,440 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-23 11:06:08,441 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-23 11:06:08,442 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-23 11:06:10,595 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-23 11:06:10,598 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-23 11:06:10,598 - Implementation - TradingLogic logging configured with centralized system
+2025-06-23 11:06:10,600 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-23 11:06:10,601 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-23 11:06:12,651 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-23 11:06:12,692 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-24 10:07:57,659 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-24 10:07:57,700 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-24 10:07:57,700 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-24 10:07:57,729 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-24 10:07:57,729 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-24 10:07:57,730 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-24 10:07:59,916 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-24 10:07:59,922 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-24 10:07:59,923 - Implementation - TradingLogic logging configured with centralized system
+2025-06-24 10:07:59,925 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-24 10:07:59,927 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-24 10:08:01,971 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-24 10:08:01,974 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-25 09:43:57,738 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 09:43:57,786 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 09:43:57,787 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-25 09:43:57,814 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 09:43:57,815 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-25 09:43:57,817 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 09:43:59,993 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 09:43:59,998 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 09:43:59,999 - Implementation - TradingLogic logging configured with centralized system
+2025-06-25 09:44:00,001 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-25 09:44:00,002 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 09:44:02,171 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 09:44:02,187 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-25 10:21:36,095 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 10:21:36,137 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 10:21:36,137 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-25 10:21:36,152 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 10:21:36,153 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-25 10:21:36,155 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 10:21:38,539 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 10:21:38,548 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 10:21:38,548 - Implementation - TradingLogic logging configured with centralized system
+2025-06-25 10:21:38,562 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-25 10:21:38,567 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 10:21:40,709 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-25 10:21:40,747 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-26 08:49:36,919 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-26 08:49:36,946 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-26 08:49:36,946 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-26 08:49:36,968 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-26 08:49:36,968 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-26 08:49:36,969 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-26 08:49:39,119 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-26 08:49:39,123 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-26 08:49:39,123 - Implementation - TradingLogic logging configured with centralized system
+2025-06-26 08:49:39,125 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-26 08:49:39,126 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-26 08:49:41,161 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-26 08:49:41,164 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-27 10:39:14,157 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-27 10:39:14,173 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-27 10:39:14,173 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-27 10:39:14,206 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-27 10:39:14,206 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-27 10:39:14,206 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-27 10:39:16,372 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-27 10:39:16,387 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-27 10:39:16,388 - Implementation - TradingLogic logging configured with centralized system
+2025-06-27 10:39:16,390 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-27 10:39:16,391 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-27 10:39:18,495 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-27 10:39:18,502 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-30 10:02:54,979 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-30 10:02:55,013 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-30 10:02:55,014 - Implementation - FTMORuleManager logging configured with centralized system
+2025-06-30 10:02:55,042 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-30 10:02:55,042 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-30 10:02:55,045 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-30 10:02:57,239 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-30 10:02:57,246 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-30 10:02:57,246 - Implementation - TradingLogic logging configured with centralized system
+2025-06-30 10:02:57,251 - Implementation - BotStatusManager initialized with centralized logging
+2025-06-30 10:02:57,255 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-30 10:02:59,847 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-06-30 10:02:59,852 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-01 10:18:15,896 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 10:18:15,924 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 10:18:15,924 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-01 10:18:15,946 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 10:18:15,946 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-01 10:18:15,946 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 10:18:18,079 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 10:18:18,095 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 10:18:18,095 - Implementation - TradingLogic logging configured with centralized system
+2025-07-01 10:18:18,095 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-01 10:18:18,095 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 10:18:20,129 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 10:18:20,145 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-01 14:53:04,887 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 14:53:04,924 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 14:53:04,925 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-01 14:53:04,957 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 14:53:04,958 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-01 14:53:04,960 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 14:53:07,235 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 14:53:07,239 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 14:53:07,240 - Implementation - TradingLogic logging configured with centralized system
+2025-07-01 14:53:07,242 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-01 14:53:07,244 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 14:53:09,435 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-01 14:53:09,445 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-02 10:34:35,129 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-02 10:34:35,155 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-02 10:34:35,156 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-02 10:34:35,180 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-02 10:34:35,181 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-02 10:34:35,182 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-02 10:34:37,353 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-02 10:34:37,357 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-02 10:34:37,357 - Implementation - TradingLogic logging configured with centralized system
+2025-07-02 10:34:37,359 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-02 10:34:37,360 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-02 10:34:39,410 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-02 10:34:39,414 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-03 13:43:29,149 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-03 13:43:29,189 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-03 13:43:29,189 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-03 13:43:29,219 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-03 13:43:29,219 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-03 13:43:29,224 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-03 13:43:31,493 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-03 13:43:31,494 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-03 13:43:31,494 - Implementation - TradingLogic logging configured with centralized system
+2025-07-03 13:43:31,494 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-03 13:43:31,494 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-03 13:43:34,301 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-03 13:43:34,330 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-04 11:43:25,516 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-04 11:43:25,549 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-04 11:43:25,550 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-04 11:43:25,576 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-04 11:43:25,576 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-04 11:43:25,578 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-04 11:43:27,728 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-04 11:43:27,731 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-04 11:43:27,731 - Implementation - TradingLogic logging configured with centralized system
+2025-07-04 11:43:27,735 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-04 11:43:27,736 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-04 11:43:29,782 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-04 11:43:29,785 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-08 11:11:37,720 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-08 11:11:37,748 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-08 11:11:37,748 - Implementation - FTMORuleManager logging configured with centralized system
+2025-07-08 11:11:37,769 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-08 11:11:37,769 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-08 11:11:37,770 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-08 11:11:39,951 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-08 11:11:39,955 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-08 11:11:39,956 - Implementation - TradingLogic logging configured with centralized system
+2025-07-08 11:11:39,958 - Implementation - BotStatusManager initialized with centralized logging
+2025-07-08 11:11:39,960 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-08 11:11:42,024 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-07-08 11:11:42,028 - Implementation - FTMORuleManager logging configured with centralized system
+2025-08-04 09:00:04,519 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-04 09:00:04,541 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-04 09:00:04,541 - Implementation - FTMORuleManager logging configured with centralized system
+2025-08-04 09:00:04,571 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-04 09:00:04,571 - Implementation - BotStatusManager initialized with centralized logging
+2025-08-04 09:00:04,571 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-04 09:00:06,809 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-04 09:00:06,810 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-04 09:00:06,815 - Implementation - TradingLogic logging configured with centralized system
+2025-08-04 09:00:06,818 - Implementation - BotStatusManager initialized with centralized logging
+2025-08-04 09:00:06,819 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-04 09:00:08,879 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-04 09:00:08,900 - Implementation - FTMORuleManager logging configured with centralized system
+2025-08-05 12:40:14,301 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-05 12:40:14,330 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-05 12:40:14,330 - Implementation - FTMORuleManager logging configured with centralized system
+2025-08-05 12:40:14,355 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-05 12:40:14,356 - Implementation - BotStatusManager initialized with centralized logging
+2025-08-05 12:40:14,357 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-05 12:40:16,536 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-05 12:40:16,541 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-05 12:40:16,541 - Implementation - TradingLogic logging configured with centralized system
+2025-08-05 12:40:16,543 - Implementation - BotStatusManager initialized with centralized logging
+2025-08-05 12:40:16,545 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-05 12:40:18,607 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-05 12:40:18,612 - Implementation - FTMORuleManager logging configured with centralized system
+2025-08-25 14:44:53,630 - Implementation - 
+        Logger Setup for ForexBot:
+        - Main log file: trading_logs\forexbot.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-25 14:44:53,660 - Implementation - 
+        Logger Setup for FTMORuleManager:
+        - Main log file: trading_logs\ftmorulemanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-25 14:44:53,661 - Implementation - FTMORuleManager logging configured with centralized system
+2025-08-25 14:44:53,688 - Implementation - 
+        Logger Setup for BotStatusManager:
+        - Main log file: trading_logs\botstatusmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-25 14:44:53,688 - Implementation - BotStatusManager initialized with centralized logging
+2025-08-25 14:44:53,689 - Implementation - 
+        Logger Setup for MT5Trader:
+        - Main log file: trading_logs\mt5trader.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-25 14:44:55,950 - Implementation - 
+        Logger Setup for PositionManager:
+        - Main log file: trading_logs\positionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-25 14:44:55,955 - Implementation - 
+        Logger Setup for TradingLogic:
+        - Main log file: trading_logs\tradinglogic.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-25 14:44:55,955 - Implementation - TradingLogic logging configured with centralized system
+2025-08-25 14:44:55,958 - Implementation - BotStatusManager initialized with centralized logging
+2025-08-25 14:44:55,958 - Implementation - 
+        Logger Setup for TradingLogger:
+        - Main log file: trading_logs\tradinglogger.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-25 14:44:58,063 - Implementation - 
+        Logger Setup for MarketSessionManager:
+        - Main log file: trading_logs\marketsessionmanager.log
+        - Max file size: 512KB
+        - Backup count: 3
+        - Rotation behavior: Will delete oldest file when rotating beyond 3 backups
+        
+2025-08-25 14:44:58,070 - Implementation - FTMORuleManager logging configured with centralized system

@@ -30,8 +30,8 @@ class MT5Trader:
 
     def _check_expert_status(self) -> Dict:
         """
-        Enhanced check for Expert Advisor status with actual trading capability verification
-        Returns Dict with status details and diagnostic info
+            Enhanced check for Expert Advisor status with actual trading capability verification
+            Returns Dict with status details and diagnostic info
         """
         try:
             terminal_info = mt5.terminal_info()
@@ -297,7 +297,7 @@ class MT5Trader:
                 return self._attempt_reconnection()
 
             # Test symbol access
-            test_symbols = ['EURUSD', 'GBPUSD', 'USDJPY']
+            test_symbols = ['EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD']
             symbol_status = []
             
             for symbol in test_symbols:
